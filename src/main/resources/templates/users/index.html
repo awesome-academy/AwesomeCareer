@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title th:text="#{user.index.title}">Users</title>
+</head>
+<body>
+  <h2 th:text="#{user.index.all}">All Users</h2>
+
+  <ul class="users">
+    <th:block th:each="user : ${users}">
+    <li th:replace="~{users/_user :: copy(${user})}"></li>
+    </th:block>
+  </ul>
+  
+</body>
+</html>

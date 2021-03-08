@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+  <ul class="users">
+    <li th:fragment="copy (user)" th:id="'user-'+${user.id}">
+      <a th:href="@{'/users/'+${user.email}}" th:text="${user.name}"></a>
+    </li>
+  </ul>
+</body>
+</html>
