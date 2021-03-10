@@ -22,7 +22,7 @@ import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.service.UserService;
 
 @Controller
-@EnableWebMvc
+//@EnableWebMvc
 public class UsersController {
 	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
