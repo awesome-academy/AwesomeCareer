@@ -1,0 +1,38 @@
+package com.aa.awesomecareer.entity;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "education")
+public class Education {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	
+	@Column(name = "school", length = 256)
+	private String school;
+	@Column(name = "major", length = 256)
+	private String major;
+	@Column(name = "description", length = 3000)
+	private String description;
+	@Column(name = "graduation")
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private Date graduation;
+	
+	@ManyToOne
+	@JoinColumn(name = "id")
+	private User user;
+
+}
