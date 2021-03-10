@@ -117,6 +117,6 @@ public class User {
 	private List<Project> projects;
 	
 	@OneToMany(mappedBy = "projectinfo")
-	private List<ProfileInfo> profileInfos;
+	private List<Profile> profileInfos;
 
 }

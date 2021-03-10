@@ -26,7 +26,7 @@ import com.aa.awesomecareer.entity.Favorite;
 import com.aa.awesomecareer.entity.Follow;
 import com.aa.awesomecareer.entity.Interest;
 import com.aa.awesomecareer.entity.Language;
-import com.aa.awesomecareer.entity.ProfileInfo;
+import com.aa.awesomecareer.entity.Profile;
 import com.aa.awesomecareer.entity.Project;
 import com.aa.awesomecareer.entity.Voting;
 import com.aa.awesomecareer.util.validator.FieldMatch;
