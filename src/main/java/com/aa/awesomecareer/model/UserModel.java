@@ -15,7 +15,7 @@ import com.aa.awesomecareer.util.validator.UniqueEmail;
 
 @SuppressWarnings("serial")
 @FieldMatch.List({
-		@FieldMatch(first = "password", second = "confirmation", message = "{user.validation.password.notmatch}") })
+@FieldMatch(first = "password", second = "confirmation", message = "{user.validation.password.notmatch}") })
 @UniqueEmail(name = "email", message = "{user.validation.email.exist}")
 public class UserModel extends BaseModel {
 	private Integer id;
