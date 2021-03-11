@@ -1,17 +1,11 @@
 package com.aa.awesomecareer.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -85,6 +80,14 @@ public class User {
 	
 	@Column(name = "image")
 	private String image;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+	name = "users_roles",
+	joinColumns =@JoinColumn(name="userId"),
+	inverseJoinColumns = @JoinColumn(name="roleId")
+	)
+    private Set<Role> roles = new HashSet<>();
 	
 	@OneToMany(mappedBy = "application")
 	private List<Application> applications;
