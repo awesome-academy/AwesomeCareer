@@ -1,5 +1,6 @@
 package com.aa.awesomecareer.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,8 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.stereotype.Service;
 
+import com.aa.awesomecareer.configuration.MyUserDetails;
 import com.aa.awesomecareer.entity.User;
 import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.repository.UserRepository;
@@ -25,6 +31,9 @@ public class UserServiceImp implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private UserServiceImp() {
 	}
@@ -66,7 +75,7 @@ public class UserServiceImp implements UserService {
 		User condition = new User();
 		condition.setFullName(userModel.getFullName());
 		condition.setEmail(userModel.getEmail());
-		condition.setPassword(userModel.getPassword());
+		condition.setPassword(passwordEncoder.encode(userModel.getPassword()));
 		condition.setCompany(userModel.getCompany());
 		condition.setOccupationInterest(userModel.getOccupationInterest());
 		condition.setCountry(userModel.getCountry());
@@ -78,6 +87,40 @@ public class UserServiceImp implements UserService {
 	}
 	private boolean emailExists(String email) {
 		return userRepository.findByEmail(email) !=null;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findByEmail(username);
+		if(user == null) {
+			throw new UsernameNotFoundException("Could not find user");
+		}
+		return new MyUserDetails(user);
+	}
+	
+
+	@Override
+	public void createNewToken(PersistentRememberMeToken token) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateToken(String series, String tokenValue, Date lastUsed) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public PersistentRememberMeToken getTokenForSeries(String seriesId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeUserTokens(String username) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
