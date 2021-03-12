@@ -10,12 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoryHashtagModel {
-	
+
 	private Integer id;
 	private Integer storyId;
 	private Integer hashtagId;
-	
-	private StoryModel storyModel;
-	private HashtagModel hashtagModel;
-
 }

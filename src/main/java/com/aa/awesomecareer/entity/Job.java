@@ -1,6 +1,6 @@
 package com.aa.awesomecareer.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,13 +23,13 @@ public class Job {
 	@Column(name = "companyId")
 	private Integer companyId;
 
-	@Column(name = "jobTitle", length = 256)
-	private String jobTitle;
-	@Column(name = "jobTitle", length = 3000)
+//	@Column(name = "jobTitle", length = 256)
+//	private String jobTitle;
+//	@Column(name = "jobTitle", length = 3000)
 	private String discription;
 	@Column(name = "endTime")
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private String endTime;
+	private Date endTime;
 	@Column(name = "author", length = 256)
 	private String author;
 
@@ -41,19 +41,19 @@ public class Job {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@OneToMany(mappedBy = "application")
-	private List<Application> applications;
-
-	@OneToMany(mappedBy = "bookmark")
-	private List<Bookmark> bookmarks;
-
-	@OneToMany(mappedBy = "voting")
-	private List<Voting> votings;
-
-	@OneToMany(mappedBy = "jobfield")
-	private List<JobField> jobfields;
-
-	@OneToMany(mappedBy = "jobtype")
-	private List<JobType> jobtypes;
+//	@OneToMany(mappedBy = "application")
+//	private List<Application> applications;
+//
+//	@OneToMany(mappedBy = "bookmark")
+//	private List<Bookmark> bookmarks;
+//
+//	@OneToMany(mappedBy = "voting")
+//	private List<Voting> votings;
+//
+//	@OneToMany(mappedBy = "jobfield")
+//	private List<JobField> jobfields;
+//
+//	@OneToMany(mappedBy = "jobtype")
+//	private List<JobType> jobtypes;
 
 }

@@ -1,6 +1,6 @@
 package com.aa.awesomecareer.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,12 +32,12 @@ public class JobType {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Job job;
-
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Type type;
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private Job job;
+//
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private Type type;
 
 }

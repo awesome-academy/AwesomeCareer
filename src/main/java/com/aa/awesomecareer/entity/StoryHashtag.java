@@ -1,6 +1,6 @@
 package com.aa.awesomecareer.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,9 +26,9 @@ public class StoryHashtag {
 	@Column(name = "hashtagId")
 	private Integer hashtagId;
 
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Story story;
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private Story story;
 
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "createdAt")
@@ -38,7 +38,7 @@ public class StoryHashtag {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Hashtag hashtag;
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private Hashtag hashtag;
 }

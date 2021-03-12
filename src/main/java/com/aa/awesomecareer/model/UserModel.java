@@ -14,18 +14,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @UniqueEmail(name = "email", message = "{user.validation.email.exist}")
 @FieldMatch(first = "password", second = "confirmation", message = "{user.validation.password.notmatch}")
 public class UserModel extends BaseModel {
 	
-	private Integer id;
+	public Integer id;
 	@NotNull
 	@NotEmpty
-	private String fullName;
+	public String fullName;
 	@NotNull
 	@NotEmpty
 	private String email;
@@ -42,7 +40,7 @@ public class UserModel extends BaseModel {
 	@NotEmpty
 	private String country;
 	
-	private String userName;
+	public String userName;
 	private String seftIntroduction;
 	private String ambition;
 	private String link;
@@ -53,8 +51,44 @@ public class UserModel extends BaseModel {
 	private Date birthday;
 	private String relationshipStatus;
 	private boolean imAParent;
-	private String image;
+//	private String image;
 	
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getOccupationInterest() {
+		return occupationInterest;
+	}
+	public void setOccupationInterest(String occupationInterest) {
+		this.occupationInterest = occupationInterest;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	private List<ApplicationModel> applicationModels;
 	private List<BookmarkModel> bookmarkModels;
 	private List<FavoriteModel> favoriteModels;
@@ -66,5 +100,5 @@ public class UserModel extends BaseModel {
 	private List<EducationModel> educationModels;
 	private List<ProjectModel> projectModels;
 	private List<ProfileModel> profileModels;
-
 }
+

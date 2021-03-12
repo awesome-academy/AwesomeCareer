@@ -10,12 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LanguageModel {
-	
 	private Integer id;
+	private Integer userId;
 	private String language;
 	private String proficiency;
-	private Integer userId;
-	
-	private UserModel userModel;
-
 }

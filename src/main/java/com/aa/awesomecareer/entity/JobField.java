@@ -1,6 +1,6 @@
 package com.aa.awesomecareer.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,12 +34,12 @@ public class JobField {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Job job;
-
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Field field;
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private Job job;
+//
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private Field field;
 
 }

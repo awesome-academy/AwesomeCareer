@@ -1,6 +1,7 @@
 package com.aa.awesomecareer.entity;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,12 +24,15 @@ public class Experience {
 	private String companyName;
 	@Column(name = "jobTitle", length = 256)
 	private String jobTitle;
+	
 	@Column(name = "startTime")
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private String startTime;
+	private Date startTime;
+	
 	@Column(name = "endTime")
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private String endTime;
+	private Date endTime;
+	
 	@Column(name = "description", length = 3000)
 	private String description;
 

@@ -1,6 +1,6 @@
 package com.aa.awesomecareer.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,7 +32,7 @@ public class Field {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@OneToMany(mappedBy = "jobfield")
-	private List<JobField> jobfields;
+//	@OneToMany(mappedBy = "jobfield")
+//	private List<JobField> jobfields;
 
 }

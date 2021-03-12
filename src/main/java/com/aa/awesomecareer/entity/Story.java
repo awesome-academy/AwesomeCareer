@@ -1,6 +1,6 @@
 package com.aa.awesomecareer.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,9 +36,9 @@ public class Story {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@OneToMany(mappedBy = "favorite")
-	private List<Application> favorites;
-
-	@OneToMany(mappedBy = "storyhastag")
-	private List<StoryHashtag> storyHashtags;
+//	@OneToMany(mappedBy = "favorite")
+//	private List<Application> favorites;
+//
+//	@OneToMany(mappedBy = "storyhastag")
+//	private List<StoryHashtag> storyHashtags;
 }

@@ -10,12 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FollowModel {
-	
 	private Integer id;
 	private Integer userId;
 	private Integer companyId;
-	
-	private UserModel userModel;
-	private CompanyModel companyModel;
-
 }

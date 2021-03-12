@@ -45,7 +45,4 @@ public class Company {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@OneToMany(mappedBy = "follow")
-	private List<Follow> follows;
-
 }

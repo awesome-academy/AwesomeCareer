@@ -21,8 +21,6 @@ import lombok.Setter;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -80,11 +78,11 @@ public class User {
 	@Column(name = "relationshipStatus",length = 256)
 	private String relationshipStatus;
 	
-	@Column(name = "imAParent")
-	private boolean imAParent;
+//	@Column(name = "imAParent")
+//	private boolean imAParent;
 	
-	@Column(name = "image", length = 256)
-	private String image;
+//	@Column(name = "image", length = 256)
+//	private String image;
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "createdAt")
@@ -94,36 +92,86 @@ public class User {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 	
-	@OneToMany(mappedBy = "application")
-	private List<Application> applications;
-	
-	@OneToMany(mappedBy = "bookmark")
-	private List<Bookmark> bookmarks;
-	
-	@OneToMany(mappedBy = "favorite")
-	private List<Favorite> favorites;
-	
-	@OneToMany(mappedBy = "voting")
-	private List<Voting> votings;
-	
-	@OneToMany(mappedBy = "follow")
-	private List<Follow> follows;
-	
-	@OneToMany(mappedBy = "interest")
-	private List<Interest> interests;
-	
-	@OneToMany(mappedBy = "language")
-	private List<Language> languages;
-	
-	@OneToMany(mappedBy = "certificate")
-	private List<Certificate> certificates;
-	
-	@OneToMany(mappedBy = "education")
-	private List<Education> educations;
-	
-	@OneToMany(mappedBy = "project")
-	private List<Project> projects;
-	
-	@OneToMany(mappedBy = "profile")
-	private List<Profile> profiles;
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getOccupationInterest() {
+		return occupationInterest;
+	}
+
+	public void setOccupationInterest(String occupationInterest) {
+		this.occupationInterest = occupationInterest;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+//
+//	@OneToMany(mappedBy = "application")
+//	private List<Application> applications;
+//	
+//	@OneToMany(mappedBy = "bookmark")
+//	private List<Bookmark> bookmarks;
+//	
+//	@OneToMany(mappedBy = "favorite")
+//	private List<Favorite> favorites;
+//	
+//	@OneToMany(mappedBy = "voting")
+//	private List<Voting> votings;
+//	
+//	@OneToMany(mappedBy = "follow")
+//	private List<Follow> follows;
+//	
+//	@OneToMany(mappedBy = "interest")
+//	private List<Interest> interests;
+//	
+//	@OneToMany(mappedBy = "language")
+//	private List<Language> languages;
+//	
+//	@OneToMany(mappedBy = "certificate")
+//	private List<Certificate> certificates;
+//	
+//	@OneToMany(mappedBy = "education")
+//	private List<Education> educations;
+//	
+//	@OneToMany(mappedBy = "project")
+//	private List<Project> projects;
+//	
+//	@OneToMany(mappedBy = "profile")
+//	private List<Profile> profiles;
 }

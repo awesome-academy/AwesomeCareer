@@ -10,11 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InterestModel {
-	
 	private Integer id;
 	private Integer userId;
 	private String name;
-	
-	private UserModel userModel;
-
 }

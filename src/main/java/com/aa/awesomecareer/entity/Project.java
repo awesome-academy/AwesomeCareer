@@ -44,7 +44,7 @@ public class Project {
 	@Column(name = "updatedBy")
 	private Date updatedBy;
 
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private User user;
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private User user;
 }

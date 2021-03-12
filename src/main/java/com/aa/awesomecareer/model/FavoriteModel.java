@@ -12,8 +12,5 @@ import lombok.Setter;
 public class FavoriteModel {
 	private Integer id;
 	private Integer userId;
-	private Integer storyId;
-	private UserModel userModel;
-	private StoryModel storyModel;
-
+	private String storyId;
 }

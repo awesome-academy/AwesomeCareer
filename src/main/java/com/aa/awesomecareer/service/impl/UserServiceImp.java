@@ -26,7 +26,7 @@ public class UserServiceImp implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	private UserServiceImp() {
+	public UserServiceImp() {
 	}
 
 	public List<UserModel> findAll() {

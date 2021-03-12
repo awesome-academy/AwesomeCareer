@@ -10,13 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberModel {
-	
 	private Integer id;
 	private Integer companyId;
-	private Integer userId;
-	
-	private UserModel userModel;
-	private CompanyModel companyModel;
-
-
 }
