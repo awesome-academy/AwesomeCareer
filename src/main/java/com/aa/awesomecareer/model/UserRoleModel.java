@@ -1,9 +1,5 @@
 package com.aa.awesomecareer.model;
 
-import java.util.Date;
-
-import com.aa.awesomecareer.entity.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CertificateModel {
+public class UserRoleModel {
+
 	private Integer id;
 	private Integer userId;
-	private String title;
-	private Date issuedTime;
+	private Integer roleId;
+
 }

@@ -9,13 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileInfoModel {
-	
+public class RoleModel {
+
 	private Integer id;
-	private String currentOccupation;
-	private String location;
-	private String tagName;
-	
-	private UserModel userModel;
+	private String name;
 
 }

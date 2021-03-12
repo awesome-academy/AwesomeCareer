@@ -16,18 +16,26 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "certificate")
-public class Certificate {	
+public class Certificate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@Column(name = "userId",length = 256)
+	@Column(name = "userId")
 	private Integer userId;
-	@Column(name = "title",length = 256)
+	@Column(name = "title", length = 256)
 	private String title;
 	@Column(name = "issuedTime")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date issuedTime;
-	
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
+
 	@ManyToOne
 	@JoinColumn(name = "id")
 	private User user;

@@ -1,5 +1,7 @@
 package com.aa.awesomecareer.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ public class Experience {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@Column(name = "companyName", length = 256)
 	private String companyName;
 	@Column(name = "jobTitle", length = 256)
@@ -29,4 +31,12 @@ public class Experience {
 	private String endTime;
 	@Column(name = "description", length = 3000)
 	private String description;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
 }

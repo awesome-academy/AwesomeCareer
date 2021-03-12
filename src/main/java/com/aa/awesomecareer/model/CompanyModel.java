@@ -18,7 +18,7 @@ public class CompanyModel {
 	private String website;
 	private String foundedTime;
 	private String foundedBy;
-	private Integer memberTotal;
+	private Integer totalMember;
 	private String image;
 	List<JobModel> jobModels;
 	List<FollowModel> followModels;

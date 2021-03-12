@@ -36,10 +36,10 @@ public class User {
 	@Column(name = "email",unique=true, length = 256)
 	private String email;
 	
-	@Column(name = "password",length = 256)
+	@Column(name = "password",length = 128)
 	private String password;
 	
-	@Column(name = "company",length = 256)
+	@Column(name = "company",length = 128)
 	private String company;
 	
 	@Column(name = "occupationInterest",length = 256)
@@ -55,22 +55,22 @@ public class User {
 	@Column(name = "seftIntroduction",length = 3000)
 	private String seftIntroduction;
 	
-	@Column(name = "ambition",length = 3000)
+	@Column(name = "ambition",length = 256)
 	private String ambition;
 	
-	@Column(name = "links",length = 256)
-	private String links;
+	@Column(name = "link",length = 256)
+	private String link;
 	
-	@Column(name = "goodAt",length = 3000)
+	@Column(name = "goodAt",length = 256)
 	private String goodAt;
 	
-	@Column(name = "resume",length = 3000)
+	@Column(name = "resume",length = 256)
 	private String resume;
 	
-	@Column(name = "interest",length = 3000)
+	@Column(name = "interest",length = 256)
 	private String interest;
 	
-	@Column(name = "gender",length = 256)
+	@Column(name = "gender",length = 3)
 	private String gender;
 	
 	@Column(name = "birthday")
@@ -80,11 +80,19 @@ public class User {
 	@Column(name = "relationshipStatus",length = 256)
 	private String relationshipStatus;
 	
-	@Column(name = "amAParent")
-	private boolean amAParent;
+	@Column(name = "imAParent")
+	private boolean imAParent;
 	
-	@Column(name = "image")
+	@Column(name = "image", length = 256)
 	private String image;
+	
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
+	
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
 	
 	@OneToMany(mappedBy = "application")
 	private List<Application> applications;
@@ -116,7 +124,6 @@ public class User {
 	@OneToMany(mappedBy = "project")
 	private List<Project> projects;
 	
-	@OneToMany(mappedBy = "projectinfo")
-	private List<ProfileInfo> profileInfos;
-
+	@OneToMany(mappedBy = "profile")
+	private List<Profile> profiles;
 }

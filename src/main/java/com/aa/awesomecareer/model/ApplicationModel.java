@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApplicationModel {
-	
+
 	private Integer id;
 	private Integer userId;
 	private Integer jobId;

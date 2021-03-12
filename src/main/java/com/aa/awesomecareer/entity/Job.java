@@ -1,5 +1,6 @@
 package com.aa.awesomecareer.entity;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,18 +33,26 @@ public class Job {
 	@Column(name = "author", length = 256)
 	private String author;
 
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
+
 	@OneToMany(mappedBy = "application")
 	private List<Application> applications;
-	
+
 	@OneToMany(mappedBy = "bookmark")
 	private List<Bookmark> bookmarks;
-	
+
 	@OneToMany(mappedBy = "voting")
 	private List<Voting> votings;
-	
+
 	@OneToMany(mappedBy = "jobfield")
 	private List<JobField> jobfields;
-	
+
 	@OneToMany(mappedBy = "jobtype")
 	private List<JobType> jobtypes;
 

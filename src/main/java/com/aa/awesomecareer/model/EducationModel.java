@@ -10,13 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EducationModel {
-	
+
 	private Integer id;
 	private Integer userId;
 	private String school;
 	private String major;
 	private String description;
 	private String graduation;
-	private UserModel userModel;
 
 }

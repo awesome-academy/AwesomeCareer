@@ -17,6 +17,7 @@ public class ProjectModel {
 	private String startDate;
 	private String endDate;
 	private String description;
+	private String member;
 	
 	private UserModel useModelr;
 

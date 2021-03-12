@@ -12,9 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HashtagModel {
-	
+
 	private Integer id;
 	private String name;
-	
+
 	List<StoryHashtagModel> storyHashtagModels;
 }

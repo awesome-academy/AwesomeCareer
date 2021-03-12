@@ -15,30 +15,37 @@ import javax.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name="company")
+@Table(name = "company")
 public class Company {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-    
-    @Column(name="name", length=256)
+
+	@Column(name = "name", length = 256)
 	private String name;
-    @Column(name="address", length=256)
+	@Column(name = "address", length = 256)
 	private String address;
-    @Column(name="website", length=256)
+	@Column(name = "website", length = 128)
 	private String website;
-    @Column(name="foundedTime")
-    @Temporal(value=TemporalType.TIMESTAMP)
+	@Column(name = "foundedTime")
+	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date foundedTime;
-    @Column(name="foundedBy", length=256)
+	@Column(name = "foundedBy", length = 256)
 	private String foundedBy;
-    @Column(name="memberTotal")
-	private Integer memberTotal;
-    @Column(name="image", length=256)
+	@Column(name = "totalMember")
+	private Integer totalMember;
+	@Column(name = "image", length = 256)
 	private String image;
-    
-    @OneToMany(mappedBy = "follow")
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
+
+	@OneToMany(mappedBy = "follow")
 	private List<Follow> follows;
-	
 
 }
