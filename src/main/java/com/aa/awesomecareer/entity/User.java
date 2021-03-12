@@ -21,8 +21,6 @@ import lombok.Setter;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -36,10 +34,10 @@ public class User {
 	@Column(name = "email",unique=true, length = 256)
 	private String email;
 	
-	@Column(name = "password",length = 256)
+	@Column(name = "password",length = 128)
 	private String password;
 	
-	@Column(name = "company",length = 256)
+	@Column(name = "company",length = 128)
 	private String company;
 	
 	@Column(name = "occupationInterest",length = 256)
@@ -55,22 +53,22 @@ public class User {
 	@Column(name = "seftIntroduction",length = 3000)
 	private String seftIntroduction;
 	
-	@Column(name = "ambition",length = 3000)
+	@Column(name = "ambition",length = 256)
 	private String ambition;
 	
-	@Column(name = "links",length = 256)
-	private String links;
+	@Column(name = "link",length = 256)
+	private String link;
 	
-	@Column(name = "goodAt",length = 3000)
+	@Column(name = "goodAt",length = 256)
 	private String goodAt;
 	
-	@Column(name = "resume",length = 3000)
+	@Column(name = "resume",length = 256)
 	private String resume;
 	
-	@Column(name = "interest",length = 3000)
+	@Column(name = "interest",length = 256)
 	private String interest;
 	
-	@Column(name = "gender",length = 256)
+	@Column(name = "gender",length = 3)
 	private String gender;
 	
 	@Column(name = "birthday")
@@ -80,43 +78,100 @@ public class User {
 	@Column(name = "relationshipStatus",length = 256)
 	private String relationshipStatus;
 	
-	@Column(name = "amAParent")
-	private boolean amAParent;
+//	@Column(name = "imAParent")
+//	private boolean imAParent;
 	
-	@Column(name = "image")
-	private String image;
+//	@Column(name = "image", length = 256)
+//	private String image;
 	
-	@OneToMany(mappedBy = "application")
-	private List<Application> applications;
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
 	
-	@OneToMany(mappedBy = "bookmark")
-	private List<Bookmark> bookmarks;
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
 	
-	@OneToMany(mappedBy = "favorite")
-	private List<Favorite> favorites;
-	
-	@OneToMany(mappedBy = "voting")
-	private List<Voting> votings;
-	
-	@OneToMany(mappedBy = "follow")
-	private List<Follow> follows;
-	
-	@OneToMany(mappedBy = "interest")
-	private List<Interest> interests;
-	
-	@OneToMany(mappedBy = "language")
-	private List<Language> languages;
-	
-	@OneToMany(mappedBy = "certificate")
-	private List<Certificate> certificates;
-	
-	@OneToMany(mappedBy = "education")
-	private List<Education> educations;
-	
-	@OneToMany(mappedBy = "project")
-	private List<Project> projects;
-	
-	@OneToMany(mappedBy = "projectinfo")
-	private List<Profile> profileInfos;
+	public String getFullName() {
+		return fullName;
+	}
 
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getOccupationInterest() {
+		return occupationInterest;
+	}
+
+	public void setOccupationInterest(String occupationInterest) {
+		this.occupationInterest = occupationInterest;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+//
+//	@OneToMany(mappedBy = "application")
+//	private List<Application> applications;
+//	
+//	@OneToMany(mappedBy = "bookmark")
+//	private List<Bookmark> bookmarks;
+//	
+//	@OneToMany(mappedBy = "favorite")
+//	private List<Favorite> favorites;
+//	
+//	@OneToMany(mappedBy = "voting")
+//	private List<Voting> votings;
+//	
+//	@OneToMany(mappedBy = "follow")
+//	private List<Follow> follows;
+//	
+//	@OneToMany(mappedBy = "interest")
+//	private List<Interest> interests;
+//	
+//	@OneToMany(mappedBy = "language")
+//	private List<Language> languages;
+//	
+//	@OneToMany(mappedBy = "certificate")
+//	private List<Certificate> certificates;
+//	
+//	@OneToMany(mappedBy = "education")
+//	private List<Education> educations;
+//	
+//	@OneToMany(mappedBy = "project")
+//	private List<Project> projects;
+//	
+//	@OneToMany(mappedBy = "profile")
+//	private List<Profile> profiles;
 }

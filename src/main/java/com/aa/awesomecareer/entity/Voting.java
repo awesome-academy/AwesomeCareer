@@ -14,14 +14,11 @@ public class Voting {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@Column(name = "userId")
 	private Integer userId;
 	@Column(name = "jobId")
 	private Integer jobId;
 	@Column(name = "score")
 	private Integer score;
-	
-	
-	
 }

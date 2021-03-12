@@ -21,10 +21,11 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	@Column(name = "name",length = 256)
+
+	@Column(name = "title", length = 128)
 	private String title;
-	@Column(name = "name",length = 256)
+
+	@Column(name = "link", length = 256)
 	private String link;
 	@Column(name = "startDate")
 	@Temporal(value = TemporalType.TIMESTAMP)
@@ -32,10 +33,18 @@ public class Project {
 	@Column(name = "endDate")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date endDate;
-	@Column(name = "name",length = 3000)
+	@Column(name = "description", length = 3000)
 	private String description;
-	
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private User user;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
+
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private User user;
 }
