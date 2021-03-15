@@ -57,25 +57,25 @@ public class UserServiceImp implements UserService {
 		return null;
 	}
 
-	@Transactional
-	@Override
-	public UserModel addUser(UserModel userModel) {
-		if(emailExists(userModel.getEmail())) {
-			logger.info("There is an account with that email address" +userModel.getEmail());
-		}
-		User condition = new User();
-		condition.setFullName(userModel.getFullName());
-		condition.setEmail(userModel.getEmail());
-		condition.setPassword(userModel.getPassword());
-		condition.setCompany(userModel.getCompany());
-		condition.setOccupationInterest(userModel.getOccupationInterest());
-		condition.setCountry(userModel.getCountry());
-		User user= userRepository.save(condition);
-		userModel = new UserModel();
-		BeanUtils.copyProperties(user, userModel);
-		
-		return userModel;
-	}
+//	@Transactional
+//	@Override
+//	public UserModel addUser(UserModel userModel) {
+//		if(emailExists(userModel.getEmail())) {
+//			logger.info("There is an account with that email address" +userModel.getEmail());
+//		}
+//		User condition = new User();
+//		condition.setFullName(userModel.getFullName());
+//		condition.setEmail(userModel.getEmail());
+//		condition.setPassword(userModel.getPassword());
+//		condition.setCompany(userModel.getCompany());
+//		condition.setOccupationInterest(userModel.getOccupationInterest());
+//		condition.setCountry(userModel.getCountry());
+//		User user= userRepository.save(condition);
+//		userModel = new UserModel();
+//		BeanUtils.copyProperties(user, userModel);
+//		
+//		return userModel;
+//	}
 	private boolean emailExists(String email) {
 		return userRepository.findByEmail(email) !=null;
 	}

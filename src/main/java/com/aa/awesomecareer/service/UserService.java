@@ -8,6 +8,6 @@ import com.aa.awesomecareer.model.UserModel;
 public interface UserService {
 	public List<UserModel> findAll();
 	public UserModel findByEmail(String email);
-	UserModel addUser(UserModel userModel);
+	//UserModel addUser(UserModel userModel);
 
 }

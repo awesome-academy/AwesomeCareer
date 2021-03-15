@@ -33,15 +33,15 @@ import com.aa.awesomecareer.util.validator.FieldMatch;
 import com.aa.awesomecareer.util.validator.NullOrNotBlank;
 import com.aa.awesomecareer.util.validator.UniqueEmail;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//import lombok.AllArgsConstructor;
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
+//
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
 @UniqueEmail(name = "email", message = "{user.validation.email.exist}")
 @FieldMatch(first = "password", second = "confirmation", message = "{user.validation.password.notmatch}")
 public class UserModel extends BaseModel {
@@ -79,16 +79,16 @@ public class UserModel extends BaseModel {
 	private boolean amAParent;
 	private String image;
 	
-	private List<ApplicationModel> applicationModels;
-	private List<BookmarkModel> bookmarkModels;
-	private List<FavoriteModel> favoriteModels;
-	private List<VotingModel> votingModels;
-	private List<FollowModel> followModels;
-	private List<InterestModel> interestModels;
-	private List<LanguageModel> languageModels;
-	private List<CertificateModel> certificateModels;
-	private List<EducationModel> educationModels;
-	private List<ProjectModel> projectModels;
-	private List<ProfileInfoModel> profileInfoModels;
+//	private List<ApplicationModel> applicationModels;
+//	private List<BookmarkModel> bookmarkModels;
+//	private List<FavoriteModel> favoriteModels;
+//	private List<VotingModel> votingModels;
+//	private List<FollowModel> followModels;
+//	private List<InterestModel> interestModels;
+//	private List<LanguageModel> languageModels;
+//	private List<CertificateModel> certificateModels;
+//	private List<EducationModel> educationModels;
+//	private List<ProjectModel> projectModels;
+//	private List<ProfileInfoModel> profileInfoModels;
 
 }

@@ -60,16 +60,16 @@ public class UsersController {
 		return "users/add";
 	}
 	
-	@PostMapping(value = "/users")
-	public String create(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
-			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
-		if (bindingResult.hasErrors()) {
-			logger.info("Returning register.jsp page, validate failed");
-			return "users/add";
-		}
-		userService.addUser(userModel);
-		// Add message to flash scope
-		return "redirect: " + request.getContextPath() + "/home";
-	}
+//	@PostMapping(value = "/users")
+//	public String create(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
+//			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+//		if (bindingResult.hasErrors()) {
+//			logger.info("Returning register.jsp page, validate failed");
+//			return "users/add";
+//		}
+//		userService.addUser(userModel);
+//		// Add message to flash scope
+//		return "redirect: " + request.getContextPath() + "/home";
+//	}
 
 }
