@@ -14,16 +14,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -84,14 +82,6 @@ public class User {
 //	@Column(name = "image", length = 256)
 //	private String image;
 	
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
-	
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
-	
 	public String getFullName() {
 		return fullName;
 	}
@@ -140,6 +130,8 @@ public class User {
 		this.country = country;
 	}
 
+	@OneToMany(mappedBy = "experience")
+    private List<Experience> experiences;
 
 //
 //	@OneToMany(mappedBy = "application")
