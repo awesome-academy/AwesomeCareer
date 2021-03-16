@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+	th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<p th:text="${newExperienceModel.companyName}"></p>
+	<span>.................................</span>
+	<span th:text="${newExperienceModel.startYear}"></span>
+	<span>-</span>
+	<span th:text="${newExperienceModel.startMonth}"></span>
+	<span>-</span>
+	<span th:text="${newExperienceModel.endYear}"></span>
+	<span>-</span>
+	<span th:text="${newExperienceModel.endMonth}"></span>
+	<p th:text="${newExperienceModel.jobTitle}"></p>
+	<p th:text="${newExperienceModel.description}"></p>
+</body>
+</html>
