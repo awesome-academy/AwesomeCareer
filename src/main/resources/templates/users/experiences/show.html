@@ -9,6 +9,7 @@
 </head>
 <body>
 	<p th:text="${newExperienceModel.companyName}"></p>
+	<span th:href="/@{'/edit/'+${experienceModel.id}" th:id="'experience-'+${experienceModel.id}">Edit</span>
 	<span>.................................</span>
 	<span th:text="${newExperienceModel.startYear}"></span>
 	<span>-</span>
@@ -18,6 +19,29 @@
 	<span>-</span>
 	<span th:text="${newExperienceModel.endMonth}"></span>
 	<p th:text="${newExperienceModel.jobTitle}"></p>
+	<span th:href="/@{'/edit/'+${experienceModel.id}" th:id="'experience-'+${experienceModel.id}">Edit</span>
 	<p th:text="${newExperienceModel.description}"></p>
+	
+	<script>
+	$('#experience-[[${experienceModel.id}]]').click(function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$.ajax({
+			type: 'GET',
+			url :$(this).attr('href'),
+			success : function(data, textStatus,xhr){
+			
+				
+				$('#experience-[[$experienceModel.id]]').html(data);
+			}
+		
+			})
+		});
+	
+	
+	
+	
+	
+	</script>
 </body>
 </html>

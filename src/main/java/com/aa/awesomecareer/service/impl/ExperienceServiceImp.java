@@ -1,5 +1,7 @@
 package com.aa.awesomecareer.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +23,14 @@ public class ExperienceServiceImp implements ExperienceService {
 		ExperienceModel newExperienceModel = new ExperienceModel();
 		BeanUtils.copyProperties(newExperience, newExperienceModel);
 		return newExperienceModel;
+	}
+
+	@Override
+	public ExperienceModel findById(Integer id) {
+		Optional<Experience> experienceOld = experienceRepo.findById(id);
+		ExperienceModel experienceModel = new ExperienceModel();
+		BeanUtils.copyProperties(experienceOld, experienceModel);
+		return experienceModel;
 	}
 	
 	

@@ -32,7 +32,7 @@ public class ExperiencesController {
 		model.addAttribute("months", months);
 		model.addAttribute("experienceModel",experienceModel);
 		
-		return "experiences/form";
+		return "experiences/_form";
 	}
 	
 	@PostMapping(value="/user/{id}/experience")
@@ -43,6 +43,15 @@ public class ExperiencesController {
 		model.addAttribute("newExperienceModel", newExperienceModel);
 		
 		return "experiences/show";
+	}
+	
+	@GetMapping(value="/experience/{id}")
+	public String showFormOld(@PathVariable("id") int id,Model model) {
+		
+		ExperienceModel experienceModel = experienceService.findById(id);
+		model.addAttribute("experience", experienceModel);
+		
+		return "experiences/_form";
 	}
 
 }
