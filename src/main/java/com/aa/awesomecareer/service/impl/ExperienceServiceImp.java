@@ -1,5 +1,7 @@
 package com.aa.awesomecareer.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -31,6 +33,25 @@ public class ExperienceServiceImp implements ExperienceService {
 		ExperienceModel experienceModel = new ExperienceModel();
 		BeanUtils.copyProperties(experienceOld, experienceModel);
 		return experienceModel;
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		experienceRepo.deleteById(id);
+		
+	}
+
+	@Override
+	public List<ExperienceModel> findAll() {
+		List<Experience> experiences =experienceRepo.findAll();
+		List<ExperienceModel> experienceModels = new ArrayList<ExperienceModel>();
+		for(Experience ex : experiences) {
+			ExperienceModel experienceModel = new ExperienceModel();
+			BeanUtils.copyProperties(ex, experienceModel);
+			experienceModels.add(experienceModel);
+		}
+		
+		return experienceModels;
 	}
 	
 	
