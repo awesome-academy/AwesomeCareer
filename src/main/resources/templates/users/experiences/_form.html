@@ -12,8 +12,7 @@
 	<main class="container">
 		<section class="row">
 			<div class="col-8 offset-2">
-				<form th:action="@{/user/{id}/experience" th:method="POST"
-					th:object="${experienceModel}">
+				<form th:action="@{/user/{id}/experience}" th:method="POST" th:object="${experienceModel}">
 					<div class="card">
 						<div class="card-header">
 							<b>Edit Profile</b>
@@ -95,7 +94,8 @@
 						</div>
 
 						<div class="card-footer text-muted">
-							<button class="btn btn-success">Delete</button>
+							<button class="btn btn-success" id="_delete" 
+							th:href="@{/experience/{experienceModel.id}/delete}">Delete</button>
 							<button class="btn btn-success">Cancel</button>
 							<button class="btn btn-success" id="_update">Update</button>
 						</div>
@@ -140,5 +140,20 @@
     	});
     
     </script>
+   <script>
+		$('#_delete').click(function(event){
+			event.preventDefault();
+			event.stopPropagation();
+			$.ajax({
+				type : 'DELETE',
+				url : $(this).attr('href'),
+				success : function(data, textStatus, xhr){
+					$('#experience_show').html(data);
+				}
+				
+			});
+		});
+		
+		</script>
 </body>
 </html>
