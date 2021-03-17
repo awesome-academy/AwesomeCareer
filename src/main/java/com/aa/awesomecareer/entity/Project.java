@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 @Table(name = "project")
 public class Project {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name = "title", length = 128)

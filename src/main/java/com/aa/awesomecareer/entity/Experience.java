@@ -16,7 +16,7 @@ import com.aa.awesomecareer.model.BaseModel;
 @Table(name = "experience")
 public class Experience extends BaseModel {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "userId")
@@ -49,7 +49,7 @@ public class Experience extends BaseModel {
 	private boolean internship;
 	
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "experience_id")
 	private User user;
 	
 	public Experience() {
