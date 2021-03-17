@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User extends BaseEntity{
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "fullName",length = 256)
@@ -130,8 +130,8 @@ public class User extends BaseEntity{
 		this.country = country;
 	}
 
-	@OneToMany(mappedBy = "experience")
-    private List<Experience> experiences;
+//	@OneToMany(mappedBy = "experience")
+//    private List<Experience> experiences;
 
 //
 //	@OneToMany(mappedBy = "application")

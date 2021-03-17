@@ -16,43 +16,43 @@ public class ExperienceServiceImp implements ExperienceService {
 	
 	@Autowired
 	ExperienceRepository experienceRepo;
-	
-	public ExperienceModel save(ExperienceModel experienceModel) {
-		
-		Experience experience = new Experience();
-		BeanUtils.copyProperties(experienceModel, experience);
-		Experience newExperience = experienceRepo.save(experience);
-		ExperienceModel newExperienceModel = new ExperienceModel();
-		BeanUtils.copyProperties(newExperience, newExperienceModel);
-		return newExperienceModel;
-	}
-
-	@Override
-	public ExperienceModel findById(Integer id) {
-		Optional<Experience> experienceOld = experienceRepo.findById(id);
-		ExperienceModel experienceModel = new ExperienceModel();
-		BeanUtils.copyProperties(experienceOld, experienceModel);
-		return experienceModel;
-	}
-
-	@Override
-	public void deleteById(Integer id) {
-		experienceRepo.deleteById(id);
-		
-	}
-
-	@Override
-	public List<ExperienceModel> findAll() {
-		List<Experience> experiences =experienceRepo.findAll();
-		List<ExperienceModel> experienceModels = new ArrayList<ExperienceModel>();
-		for(Experience ex : experiences) {
-			ExperienceModel experienceModel = new ExperienceModel();
-			BeanUtils.copyProperties(ex, experienceModel);
-			experienceModels.add(experienceModel);
-		}
-		
-		return experienceModels;
-	}
+//
+//	public ExperienceModel save(ExperienceModel experienceModel) {
+//
+//		Experience experience = new Experience();
+//		BeanUtils.copyProperties(experienceModel, experience);
+//		Experience newExperience = experienceRepo.save(experience);
+//		ExperienceModel newExperienceModel = new ExperienceModel();
+//		BeanUtils.copyProperties(newExperience, newExperienceModel);
+//		return newExperienceModel;
+//	}
+//
+//	@Override
+//	public ExperienceModel findById(Integer id) {
+//		Optional<Experience> experienceOld = experienceRepo.findById(id);
+//		ExperienceModel experienceModel = new ExperienceModel();
+//		BeanUtils.copyProperties(experienceOld, experienceModel);
+//		return experienceModel;
+//	}
+//
+//	@Override
+//	public void deleteById(Integer id) {
+//		experienceRepo.deleteById(id);
+//
+//	}
+//
+//	@Override
+//	public List<ExperienceModel> findAll() {
+//		List<Experience> experiences =experienceRepo.findAll();
+//		List<ExperienceModel> experienceModels = new ArrayList<ExperienceModel>();
+//		for(Experience ex : experiences) {
+//			ExperienceModel experienceModel = new ExperienceModel();
+//			BeanUtils.copyProperties(ex, experienceModel);
+//			experienceModels.add(experienceModel);
+//		}
+//
+//		return experienceModels;
+//	}
 	
 	
 

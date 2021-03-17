@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name = "hashtag")
 public class Hashtag {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name = "name", length = 256)

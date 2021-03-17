@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name = "language")
 public class Language {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name = "language", length = 256)
