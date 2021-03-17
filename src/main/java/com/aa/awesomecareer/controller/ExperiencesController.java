@@ -46,7 +46,7 @@ public class ExperiencesController {
 	}
 	
 	@GetMapping(value="/experience/{id}")
-	public String showFormOld(@PathVariable("id") int id,Model model) {
+	public String showFormOld(@PathVariable("id") Integer id,Model model) {
 		
 		ExperienceModel experienceModel = experienceService.findById(id);
 		model.addAttribute("experience", experienceModel);
