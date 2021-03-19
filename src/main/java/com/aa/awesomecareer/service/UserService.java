@@ -7,7 +7,11 @@ import com.aa.awesomecareer.model.UserModel;
 
 public interface UserService {
 	public List<UserModel> findAll();
-	public UserModel findByEmail(String email);
+	
+	public UserModel findUser(Integer id);
+	
 	//UserModel addUser(UserModel userModel);
+	
+	public UserModel saveInfo(UserModel userModel); 
 
 }

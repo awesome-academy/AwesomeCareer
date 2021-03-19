@@ -1,21 +1,16 @@
 <!DOCTYPE html>
-<html th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}" xmlns:th="http://www.thymeleaf.org">
+<html
+	th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title th:text="#{user.show.title}">User Info</title>
+<title th:text="#{user.show.title}">User Info</title>
 </head>
 <body>
-<div class="row">
-  <aside class="col-md-4">
-	<section class="user_info">
-		<th:block th:if="${user}">
-		<h1>
-			[[${user.name}]]
-		</h1>
-	    </th:block>
-	</section>
-  </aside>
-  <div class="col-md-8">
-  </div>
-</div>
+	<h1>
+		[[${user.userName}]]
+	</h1>
+	<div th:replace="~{users/_basicInfo :: huy(${certificate})}"></div>
+	
+	
 </body>
 </html>

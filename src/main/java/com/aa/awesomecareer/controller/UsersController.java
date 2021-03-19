@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -46,11 +47,10 @@ public class UsersController {
 		return "users/index";
 	}
 
-	@GetMapping(value = "/users/{email}")
-	public String show(@PathVariable String email, Model model) {
-		UserModel userModel = userService.findByEmail(email);
+	@GetMapping(value = "/users/{id}")
+	public String show(@PathVariable Integer id, Model model) {
+		UserModel userModel = userService.findUser(id);
 		model.addAttribute("user", userModel);
-
 		return "users/show";
 	}
 	
@@ -58,6 +58,13 @@ public class UsersController {
 	public String add(Locale locale, Model model) {
 		model.addAttribute("user", new UserModel());
 		return "users/add";
+	}
+	
+	@PutMapping(value = "/users/{id}")
+	public String update(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
+			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
+		UserModel user = userService.saveInfo(userModel);
+		return "users/show";
 	}
 	
 //	@PostMapping(value = "/users")

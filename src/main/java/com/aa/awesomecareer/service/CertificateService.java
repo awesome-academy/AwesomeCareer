@@ -1,5 +1,7 @@
 package com.aa.awesomecareer.service;
 
-public interface CertificateService {
+import com.aa.awesomecareer.model.CertificateModel;
 
+public interface CertificateService {
+	public CertificateModel saveCertificate(CertificateModel certificateModel);
 }

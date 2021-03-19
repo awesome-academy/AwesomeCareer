@@ -4,7 +4,7 @@
 <body>
   <ul class="users">
     <li th:fragment="copy (user)" th:id="'user-'+${user.id}">
-      <a th:href="@{'/users/'+${user.email}}" th:text="${user.name}"></a>
+      <a th:href="@{'/users/'+${user.email}}" th:text="${user.username}"></a>
     </li>
   </ul>
 </body>

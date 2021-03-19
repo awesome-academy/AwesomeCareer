@@ -1,6 +1,9 @@
 package com.aa.awesomecareer.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -17,6 +20,7 @@ import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.repository.UserRepository;
 import com.aa.awesomecareer.service.UserService;
 
+
 @Service
 @Qualifier("userService")
 public class UserServiceImp implements UserService {
@@ -26,7 +30,7 @@ public class UserServiceImp implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	private UserServiceImp() {
+	public UserServiceImp() {
 	}
 
 	public List<UserModel> findAll() {
@@ -44,17 +48,17 @@ public class UserServiceImp implements UserService {
 		return null;
 	}
 
-	public UserModel findByEmail(String email) {
-		logger.info("Fetching user by email in the database");
+	public UserModel findUser(Integer id) {
+		logger.info("Tim kiem user theo id trong co so du lieu");
 		try {
-			User user = userRepository.findByEmail(email);
+			Optional<User> user = userRepository.findById(id);
 			UserModel userModel = new UserModel();
 			BeanUtils.copyProperties(user, userModel);
 			return userModel;
 		} catch (Exception e) {
-			logger.error("An error occurred while fetching user by email from the database", e);
+			logger.error("An error occurred while fetching the user details from the database", e);
+			return null;
 		}
-		return null;
 	}
 
 //	@Transactional
@@ -78,6 +82,19 @@ public class UserServiceImp implements UserService {
 //	}
 	private boolean emailExists(String email) {
 		return userRepository.findByEmail(email) !=null;
+	}
+	
+	public UserModel saveInfo(UserModel userModel) {
+		logger.info("Save basic info in the database");
+		User saveinfo = new User();
+		saveinfo.setId(2);
+		saveinfo.setGender(userModel.getGender());
+		saveinfo.setBirthday(userModel.getBirthday());
+		saveinfo.setRelationshipStatus(userModel.getRelationshipStatus());
+		User user= userRepository.save(saveinfo);
+		userModel = new UserModel();
+		BeanUtils.copyProperties(user, userModel);
+		return userModel;
 	}
 
 }

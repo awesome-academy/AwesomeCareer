@@ -20,7 +20,10 @@ public class Education {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
+	@Column(name = "userId")
+	private String userId;
+
 	@Column(name = "school", length = 256)
 	private String school;
 	@Column(name = "major", length = 256)
@@ -30,9 +33,17 @@ public class Education {
 	@Column(name = "graduation")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date graduation;
-	
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private User user;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "createdAt")
+	private Date createdAt;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "updatedBy")
+	private Date updatedBy;
+
+//	@ManyToOne
+//	@JoinColumn(name = "id")
+//	private User user;
 
 }
