@@ -17,6 +17,7 @@ public class ExperienceModel extends BaseModel {
 	private String description;
 	private boolean currentlyWork;
 	private boolean internship;
+	
 	private User user;
 	
 	public ExperienceModel() {

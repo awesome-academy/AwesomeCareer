@@ -28,10 +28,11 @@ public class ExperienceServiceImp implements ExperienceService {
 	ExperienceRepositoryCustom experienceRepositoryCustomRepo;
 	
 	public void save(ExperienceModel experienceModel) throws ParseException {
+	
+			Experience experience = new Experience();
+			BeanUtils.copyProperties(experienceModel, experience);
+			experienceRepo.save(experience);	
 		
-		Experience experience = new Experience();
-		BeanUtils.copyProperties(experienceModel, experience);
-		experienceRepo.save(experience);
 	}
 
 	@Override

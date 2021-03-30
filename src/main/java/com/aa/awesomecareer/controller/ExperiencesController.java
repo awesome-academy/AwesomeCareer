@@ -35,6 +35,7 @@ public class ExperiencesController {
 	@PostMapping(value="/experience")
 	public String addExperience(@ModelAttribute ExperienceModel experienceModel,
 			BindingResult bindingResult, Model model) throws ParseException {
+		experienceModel.setUserId(1);
 		experienceService.save(experienceModel);
 		List<ExperienceModel> experienceModels = experienceService.findAllById(1);
 		model.addAttribute("experienceModels", experienceModels);
@@ -47,6 +48,7 @@ public class ExperiencesController {
 		
 		ExperienceModel experienceModel = experienceService.findById(id);
 		model.addAttribute("experienceModel", experienceModel);
+		System.out.println("Kiem tra id cua experience "+ experienceModel.getId());
 		
 		return "experiences/_form";
 	}

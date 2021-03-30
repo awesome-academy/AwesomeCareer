@@ -13,6 +13,7 @@
 			<div class="col-8 offset-2">
 			
 				<form th:action="@{/experience}" th:method="POST" th:object="${experienceModel}" id="_experience_form">
+				<input type="hidden" th:name="id" th:value="${experienceModel.id}" />
 					<div class="card">
 						<div class="card-header">
 							<b>Edit Profile</b>
@@ -61,11 +62,13 @@
 						<div class="card-footer text-muted">
 							<a class="btn btn-success" id="_delete_experience"
 								th:href="@{'/experience/'+${experienceModel.id}+'/delete'}">Delete</a>
-							<button class="btn btn-success">Cancel</button>
+							<button class="btn btn-success" id="_cancel_experience" >Cancel</button>
+							
 							<input type="submit" class="btn btn-success"  value="Update">
 						</div>
 					</div>
 				</form>
+				
 				
 			</div>
 		</section>
@@ -75,6 +78,7 @@
 			event.preventDefault();
 			event.stopPropagation();
 			var form = $(this);
+			var id = $(this).find('input[name="id"]').val();
 			var companyName = $(this).find('input[name="companyName"]').val();
 			var jobTitle = $(this).find('input[name="jobTitle"]').val();
 			var startTime = $(this).find('input[name="startTime"]').val();
@@ -86,6 +90,7 @@
 				type : 'POST',
 				url : $(this).attr('action'),
 				data : {
+					'id' :id,
 					'companyName' : companyName,
 					'jobTitle' : jobTitle,
 					'startTime' : startTime,
@@ -112,6 +117,11 @@
 					$('#experience_show').html(data);
 				}
 			});
+		});
+	</script>
+	<script>
+		$('#_cancel_experience').click(function(event) {
+					$('#_experience_form_wrapper').html('');
 		});
 	</script>
 	<script>
