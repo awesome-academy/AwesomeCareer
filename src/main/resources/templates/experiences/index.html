@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<th:block th:fragment="copy" th:each="experience : ${experienceModels}">
+			<li th:replace="~{experiences/_detail :: copy(${experience})}"></li>
+	</th:block>
+</body>
+</html>

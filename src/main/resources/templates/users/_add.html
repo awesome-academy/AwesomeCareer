@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+	th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title th:text="#{user.show.title}">User Info</title>
+</head>
+<body>
+	<form th:action="@{/users}" th:object="${user}" th:method="POST">
+		<div class="container">
+			<div class="form-group col-md-4">
+				<input type="fullname" class="form-control" id="inputFullname"
+					placeholder="Fullname" th:field="*{fullName}">
+			</div>
+			<div class="form-group col-md-4">
+				<input type="email" class="form-control" id="inputEmail"
+					placeholder="Email" th:field="*{email}">
+			</div>
+
+			<div class="form-group col-md-4">
+				<input type="text" class="form-control" id="inputPassword"
+					placeholder="Password" th:field="*{password}">
+			</div>
+			<div class="form-group col-md-4">
+				<input type="text" class="form-control" id="inputCompany"
+					placeholder="Company" th:field="*{company}">
+			</div>
+
+			<div class="form-group col-md-4">
+				<select id="inputState" class="form-control"
+					placeholder="Occupation of Interest"
+					th:field="*{occupationInterest}">
+					<option value="">Choose...</option>
+					<option th:each="occupation: ${occupations}"
+						th:value="${occupation}" th:utext="${occupation}">...</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Sign up</button>
+			<div class="form-group col-md-4">
+				<label for="inputState">Country:</label> <select id="inputState"
+					class="form-control" th:field="*{country}">
+					<option value="">Choose...</option>
+					<option th:each="country: ${countries}" th:value="${country}"
+						th:utext="${country}">...</option>
+				</select>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

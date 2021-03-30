@@ -1,14 +1,22 @@
 package com.aa.awesomecareer.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,8 +27,7 @@ import lombok.NoArgsConstructor;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class User extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +51,6 @@ public class User extends BaseEntity{
 	@Column(name = "country",length = 256)
 	private String country;
 
-	
 	@Column(name = "userName",length = 256)
 	private String userName;
 	
@@ -81,6 +87,23 @@ public class User extends BaseEntity{
 	
 //	@Column(name = "image", length = 256)
 //	private String image;
+
+	
+	@OneToMany(mappedBy = "user")
+    private List<Experience> experiences;
+	
+	@OneToMany(mappedBy = "user")
+    private List<SkillUser> skillUsers;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(
+			name="skilluser",
+			joinColumns = @JoinColumn(name="userId"),
+			inverseJoinColumns = @JoinColumn(name="skillId")
+			)
+    private Set<Skill> skills = new HashSet<>();
+	
+	
 	
 	public String getFullName() {
 		return fullName;
@@ -130,10 +153,40 @@ public class User extends BaseEntity{
 		this.country = country;
 	}
 
-//	@OneToMany(mappedBy = "experience")
-//    private List<Experience> experiences;
+	public List<Experience> getExperiences() {
+		return experiences;
+	}
 
-//
+	public void setExperiences(List<Experience> experiences) {
+		this.experiences = experiences;
+	}
+
+	public Set<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Set<Skill> skills) {
+		this.skills = skills;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public List<SkillUser> getSkillUsers() {
+		return skillUsers;
+	}
+
+	public void setSkillUsers(List<SkillUser> skillUsers) {
+		this.skillUsers = skillUsers;
+	}
+	
+	
+	
 //	@OneToMany(mappedBy = "application")
 //	private List<Application> applications;
 //	

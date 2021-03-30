@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <?xml version="1.0" encoding="UTF-8"?>
+
 <html th:fragment="layout (title, content, links)" 
   xmlns:th="http://www.thymeleaf.org" 
   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+
   <title th:replace="${title}">[[#{meta.title}]]</title>
   <meta name="description" th:attr="content=#{meta.description}" />
   <meta name="keywords" th:attr="content=#{meta.keywords}" />
   <meta charset="utf-8"/>
+  
   <!-- <sec:csrfMetaTags ></sec:csrfMetaTags> -->
 	<!-- default header name is X-CSRF-TOKEN -->
   <th:block th:if="${_csrf}">
-  <meta name="_csrf_header" th:attr="content=${_csrf.headerName}"/>
-  <meta name="_csrf_parameter" th:attr="content=${_csrf.parameterName}"/>
-  <meta name="_csrf" th:attr="content=${_csrf.token}"/>
+    <meta name="_csrf_header" th:attr="content=${_csrf.headerName}"/>
+    <meta name="_csrf_parameter" th:attr="content=${_csrf.parameterName}"/>
+    <meta name="_csrf" th:attr="content=${_csrf.token}"/>
   </th:block>
 	
   <!-- Common styles and scripts -->
@@ -21,11 +24,13 @@
   <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
   <script type="text/javascript" th:src="@{/js/custom.js}"></script>
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
   <!-- <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}"> -->
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}">
   <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/fontawesome.min.css}"></link>
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
   <link th:href="@{/css/custom.css}" rel="stylesheet" type="text/css" media="all" />
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/footer.css}">
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/header.css}">
@@ -33,22 +38,30 @@
   <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
 
   <th:block th:replace="${links}" />
+  
 </head>
 <body>
+
   <th:block th:if="${flash != null and flash.isEmptyMessage()}">
-  <div th:each="key : ${flash.getMessage().keySet()}" th:class="'alert alert-'+${flash.getMessage().get(key)}+' alert-dismissible'" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div th:each="key : ${flash.getMessage().keySet()}" th:class="'alert alert-'+${flash.getMessage().get(key)}+' alert-dismissible'" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 	  <span aria-hidden="true">&times;</span>
-    </button>
+      </button>
     [[#{${key}}]]
-  </div>
+    </div>
   </th:block>
-  <header th:replace="layout/_header :: copy"></header>     
+  
+  <header th:replace="layout/_header :: copy"></header> 
+      
   <div class="container">
     <div th:replace="${content}">
         <p>Layout content</p>
     </div>
+    
     <footer th:replace="layout/_footer :: copy"></footer> 
+    
   </div>  
+  
 </body>
+
 </html>

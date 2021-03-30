@@ -6,18 +6,23 @@ $(document).ready(function() {
 	    if (!(/^http:.*/.test(settings.url) || /^https:.*/
 	      .test(settings.url))) {
 	      // Only send the token to relative URLs i.e. locally.
-	      xhr.setRequestHeader("X-XSRF-TOKEN",
-	        Cookies.get('XSRF-TOKEN'));
+	      //xhr.setRequestHeader("X-XSRF-TOKEN",
+	      //  Cookies.get('XSRF-TOKEN'));
 	    }
 	  }
-	}
+	},
+	xhrFields: {
+      withCredentials: true
+   }
   });	
 	
   var _csrf_token = $("meta[name='_csrf']").attr("content");
   var _csrf_parameter = $("meta[name='_csrf_parameter']").attr("content");
   var _csrf_header = $("meta[name='_csrf_header']").attr("content");
   $(document).ajaxSend(function(e, xhr, options) {
-    xhr.setRequestHeader(_csrf_header, _csrf_token);
+    if (_csrf_header && _csrf_token) {
+      xhr.setRequestHeader(_csrf_header, _csrf_token);
+    }
   });
   
   $('a').filter('[data-method="delete"], [data-method="DELETE"]').click(function(event) {
