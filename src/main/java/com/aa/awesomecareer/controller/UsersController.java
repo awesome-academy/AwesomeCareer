@@ -1,5 +1,6 @@
 package com.aa.awesomecareer.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -20,11 +21,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aa.awesomecareer.model.ExperienceModel;
+import com.aa.awesomecareer.model.SkillModel;
 import com.aa.awesomecareer.model.UserModel;
+import com.aa.awesomecareer.service.ExperienceService;
+import com.aa.awesomecareer.service.SkillService;
 import com.aa.awesomecareer.service.UserService;
+import com.aa.awesomecareer.util.CommonUtil;
 
 @Controller
 //@EnableWebMvc
@@ -34,6 +39,12 @@ public class UsersController {
 	@Autowired
 	MessageSource messageSource;
 
+	@Autowired
+	ExperienceService experienceService;
+
+	@Autowired
+	SkillService skillService;
+	
 	@Autowired
 	@Qualifier("userService")
 	UserService userService;
@@ -46,30 +57,41 @@ public class UsersController {
 		return "users/index";
 	}
 
-	@GetMapping(value = "/users/{email}")
-	public String show(@PathVariable String email, Model model) {
-		UserModel userModel = userService.findByEmail(email);
-		model.addAttribute("user", userModel);
-
-		return "users/show";
-	}
-	
-	@GetMapping(value = { "/users/add", "/signup" })
+	@GetMapping(value = { "/signup" })
 	public String add(Locale locale, Model model) {
+		List<String> occupations = CommonUtil.occupationList();
+		model.addAttribute("occupations", occupations);
+		List<String> countries = CommonUtil.countryList();
+		model.addAttribute("countries", countries);
 		model.addAttribute("user", new UserModel());
-		return "users/add";
+		return "users/_add";
 	}
-	
+
 	@PostMapping(value = "/users")
-	public String create(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
+	public String create(@ModelAttribute("userModel") @Validated UserModel userModel, BindingResult bindingResult,
 			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
 		if (bindingResult.hasErrors()) {
 			logger.info("Returning register.jsp page, validate failed");
-			return "users/add";
+			return "users/_add";
 		}
 		userService.addUser(userModel);
 		// Add message to flash scope
-		return "redirect: " + request.getContextPath() + "/home";
+		return "redirect: " + request.getContextPath() + "/user/" + userModel.getId();
+	}
+
+	@GetMapping(value = "/user/{id}")
+	public String show(@PathVariable Integer id, Model model) {
+		UserModel userModel = userService.findUserById(id);
+		model.addAttribute("userModel", userModel);
+
+		List<ExperienceModel> experienceModels = experienceService.findAllById(1);
+		model.addAttribute("experienceModels", experienceModels);
+
+		List<SkillModel> skillModels = skillService.findAll();
+		model.addAttribute("skillModels", skillModels);
+
+		return "users/show";
+
 	}
 
 }

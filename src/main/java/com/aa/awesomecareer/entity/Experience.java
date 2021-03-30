@@ -1,5 +1,7 @@
 package com.aa.awesomecareer.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.aa.awesomecareer.model.BaseModel;
 
@@ -16,7 +20,7 @@ import com.aa.awesomecareer.model.BaseModel;
 @Table(name = "experience")
 public class Experience extends BaseModel {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "userId")
@@ -27,17 +31,13 @@ public class Experience extends BaseModel {
 	@Column(name = "jobTitle", length = 256)
 	private String jobTitle;
 	
-	@Column(name = "startYear")
-	private String startYear;
-	
-	@Column(name = "startMonth")
-	private String startMonth;
-	
-	@Column(name = "endYear")
-	private String endYear;
-	
-	@Column(name = "endMonth")
-	private String endMonth;
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "startTime")
+	private Date startTime;
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "endTime")
+	private Date endTime;
 	
 	@Column(name = "description", length = 3000)
 	private String description;
@@ -49,32 +49,27 @@ public class Experience extends BaseModel {
 	private boolean internship;
 	
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "userId",insertable = false, updatable = false)
 	private User user;
 	
 	public Experience() {
 
 	}
 
-	public Experience(Integer id, Integer userId, String companyName, String jobTitle, String startYear,
-			String startMonth, String endYear, String endMonth, String description, boolean currentlyWork,
-			boolean internship, User user) {
+	public Experience(Integer id, Integer userId, String companyName, String jobTitle, Date startTime, Date endTime,
+			String description, boolean currentlyWork, boolean internship, User user) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.companyName = companyName;
 		this.jobTitle = jobTitle;
-		this.startYear = startYear;
-		this.startMonth = startMonth;
-		this.endYear = endYear;
-		this.endMonth = endMonth;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.description = description;
 		this.currentlyWork = currentlyWork;
 		this.internship = internship;
 		this.user = user;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -117,36 +112,20 @@ public class Experience extends BaseModel {
 		this.jobTitle = jobTitle;
 	}
 
-	public String getStartYear() {
-		return startYear;
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setStartYear(String startYear) {
-		this.startYear = startYear;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
-	public String getStartMonth() {
-		return startMonth;
+	public Date getEndTime() {
+		return endTime;
 	}
 
-	public void setStartMonth(String startMonth) {
-		this.startMonth = startMonth;
-	}
-
-	public String getEndYear() {
-		return endYear;
-	}
-
-	public void setEndYear(String endYear) {
-		this.endYear = endYear;
-	}
-
-	public String getEndMonth() {
-		return endMonth;
-	}
-
-	public void setEndMonth(String endMonth) {
-		this.endMonth = endMonth;
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public String getDescription() {

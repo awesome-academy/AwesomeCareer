@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <th:block th:fragment="copy">
+   <div th:id="'skill-'+${userModel.id}">
+	<form th:action="@{'/user/'+${userModel.id}+'/skill'}" th:method="POST" th:id="'_skill-'+${userModel.id}+'-form'" th:object="${userModel}">
+		    <label>Skills:</label>
+		    <th:block th:each="skillModel:${skillModels}">
+		    <input th:type="checkbox" th:name="skillIds"
+		    th:text="${skillModel.name}"
+		    th:value="${skillModel.id}"
+		    th:checked="${#lists.contains(userModel.skillIds, skillModel.id)}"
+		    />
+		   </th:block>
+		<input type="submit" class="btn btn-success"  value="Update">
+	</form>
+	</div>
+	<script>
+ $('#_skill-[[${userModel.id}]]-form').submit(function(event){
+	 event.preventDefault();
+	 event.stopPropagation();
+	 var skillIds = [];
+     $("input:checkbox[name='skillIds']:checked").each(function() {
+    	 skillIds.push($(this).val());
+     });
+	 $.ajax({
+		 type : 'POST',
+		 url : $(this).attr('action'),
+		 cache: false,
+		 data: {
+			 'skillIds': skillIds
+		 },
+		 success : function(data,textStatus,xhr){
+			 $('#skill-[[${userModel.id}]]').html(data);
+		 }
+		 
+	 })
+ })
+ </script>
+ </th:block>
+ 
+ 
+
+</body>
+</html>

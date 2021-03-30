@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 public class CommonUtil {
 
 	public static boolean isEmpty(List<?> list) {
@@ -22,11 +24,17 @@ public class CommonUtil {
 		return years;
 	}
 	
-	public List<String> monthList(){
-		String[] arr = { "January", "February", "March", "April","May",
-				"June","July","August","September","October","November","December" };
-		List<String> months = Arrays.asList(arr);
-		return months;
+	public static List<String> occupationList(){
+		String[] arr = { "Engineering", "Art/Design", "Management", "Writing","Public Relations",
+				"Business Development","Consulting"};
+		List<String> occupations = Arrays.asList(arr);
+		return occupations;
 	}
+	public static List<String> countryList(){
+		String[] arr = { "Viet Nam", "Singapore", "American"};
+		List<String> occupations = Arrays.asList(arr);
+		return occupations;
+	}
+
 
 }

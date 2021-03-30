@@ -1,19 +1,19 @@
 package com.aa.awesomecareer.model;
 
-import javax.persistence.Column;
+import java.util.Date;
 
 import com.aa.awesomecareer.entity.User;
 
 public class ExperienceModel extends BaseModel {
+
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	private Integer userId;
 	private String companyName;
 	private String jobTitle;
-	private String startYear;
-	private String startMonth;
-	private String endYear;
-	private String endMonth;
+	private Date startTime;
+	private Date endTime;
 	private String description;
 	private boolean currentlyWork;
 	private boolean internship;
@@ -23,28 +23,32 @@ public class ExperienceModel extends BaseModel {
 	
 	}
 	
-	public ExperienceModel(Integer id, String companyName, String jobTitle, String startYear, String startMonth,
-			String endYear, String endMonth, String description, boolean currentlyWork, boolean internship) {
+	public ExperienceModel(Integer id, Integer userId, String companyName, String jobTitle, Date startTime,
+			Date endTime, String description, boolean currentlyWork, boolean internship, User user) {
 		super();
 		this.id = id;
+		this.userId = userId;
 		this.companyName = companyName;
 		this.jobTitle = jobTitle;
-		this.startYear = startYear;
-		this.startMonth = startMonth;
-		this.endYear = endYear;
-		this.endMonth = endMonth;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.description = description;
 		this.currentlyWork = currentlyWork;
 		this.internship = internship;
+		this.user = user;
 	}
+
+
+
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public Integer getUserId() {
 		return userId;
 	}
@@ -56,42 +60,23 @@ public class ExperienceModel extends BaseModel {
 	public String getCompanyName() {
 		return companyName;
 	}
+
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+
 	public String getJobTitle() {
 		return jobTitle;
 	}
+
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-	public String getStartYear() {
-		return startYear;
-	}
-	public void setStartYear(String startYear) {
-		this.startYear = startYear;
-	}
-	public String getStartMonth() {
-		return startMonth;
-	}
-	public void setStartMonth(String startMonth) {
-		this.startMonth = startMonth;
-	}
-	public String getEndYear() {
-		return endYear;
-	}
-	public void setEndYear(String endYear) {
-		this.endYear = endYear;
-	}
-	public String getEndMonth() {
-		return endMonth;
-	}
-	public void setEndMonth(String endMonth) {
-		this.endMonth = endMonth;
-	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -118,6 +103,22 @@ public class ExperienceModel extends BaseModel {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 }

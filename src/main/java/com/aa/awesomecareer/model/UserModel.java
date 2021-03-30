@@ -1,5 +1,6 @@
 package com.aa.awesomecareer.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,8 @@ public class UserModel extends BaseModel {
 	private boolean imAParent;
 //	private String image;
 	
+	private List<Integer> skillIds = new ArrayList<Integer>();
+	
 	public String getFullName() {
 		return fullName;
 	}
@@ -89,16 +92,19 @@ public class UserModel extends BaseModel {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	private List<ApplicationModel> applicationModels;
-	private List<BookmarkModel> bookmarkModels;
-	private List<FavoriteModel> favoriteModels;
-	private List<VotingModel> votingModels;
-	private List<FollowModel> followModels;
-	private List<InterestModel> interestModels;
-	private List<LanguageModel> languageModels;
-	private List<CertificateModel> certificateModels;
-	private List<EducationModel> educationModels;
-	private List<ProjectModel> projectModels;
-	private List<ProfileModel> profileModels;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public List<Integer> getSkillIds() {
+		return skillIds;
+	}
+	public void setSkillIds(List<Integer> skillIds) {
+		this.skillIds = skillIds;
+	}
+	
+	
 }
 
