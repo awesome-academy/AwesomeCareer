@@ -85,7 +85,7 @@
 			var endTime = $(this).find('input[name="endTime"]').val();
 			var currentlyWork = $(this).find('input[name="currentlyWork"]').val();
 			var internship = $(this).find('input[name="internship"]').val();
-			var description = $(this).find('input[name="description"]').val();
+			var description = $(this).find('textarea[name="description"]').val();
 			$.ajax({
 				type : 'POST',
 				url : $(this).attr('action'),

@@ -36,6 +36,7 @@ public class ExperiencesController {
 	public String addExperience(@ModelAttribute ExperienceModel experienceModel,
 			BindingResult bindingResult, Model model) throws ParseException {
 		experienceModel.setUserId(1);
+		System.out.println("ten cua experience + "+ experienceModel.getCompanyName());
 		experienceService.save(experienceModel);
 		List<ExperienceModel> experienceModels = experienceService.findAllById(1);
 		model.addAttribute("experienceModels", experienceModels);
