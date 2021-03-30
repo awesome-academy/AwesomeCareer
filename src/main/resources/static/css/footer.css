@@ -1,0 +1,104 @@
+/*footer*/
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.footer-1 {
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 60%;
+}
+
+.footer-11 {
+    display: flex;
+    flex-direction: row;
+}
+
+footer h3 {
+    color: black;
+}
+
+.footer-about h3 {
+    margin-left: 28%;
+}
+
+.footer-product ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-about ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-product h3 {
+    margin-left: 14%;
+}
+
+.footer-img {
+    margin-top: 4%;
+    margin-left: 5%;
+}
+
+.footer-img img {
+    width: 20%;
+}
+footer a {
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+}
+
+footer a:hover {
+    color: cyan;
+}
+
+#box-text {
+    padding: 15px;
+    width: 80%;
+    height: 40%;
+}
+
+.footer-about {
+    margin-right: 10%;
+}
+
+.footer-2 {
+    margin-top: 6%;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-2 button {
+    width: 88%;
+    padding: 10px;
+    border: 1px solid lightgray;
+    opacity: 0.5;
+}
+
+.footer-2 button:hover {
+    opacity: 1;
+}
+
+.footer-logo {
+    width: 20px;
+}
+
+#country-select {
+    width: 40%;
+    border: 0px;
+}
+
+.social a {
+    margin-right: 5%;
+}
+
+.social {
+    margin-top: inherit;
+    margin-left: 38%;
+}

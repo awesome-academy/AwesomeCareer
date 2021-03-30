@@ -27,11 +27,10 @@ import lombok.NoArgsConstructor;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class User extends BaseEntity{
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "fullName",length = 256)

@@ -1,18 +1,67 @@
 <!DOCTYPE html>
 <html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
-<head></head>
-<body>
-  <footer th:fragment="copy" class="footer">
-    <small>
-      The <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html" target="_blank">Spring MVC</a> documentation<br>
-      [[#{footer.copyright}]]
-    </small>
-    <nav>
-      <ul>
-        <li><a th:href="@{/about}" th:text="#{footer.about}">About</a></li>
-        <li><a th:href="@{/contact}" th:text="#{footer.contact}">Contact</a></li>
-      </ul>
-    </nav>
-  </footer> 
-</body>
+  <head>
+  </head>
+  <body>
+    <footer th:fragment="copy" class="footer">
+      <div th:if="${#request.getSession().getAttribute('user') == null}" class="footer">
+        <div class="footer-1">
+          <div class="footer-11">
+            <div class="footer-about">
+              <h3>About</h3>
+              <ul>
+                <li>
+                  <a th:href="@{/company}">Company</a>
+                </li>
+                <li>
+                  <a th:href="@{/terms}">Terms of Use</a>
+                </li>
+                <li>
+                  <a th:href="@{/help}">Help</a>
+                </li>
+                <li>
+                  <a th:href="@{/privacy}">Privacy</a>
+                </li>
+                <li>
+                  <a th:href="@{/forEmployers}">For employers</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-product">
+              <h3>Products</h3>
+              <ul>
+                <li>
+                  <a th:href="@{/visit}">Wantedly <b>Visit</b><br>Your job. Exciting like never before.
+                  </a>
+                </li>
+                <br/>
+                <li>
+                  <a th:href="@{/people}">Wantedly <b>People</b><br>Business cards. Scanned in a flash.
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-img">
+            <img src="https://de7iszmjjjuya.cloudfront.net/assets/footer-logo-475ee1f853e6ba714b0a911fc5bf7dc5aa9f998f573860a230800fdbb1d8fc53.png"/>
+          </div>
+        </div>
+        <div class="footer-2">
+          <textarea id="box-text" rows="10" cols="50" placeholder="Do you have any feedback for us? Let us know here!"></textarea>
+          <button>Send</button>
+          <div class="social">
+            <a th:href="@{/}"><img class="footer-logo" src="img/facebook.png"></a>
+            <a th:href="@{/}"><img class="footer-logo" src="img/instagram.png"></a>
+            <a th:href="@{/}"><img class="footer-logo" src="img/linkedin.png"></a>
+            <select name="countries" id="country-select">
+              <option value="Singapore">Singapore</option>
+              <option value="Japan">Japan</option>
+              <option value="China">China</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
