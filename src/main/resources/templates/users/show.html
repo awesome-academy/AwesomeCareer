@@ -18,6 +18,7 @@
 					<h5 style="display: inline-block">Ambition</h5>
 					<i class="fas fa-edit content_decor">Edit</i>
 				</div>
+				
 				<div class="container content_header">
 					<h5 style="display: inline-block">Work Experience</h5>
 					<a class="content_decor" th:href="@{/experience}" id="experience">
@@ -31,6 +32,7 @@
 					</ul>
 					<div id="_experience_form_wrapper"></div>
 				</div>
+				
 				<div class="container content_header">
 					<h5 style="display: inline-block">Project</h5>
 					<i class="fas fa-edit content_decor">Edit</i>
@@ -40,14 +42,17 @@
 					<i class="fas fa-edit content_decor">Edit</i>
 				</div>
 				<div class="container content_header">
-					<h5 style="display: inline-block">Portfolio</h5>
-					<i class="fas fa-edit content_decor">Edit</i>
+					<h5 style="display: inline-block">Education</h5>
+					<a th:href="@{/education}" id="education">
+					<i class="fas fa-edit content_decor">Add</i>
+					</a>
+					<ul id="education_show">
+					    <li th:replace="educations/index :: copy"></li>
+					</ul>
+					<div id="_education_form_wrapper"></div>
 				</div>
 				<div class="container content_header">
 					<h5 style="display: inline-block">Skills</h5>
-					<a class="content_decor" th:href="@{/skill}" id="skill"> <i
-						class="fas fa-plus-circle"></i>Edit
-					</a>
 				</div>
 				
 				<div th:id="'skill-'+${userModel.id}" th:replace="~{skills/form :: copy}"></div>
@@ -62,6 +67,7 @@
 				</div>
 			</div>
 		</div>
+</div>
 		<script>
 			$('#experience').click(function(event) {
 				event.preventDefault();
@@ -76,6 +82,19 @@
 				});
 			});
 
+		</script>
+		<script>
+		   $('#education').click(function(event){
+			   event.preventDefault();
+			   event.stopPropagation();
+			   $.ajax({
+				   type:'GET',
+				   url: $(this).attr('href'),
+			       success : function(data, textStatus, xhr){
+			    	   $('#_education_form_wrapper').html(data);
+			       }
+			   });
+		   });
 		</script>
 </body>
 </html>

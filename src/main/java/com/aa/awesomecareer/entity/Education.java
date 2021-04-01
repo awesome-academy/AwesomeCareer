@@ -13,6 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "education")
@@ -22,28 +26,96 @@ public class Education {
 	private Integer id;
 
 	@Column(name = "userId")
-	private String userId;
+	private Integer userId;
 
 	@Column(name = "school", length = 256)
 	private String school;
+	
 	@Column(name = "major", length = 256)
 	private String major;
+	
 	@Column(name = "description", length = 3000)
 	private String description;
+	
 	@Column(name = "graduation")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date graduation;
+	
+	@ManyToOne
+	@JoinColumn(name = "userId",insertable = false, updatable = false)
+	private User user;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
+	public Education() {
+		
+	}
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
+	public Education(Integer id, Integer userId, String school, String major, String description, Date graduation,
+			User user) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.school = school;
+		this.major = major;
+		this.description = description;
+		this.graduation = graduation;
+		this.user = user;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
 
-//	@ManyToOne
-//	@JoinColumn(name = "id")
-//	private User user;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getGraduation() {
+		return graduation;
+	}
+
+	public void setGraduation(Date graduation) {
+		this.graduation = graduation;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }

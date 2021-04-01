@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<ul>
+	<th:block th:fragment="copy (educationModel)">
+		<li>
+		<div th:id="'education_old-'+${educationModel.id}">
+		    <a th:href="@{'/education/'+${educationModel.id}+'/edit'}" th:id="'education-'+${educationModel.id}">Edit</a>
+		    <a th:href="@{'/education/'+${educationModel.id}+'/delete'}" 
+		    th:id="'education-'+${educationModel.id}+'-delete'">Delete</a>
+			<p th:text="${educationModel.school}"></p>
+			<span th:text="${educationModel.major}"></span> <span>-</span> <span
+				th:text="${educationModel.graduation}"></span>
+			<p th:text="${educationModel.description}"></p>
+			<span>..........................................................</span>
+	    </div>
+	    <div th:id="'education_new-'+${educationModel.id}">
+	    </div>
+   <script>
+   $('#education-[[${educationModel.id}]]').click(
+		  function(event){
+			  event.preventDefault();
+			  event.stopPropagation();
+			  $.ajax({
+				  type: 'GET',
+				  url: $(this).attr('href'),
+				  success : function(data, textStatus, xhr){
+					  $('#education_new-[[${educationModel.id}]]').html(data);
+				  }
+				  
+				  
+			  }) 
+		  });
+   </script>
+   <script>
+   $('#education-[[${educationModel.id}]]-delete').click(
+		function(event){
+			event.preventDefault();
+			event.stopPropagation();
+			$.ajax({
+				type: 'DELETE',
+				url : $(this).attr('href'),
+				success: function(data, textStatus, xhr){
+					$('#education_show').html(data);
+				}
+				
+			})
+		});
+   </script>
+   </li>
+   </th:block>
+   </ul>
+</body>
+</html>
