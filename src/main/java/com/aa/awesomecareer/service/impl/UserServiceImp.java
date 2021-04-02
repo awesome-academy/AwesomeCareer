@@ -145,4 +145,24 @@ public class UserServiceImp implements UserService {
 
 	}
 
+	@Override
+	public UserModel saveIntroduction(UserModel userModel) {
+		User user = new User();
+		BeanUtils.copyProperties(userModel,user);
+		User userNew =userRepository.save(user);
+		UserModel userModelNew = new UserModel();
+		BeanUtils.copyProperties(userNew, userModelNew);
+		return userModelNew;
+	}
+	
+	@Override
+	public UserModel saveAmbition(UserModel userModel) {
+		User user = new User();
+		BeanUtils.copyProperties(userModel, user);
+		User userNew = userRepository.save(user);
+		UserModel userModelNew = new UserModel();
+		BeanUtils.copyProperties(userNew, userModelNew);
+		return userModelNew;
+	}
+
 }

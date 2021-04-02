@@ -184,8 +184,22 @@ public class User extends BaseEntity{
 	public void setSkillUsers(List<SkillUser> skillUsers) {
 		this.skillUsers = skillUsers;
 	}
-	
-	
+
+	public String getSeftIntroduction() {
+		return seftIntroduction;
+	}
+
+	public void setSeftIntroduction(String seftIntroduction) {
+		this.seftIntroduction = seftIntroduction;
+	}
+
+	public String getAmbition() {
+		return ambition;
+	}
+
+	public void setAmbition(String ambition) {
+		this.ambition = ambition;
+	}
 	
 //	@OneToMany(mappedBy = "application")
 //	private List<Application> applications;

@@ -12,11 +12,19 @@
 			<div class="col-md-8">
 				<div class="container content_body_container">
 					<h5 style="display: inline-block">Seft introduction</h5>
+					<a  th:href="@{/introduction}" id="introduction">
 					<i class="fas fa-edit content_decor">Edit</i>
+					</a>
+					<div id="_introduction_show" th:text="${userModel.seftIntroduction}"></div>
+					<div id="_introduction_form_wrapper"></div>
 				</div>
 				<div class="container content_header">
 					<h5 style="display: inline-block">Ambition</h5>
+					<a th:href="@{/ambition}" id="ambition"> 
 					<i class="fas fa-edit content_decor">Edit</i>
+					</a>
+					<div id="_ambition_show" th:text="${userModel.ambition}"></div>
+					<div id="_ambition_form_wrapper"></div>
 				</div>
 				
 				<div class="container content_header">
@@ -82,8 +90,7 @@
 				});
 			});
 
-		</script>
-		<script>
+
 		   $('#education').click(function(event){
 			   event.preventDefault();
 			   event.stopPropagation();
@@ -95,6 +102,32 @@
 			       }
 			   });
 		   });
+		   
+		   $('#introduction').click(function(event){
+			   event.preventDefault();
+			   event.stopPropagation();
+			   $.ajax({
+				   type : 'GET',
+				   url: $(this).attr('href'),
+				   success : function(data, textStatus, xhr){
+					   $('#_introduction_form_wrapper').html(data);
+				   }
+			   });
+		   });
+		   
+		   $('#ambition').click(function(event){
+			   event.preventDefault();
+			   event.stopPropagation();
+			   $.ajax({
+				   type :'GET',
+				   url : $(this).attr('href'),
+				   success : function(data, textStatus, xhr){
+					   $('#_ambition_form_wrapper').html(data);
+				   }
+				   
+			   });
+		   });
+		   
 		</script>
 </body>
 </html>

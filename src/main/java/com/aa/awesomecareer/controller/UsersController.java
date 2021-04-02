@@ -101,5 +101,40 @@ public class UsersController {
 		return "users/show";
 
 	}
+	
+	@GetMapping(value="/introduction")
+	public String showForm(Model model) {
+		UserModel userModel = new UserModel();
+		model.addAttribute("userModel", userModel);
+		return "introductions/form";
+	}
+	
+	@PostMapping(value="/introduction")
+	public String save(@RequestParam("seftIntroduction") String seftIntroduction, Model model) {
+		UserModel userModelOld = userService.findUserById(1);
+		userModelOld.setSeftIntroduction(seftIntroduction);
+		UserModel userModel = userService.saveIntroduction(userModelOld);
+		
+		model.addAttribute("userModel",userModel);
+		
+		return "introductions/show";
+	}
+	
+	@GetMapping(value="/ambition")
+	public String showAmbitionForm(Model model) {
+		UserModel userModel = new UserModel();
+		model.addAttribute("userModel",userModel);
+		return "ambition/form";
+	}
+	
+	@PostMapping(value="ambition")
+	public String saveAmbition(@RequestParam("ambition") String ambition, Model model) {
+		UserModel userModelOld = userService.findUserById(1);
+		userModelOld.setAmbition(ambition);
+		UserModel userModel =userService.saveAmbition(userModelOld);
+		model.addAttribute("userModel", userModel);
+	
+		return "ambition/show";
+	}
 
 }

@@ -10,8 +10,12 @@
 		<h3>Select your favorite sports:</h3>
 		<ol>
 			<th:block th:each="skillModel : ${skillModels}">
-				<li style="float:left;list-style-type: none;"><label><input type="checkbox" th:value="${skillModel.id}"
-				name="skill" th:text="${skillModel.name}"></label></li>
+				<li style="list-style-type: none;" class="checkboxes">
+				<label>
+				<input type="checkbox" th:value="${skillModel.id}" name="skill" />
+				<span th:text="${skillModel.name}" ></span>
+				</label>
+				</li>
 		    <th:block>
 		</ol>
 		<hr>
