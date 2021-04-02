@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<th:block th:fragment="copy" th:each="educationModel : ${educationModels}">
+			<li th:replace="~{educations/_detail :: copy(${educationModel})}"></li>
+	</th:block>
+</body>
+</html>

@@ -14,4 +14,8 @@ public interface UserService {
 	void addUser(UserModel userModel);
 
 	public void saveSkill(UserModel userModel);
+	
+	public UserModel saveIntroduction(UserModel userModel);
+
+	UserModel saveAmbition(UserModel userModel);
 }

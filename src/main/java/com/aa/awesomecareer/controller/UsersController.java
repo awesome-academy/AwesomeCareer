@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aa.awesomecareer.model.EducationModel;
 import com.aa.awesomecareer.model.ExperienceModel;
 import com.aa.awesomecareer.model.SkillModel;
 import com.aa.awesomecareer.model.UserModel;
+import com.aa.awesomecareer.service.EducationService;
 import com.aa.awesomecareer.service.ExperienceService;
 import com.aa.awesomecareer.service.SkillService;
 import com.aa.awesomecareer.service.UserService;
@@ -44,6 +46,9 @@ public class UsersController {
 
 	@Autowired
 	SkillService skillService;
+	
+	@Autowired
+	EducationService educationService;
 	
 	@Autowired
 	@Qualifier("userService")
@@ -89,9 +94,47 @@ public class UsersController {
 
 		List<SkillModel> skillModels = skillService.findAll();
 		model.addAttribute("skillModels", skillModels);
+		
+		List<EducationModel> educationModels = educationService.findAllByUserId(1);
+		model.addAttribute("educationModels", educationModels);
 
 		return "users/show";
 
+	}
+	
+	@GetMapping(value="/introduction")
+	public String showForm(Model model) {
+		UserModel userModel = new UserModel();
+		model.addAttribute("userModel", userModel);
+		return "introductions/form";
+	}
+	
+	@PostMapping(value="/introduction")
+	public String save(@RequestParam("seftIntroduction") String seftIntroduction, Model model) {
+		UserModel userModelOld = userService.findUserById(1);
+		userModelOld.setSeftIntroduction(seftIntroduction);
+		UserModel userModel = userService.saveIntroduction(userModelOld);
+		
+		model.addAttribute("userModel",userModel);
+		
+		return "introductions/show";
+	}
+	
+	@GetMapping(value="/ambition")
+	public String showAmbitionForm(Model model) {
+		UserModel userModel = new UserModel();
+		model.addAttribute("userModel",userModel);
+		return "ambition/form";
+	}
+	
+	@PostMapping(value="ambition")
+	public String saveAmbition(@RequestParam("ambition") String ambition, Model model) {
+		UserModel userModelOld = userService.findUserById(1);
+		userModelOld.setAmbition(ambition);
+		UserModel userModel =userService.saveAmbition(userModelOld);
+		model.addAttribute("userModel", userModel);
+	
+		return "ambition/show";
 	}
 
 }

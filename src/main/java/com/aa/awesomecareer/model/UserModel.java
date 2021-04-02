@@ -104,7 +104,18 @@ public class UserModel extends BaseModel {
 	public void setSkillIds(List<Integer> skillIds) {
 		this.skillIds = skillIds;
 	}
-	
-	
+	public String getSeftIntroduction() {
+		return seftIntroduction;
+	}
+	public void setSeftIntroduction(String seftIntroduction) {
+		this.seftIntroduction = seftIntroduction;
+	}
+	public String getAmbition() {
+		return ambition;
+	}
+	public void setAmbition(String ambition) {
+		this.ambition = ambition;
+	}
+
 }
 
