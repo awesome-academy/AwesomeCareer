@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+  <form style="width: 50%">
+  
+  <h5>Add your company's website</h5>
+  <input type="text" ><br>
+  
+  <h5>Add your company's name</h5>
+  <input type="text" ><br>
+ 
+ 
+ <h5>Select occupation</h5>
+<select>
+  <option >Engineer</option>
+  <option >Teacher</option>
+</select>
+
+ <h5>Position Detail:</h5>
+  <input type="text"><br><br>
+  
+  <h5>Select employment type:</h5><br>
+  
+  <label>New grad/entry level</label><br>
+  <input type="checkbox">
+  <label>Internship</label><br>
+  <input type="checkbox">
+  <label>Mid-career</label><br>
+  <input type="checkbox">
+  <label>Contract work</label><br>
+  <input type="checkbox">
+
+  <h5>Give your Job Post a punchy title</h5><br>
+  <textarea></textarea>
+   
+   <h5>Enter address</h5>
+   <input type="text" value="Car">
+   
+   <h5>Introduce your company</h5>
+   <textarea></textarea>
+   
+   <h5>Tell us about your mission</h5>
+   <textarea></textarea>
+   
+   <h5>Describe your company's culture</h5>
+   <textarea></textarea>
+   
+   <h5>Describe this position in detail</h5>
+   <textarea></textarea>
+   
+   <h5>Deadline</h5>
+	<input type="text" id="datepicker1">
+   
+ <input type="submit" class="btn btn-success" value="Submit">
+ </form>
+ 
+ <script>
+		$(function() {
+			$("#datepicker1").datepicker();
+		});
+ </script>
+	
+</body>
+</html>
