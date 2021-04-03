@@ -2,8 +2,8 @@ package com.aa.awesomecareer.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.aa.awesomecareer.entity.JobType;
+import com.aa.awesomecareer.entity.JobTypeName;
 
-public interface JobTypeRepository extends JpaRepository<JobType, Integer> {
+public interface JobTypeRepository extends JpaRepository<JobTypeName, Integer> {
 
 }
