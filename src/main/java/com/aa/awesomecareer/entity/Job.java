@@ -1,16 +1,22 @@
 package com.aa.awesomecareer.entity;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,35 +28,35 @@ public class Job extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(name = "jobTitle", length = 256)
+	private String jobTitle;
+	
 	@Column(name = "companyWebsite",length = 256)
 	private String companyWebsite;
 	
 	@Column(name = "companyName", length = 256)
 	private String companyName;
-
-	@Column(name = "occupation", length = 256)
-	private String occupation;
-	
-	@Column(name = "position", length = 3000)
-	private String position;
-	
-	@Column(name = "type", length = 256)
-	private String type;
-	
-	@Column(name = "jobTitle", length = 256)
-	private String jobTitle;
 	
 	@Column(name = "address", length = 256)
 	private String address;
+
+	@Column(name = "fieldName")
+	private String fieldName;
+	
+	@Column(name = "position", length = 256)
+	private String position;
 	
 	@Column(name = "introduction", length = 3000)
 	private String introduction;
 	
-	@Column(name = "yourMission", length = 3000)
-	private String yourMission;
+	@Column(name = "description", length = 3000)
+	private String description;
 	
-	@Column(name = "positionDetail", length = 3000)
-	private String positionDetail;
+	@Column(name = "requirement", length = 3000)
+	private String requirement;
+	
+	@Column(name = "reason", length = 3000)
+	private String reason;
 	
 	@Column(name = "deadLine")
 	@Temporal(value = TemporalType.TIMESTAMP)
@@ -58,28 +64,46 @@ public class Job extends BaseEntity {
 	
 	@OneToMany (mappedBy = "job")
 	private List<JobType> jobTypes;
+	
+	@Column(name = "fieldId")
+	private Integer fieldId;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(
+			name="jobtype",
+			joinColumns = @JoinColumn(name="jobId"),
+			inverseJoinColumns = @JoinColumn(name="typeId")
+			)
+    private Set<Type> types = new HashSet<>();
+	
+	@OneToOne
+    @JoinColumn(name = "fieldId",insertable = false, updatable = false)
+	private Field field;
 
 	public Job() {
 	
 	}
-	
-	public Job(Integer id, String companyWebsite, String companyName, String occupation, String position, String type,
-			String jobTitle, String address, String introduction, String yourMission, String positionDetail,
-			Date deadLine, List<JobType> jobTypes) {
+
+	public Job(Integer id, String jobTitle, String companyWebsite, String companyName, String address, String fieldName,
+			String position, String introduction, String description, String requirement, String reason, Date deadLine,
+			List<JobType> jobTypes, Integer fieldId, Set<Type> types, Field field) {
 		super();
 		this.id = id;
+		this.jobTitle = jobTitle;
 		this.companyWebsite = companyWebsite;
 		this.companyName = companyName;
-		this.occupation = occupation;
-		this.position = position;
-		this.type = type;
-		this.jobTitle = jobTitle;
 		this.address = address;
+		this.fieldName = fieldName;
+		this.position = position;
 		this.introduction = introduction;
-		this.yourMission = yourMission;
-		this.positionDetail = positionDetail;
+		this.description = description;
+		this.requirement = requirement;
+		this.reason = reason;
 		this.deadLine = deadLine;
 		this.jobTypes = jobTypes;
+		this.fieldId = fieldId;
+		this.types = types;
+		this.field = field;
 	}
 
 	public Integer getId() {
@@ -88,6 +112,14 @@ public class Job extends BaseEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 
 	public String getCompanyWebsite() {
@@ -106,12 +138,20 @@ public class Job extends BaseEntity {
 		this.companyName = companyName;
 	}
 
-	public String getOccupation() {
-		return occupation;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
 	}
 
 	public String getPosition() {
@@ -122,32 +162,6 @@ public class Job extends BaseEntity {
 		this.position = position;
 	}
 
-	
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getJobTitle() {
-		return jobTitle;
-	}
-
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public String getIntroduction() {
 		return introduction;
 	}
@@ -156,20 +170,28 @@ public class Job extends BaseEntity {
 		this.introduction = introduction;
 	}
 
-	public String getYourMission() {
-		return yourMission;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setYourMission(String yourMission) {
-		this.yourMission = yourMission;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getPositionDetail() {
-		return positionDetail;
+	public String getRequirement() {
+		return requirement;
 	}
 
-	public void setPositionDetail(String positionDetail) {
-		this.positionDetail = positionDetail;
+	public void setRequirement(String requirement) {
+		this.requirement = requirement;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
 	public Date getDeadLine() {
@@ -186,6 +208,30 @@ public class Job extends BaseEntity {
 
 	public void setJobTypes(List<JobType> jobTypes) {
 		this.jobTypes = jobTypes;
+	}
+
+	public Integer getFieldId() {
+		return fieldId;
+	}
+
+	public void setFieldId(Integer fieldId) {
+		this.fieldId = fieldId;
+	}
+
+	public Set<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(Set<Type> types) {
+		this.types = types;
+	}
+
+	public Field getField() {
+		return field;
+	}
+
+	public void setField(Field field) {
+		this.field = field;
 	}
 
 }

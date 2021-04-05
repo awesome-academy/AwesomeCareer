@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+    
+    <th:block th:fragment="copy">
+    <div>
+        <th:block th:each="typeModel:${typeModels}">
+            <input th:type="checkbox" th:name="typeIds"
+		       th:text="${typeModel.name}"
+		       th:value="${typeModel.id}"
+		     />
+        </th:block>
+     </div>
+    </th:block>
+    
+    
+</body>
+</html>
