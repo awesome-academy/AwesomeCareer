@@ -17,13 +17,13 @@ public class SkillUser {
 	private Integer userId;
 	private Integer skillId;
 
-	@ManyToOne
-	@JoinColumn(name = "userId",referencedColumnName = "id", insertable = false, updatable = false)
-	private User user;
-	
-	@ManyToOne
-	@JoinColumn(name = "skillId",referencedColumnName = "id", insertable = false, updatable = false)
-	private Skill skill;
+//	@ManyToOne
+//	@JoinColumn(name = "userId",referencedColumnName = "id", insertable = false, updatable = false)
+//	private User user;
+//	
+//	@ManyToOne
+//	@JoinColumn(name = "skillId",referencedColumnName = "id", insertable = false, updatable = false)
+//	private Skill skill;
 
 	public SkillUser() {
 	}
@@ -50,22 +50,6 @@ public class SkillUser {
 
 	public void setSkillId(Integer skillId) {
 		this.skillId = skillId;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Skill getSkill() {
-		return skill;
-	}
-
-	public void setSkill(Skill skill) {
-		this.skill = skill;
 	}
 
 }

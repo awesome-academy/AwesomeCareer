@@ -29,8 +29,8 @@ public class Skill {
 	@ManyToMany(mappedBy = "skills")
     private List<User> users;
 	
-	@OneToMany(mappedBy = "skill")
-    private List<SkillUser> skillUser;
+//	@OneToMany(mappedBy = "skill")
+//    private List<SkillUser> skillUser;
 	
 	@Override
 	public String toString() {
@@ -94,12 +94,4 @@ public class Skill {
 		this.users = users;
 	}
 
-	public List<SkillUser> getSkillUser() {
-		return skillUser;
-	}
-
-	public void setSkillUser(List<SkillUser> skillUser) {
-		this.skillUser = skillUser;
-	}
-	
 }

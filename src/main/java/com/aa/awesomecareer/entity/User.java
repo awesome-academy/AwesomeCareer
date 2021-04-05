@@ -92,8 +92,8 @@ public class User extends BaseEntity{
 	@OneToMany(mappedBy = "user")
     private List<Experience> experiences;
 	
-	@OneToMany(mappedBy = "user")
-    private List<SkillUser> skillUsers;
+//	@OneToMany(mappedBy = "user")
+//    private List<SkillUser> skillUsers;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -177,15 +177,6 @@ public class User extends BaseEntity{
 		this.id = id;
 	}
 
-	public List<SkillUser> getSkillUsers() {
-		return skillUsers;
-	}
-
-	public void setSkillUsers(List<SkillUser> skillUsers) {
-		this.skillUsers = skillUsers;
-	}
-	
-	
 	
 //	@OneToMany(mappedBy = "application")
 //	private List<Application> applications;

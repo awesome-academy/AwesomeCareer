@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html 
+th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1 th:text="${jobModel.jobTitle}" style="text-align: left">Job Title</h1>
+
+<h4>Job Type :</h4>
+ <ul style="list-style-type:none">
+   <th:block th:each="typeModel : ${typeModels}">
+      <li th:utext="${typeModel.name}" style="padding-left: 0px">Job Type</li>
+    </th:block>
+ </ul>
+ <h4>Job Field:</h4>
+<p th:utext="${jobModel.fieldName}"></p>
+ <h4>Position:</h4>
+<p th:utext="${jobModel.position}"></p>
+<h4>Company Introduction</h4>
+   Company Website : <a th:utext="${jobModel.companyWebsite}"></a><br>
+   Company Name :<span th:utext="${jobModel.companyName}"></span><br>
+   Company Address :<span th:utext="${jobModel.address}"></span>
+<p th:text="${jobModel.introduction}"></p>
+<h4>Job Description</h4>
+<p th:text="${jobModel.description}"></p>
+<h4>Job Requirements</h4>
+<p th:text="${jobModel.requirement}"></p>
+
+<h4>Why You'll Love Working Here</h4>
+<p th:text="${jobModel.reason}"></p>
+
+<h5>Deadline</h5>
+<p th:text="${jobModel.deadLine}"></p>
+</body>
+</html>

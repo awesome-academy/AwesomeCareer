@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <th:block th:fragment="copy">
+      <select th:field="*{fieldName}">
+        <option th:each="fieldModel : ${fieldModels}" th:value="${fieldModel.name}" th:text="${fieldModel.name}">
+        </option>
+      </select>
+    </th:block>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html 
+th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+ <ul>
+     <h1>List Of Job</h1>
+     <button><a  th:href="@{/jobs}">Add new Job</a></button>
+     <th:block th:each="jobModel : ${jobModels}">
+        <li >
+        <span><a th:utext="${jobModel.position}" th:href="@{'/jobs/'+${jobModel.id}}"></a></span>
+        <span>/Company :</span>
+        <span><a th:utext="${jobModel.companyName}"></a></span>
+        <span>/DeadLine :</span>
+        <span><a th:utext="${jobModel.deadLine}"></a></span>
+        </li>
+      </th:block>
+ </ul>
+
+</body>
+</html>

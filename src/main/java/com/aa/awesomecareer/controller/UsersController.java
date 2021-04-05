@@ -81,7 +81,7 @@ public class UsersController {
 
 	@GetMapping(value = "/user/{id}")
 	public String show(@PathVariable Integer id, Model model) {
-		UserModel userModel = userService.findUserById(id);
+		UserModel userModel = userService.findUserById(1);
 		model.addAttribute("userModel", userModel);
 
 		List<ExperienceModel> experienceModels = experienceService.findAllById(1);

@@ -15,27 +15,27 @@ public class JobType {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Integer jobId;
-	private Integer jobTypeNameId;
+	private Integer typeId;
 	
 	@ManyToOne
-	@JoinColumn(name = "jobId")
+	@JoinColumn(name = "jobId",insertable = false, updatable = false)
 	private Job job;
 	
 	@ManyToOne
-	@JoinColumn(name = "jobTypeNameId")
-	private JobTypeName jobTypeName;
+	@JoinColumn(name = "typeId",insertable = false, updatable = false)
+	private Type type;
 	
 	public JobType() {
 		
 	}
-
-	public JobType(Integer id, Integer jobId, Integer jobTypeNameId, Job job, JobTypeName jobTypeName) {
+	
+	public JobType(Integer id, Integer jobId, Integer typeId, Job job, Type type) {
 		super();
 		this.id = id;
 		this.jobId = jobId;
-		this.jobTypeNameId = jobTypeNameId;
+		this.typeId = typeId;
 		this.job = job;
-		this.jobTypeName = jobTypeName;
+		this.type = type;
 	}
 
 	public Integer getId() {
@@ -54,13 +54,6 @@ public class JobType {
 		this.jobId = jobId;
 	}
 
-	public Integer getJobTypeNameId() {
-		return jobTypeNameId;
-	}
-
-	public void setJobTypeNameId(Integer jobTypeNameId) {
-		this.jobTypeNameId = jobTypeNameId;
-	}
 
 	public Job getJob() {
 		return job;
@@ -70,13 +63,19 @@ public class JobType {
 		this.job = job;
 	}
 
-	public JobTypeName getJobTypeName() {
-		return jobTypeName;
+	public Integer getTypeId() {
+		return typeId;
 	}
 
-	public void setJobTypeName(JobTypeName jobTypeName) {
-		this.jobTypeName = jobTypeName;
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
-	
-	
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
 }
