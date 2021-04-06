@@ -20,6 +20,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.aa.awesomecareer.entity.Field;
 import com.aa.awesomecareer.entity.JobType;
 import com.aa.awesomecareer.entity.Type;
@@ -44,6 +46,8 @@ public class JobModel extends BaseModel{
 	private String requirement;
 	private String reason;
 	private Date deadLine;
+	private MultipartFile image;
+	private String url;
 	private List<JobType> jobTypes;
 	private Integer fieldId;
     private Set<Type> types = new HashSet<>();
@@ -59,8 +63,8 @@ public class JobModel extends BaseModel{
 
 	public JobModel(Integer id, String jobTitle, String companyWebsite, String companyName, String address,
 			String fieldName, String position, String introduction, String description, String requirement,
-			String reason, Date deadLine, List<JobType> jobTypes, Integer fieldId, Set<Type> types, Field field,
-			Integer[] typeIds, List<TypeModel> typeModels) {
+			String reason, Date deadLine, MultipartFile image, List<JobType> jobTypes, Integer fieldId, Set<Type> types,
+			Field field, Integer[] typeIds, List<TypeModel> typeModels) {
 		super();
 		this.id = id;
 		this.jobTitle = jobTitle;
@@ -74,6 +78,7 @@ public class JobModel extends BaseModel{
 		this.requirement = requirement;
 		this.reason = reason;
 		this.deadLine = deadLine;
+		this.image = image;
 		this.jobTypes = jobTypes;
 		this.fieldId = fieldId;
 		this.types = types;
@@ -224,6 +229,22 @@ public class JobModel extends BaseModel{
 
 	public void setTypeModels(List<TypeModel> typeModels) {
 		this.typeModels = typeModels;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

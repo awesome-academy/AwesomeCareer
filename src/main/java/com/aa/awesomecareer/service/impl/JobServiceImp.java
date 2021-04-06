@@ -40,9 +40,11 @@ public class JobServiceImp implements JobService {
 	TypeRepository typeRepository;
 
 	@Override
-	public void saveJobModel(JobModel jobModel) {
+	public void saveJobModel(JobModel jobModel,String url) {
+		try {
 		Job job = new Job();
 		BeanUtils.copyProperties(jobModel, job);
+        job.setImage(url);
 		Job jobSave = jobRepository.save(job);
 		Integer[] typeIds = jobModel.getTypeIds();
 		
@@ -52,11 +54,12 @@ public class JobServiceImp implements JobService {
 			jobType.setTypeId(typeId);
 			System.out.println("Xem luu jobtype chua +" + jobType.getJobId() +"+"+jobType.getTypeId());
 			jobTypeRepository.save(jobType);
-			
 		}
 		
+	}catch(Exception e) {
+		logger.error("An error occurred while save the job in database",e);
 	}
-
+	}
 	@Override
 	public List<JobModel> findAllJob() {
 		try {
@@ -77,6 +80,7 @@ public class JobServiceImp implements JobService {
 
 	@Override
 	public JobModel showJobDetail(Integer id) {
+		try {
 		Optional<Job> job = jobRepository.findById(id);
 		JobModel jobModel = new JobModel();
 		BeanUtils.copyProperties(job.get(), jobModel);
@@ -89,7 +93,12 @@ public class JobServiceImp implements JobService {
 			typeModels.add(typeModel);
 		}
 		jobModel.setTypeModels(typeModels);
+		jobModel.setUrl(job.get().getImage());
 		return jobModel;
 	}
-
+	catch(Exception e) {
+		logger.error("An error occurred while fetching the job from database",e);
+		return null;
+	}
+	}
 }
