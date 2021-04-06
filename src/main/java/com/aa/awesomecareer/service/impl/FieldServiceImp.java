@@ -21,7 +21,7 @@ public class FieldServiceImp implements FieldService {
 	@Override
 	public List<FieldModel> findAll() {
 		List<Field> fields = fieldRepository.findAll();
-		List<FieldModel> fieldModels = new ArrayList<>();
+		List<FieldModel> fieldModels = new ArrayList<FieldModel>();
 		for (Field field : fields) {
 			FieldModel fieldModel = new FieldModel();
 			BeanUtils.copyProperties(field, fieldModel);

@@ -24,8 +24,20 @@ public class Field {
 	@Column(name = "name", length = 256)
 	private String name;
 
+	public Integer getId() {
+		return id;
+	}
 
-//	@OneToMany(mappedBy = "jobfield")
-//	private List<JobField> jobfields;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

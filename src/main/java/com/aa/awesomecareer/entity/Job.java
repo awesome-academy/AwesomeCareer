@@ -58,6 +58,9 @@ public class Job extends BaseEntity {
 	@Column(name = "reason", length = 3000)
 	private String reason;
 	
+	@Column(name = "image", length = 256)
+	private String image;
+	
 	@Column(name = "deadLine")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date deadLine;
@@ -232,6 +235,14 @@ public class Job extends BaseEntity {
 
 	public void setField(Field field) {
 		this.field = field;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
