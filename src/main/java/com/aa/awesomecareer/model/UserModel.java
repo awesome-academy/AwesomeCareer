@@ -16,28 +16,16 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@UniqueEmail(name = "email", message = "{user.validation.email.exist}")
-@FieldMatch(first = "password", second = "confirmation", message = "{user.validation.password.notmatch}")
+//@UniqueEmail(name = "email", message = "{user.validation.email.exist}")
+//@FieldMatch(first = "password", second = "confirmation", message = "{user.validation.password.notmatch}")
 public class UserModel extends BaseModel {
 	
 	public Integer id;
-	@NotNull
-	@NotEmpty
 	public String fullName;
-	@NotNull
-	@NotEmpty
 	private String email;
-	@NotNull
-	@NotEmpty
 	private String password;
-	@NotNull
-	@NotEmpty
 	private String company;
-	@NotNull
-	@NotEmpty
 	private String occupationInterest;
-	@NotNull
-	@NotEmpty
 	private String country;
 	
 	private Date birthday;

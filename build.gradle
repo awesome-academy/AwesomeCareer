@@ -7,7 +7,9 @@ plugins {
 
 group = 'com.aa.awesomecareer'
 version = '0.0.1-SNAPSHOT'
-//sourceCompatibility = '15'
+sourceCompatibility = '15'
+group 'com.aa.awesomecareer'
+version '1.0-SNAPSHOT'
 
 repositories {
 	mavenCentral()
@@ -21,19 +23,67 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.webjars:bootstrap:4.0.0-2'
-	implementation 'org.webjars:webjars-locator:0.30'
-	
+	// https://mvnrepository.com/artifact/org.webjars/jquery
+	implementation group: 'org.webjars', name: 'jquery', version: '3.6.0'
+	//implementation 'org.webjars:bootstrap:4.0.0-2'
+	// https://mvnrepository.com/artifact/org.webjars/bootstrap
+	implementation group: 'org.webjars', name: 'bootstrap', version: '4.6.0'
+	//implementation 'org.webjars:webjars-locator:0.30'
+	// https://mvnrepository.com/artifact/org.webjars/jquery-ui
+	implementation group: 'org.webjars', name: 'jquery-ui', version: '1.12.1'
+	// https://mvnrepository.com/artifact/org.webjars/datetimepicker
+    // https://mvnrepository.com/artifact/org.webjars.npm/jquery-datetimepicker
+	implementation group: 'org.webjars.npm', name: 'jquery-datetimepicker', version: '2.5.21'
+
 	//implementation 'org.webjars:bootstrap:3.4.1'
 	implementation 'org.webjars:font-awesome:5.14.0'
 	//implementation 'org.webjars:jquery:3.5.1'
 	implementation 'org.webjars:ckeditor:4.14.0'
 	
+	//implementation 'org.webjars:bootstrap:4.0.0-2'
+	//implementation 'org.webjars:webjars-locator:0.30'
+	
+	//implementation 'org.webjars:font-awesome:5.14.0'
+	//implementation 'org.webjars:ckeditor:4.14.0'
+
 	implementation 'commons-beanutils:commons-beanutils:1.9.4'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.2'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.4.2'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.4.3'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.4.2'
+
+	// https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
+	//implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.4.1'
+
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	//implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.4.3'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+	//testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.4.2'
+
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	//compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+
+
 }
 
 test {

@@ -13,11 +13,11 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 	@Autowired
 	private EntityManager entityManager;
 
-	@Override
-	public User findByEmail(String email) {
-		TypedQuery<User> query = entityManager.createQuery("FROM Users user WHERE users.email = :email", User.class);
-		query.setParameter("email", email);
-		return query.getSingleResult();
-	}
+//	@Override
+//	public User findByEmail(String email) {
+//		TypedQuery<User> query = entityManager.createQuery("FROM Users user WHERE users.email = :email", User.class);
+//		query.setParameter("email", email);
+//		return query.getSingleResult();
+//	}
 
 }

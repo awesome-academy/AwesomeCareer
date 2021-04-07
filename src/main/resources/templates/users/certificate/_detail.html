@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<th:block th:fragment="copy (certificate)">
+		<li>
+			<div th:id="'certificate_old' +${certificate.id}">
+				<a th:href="@{'/certificate/'+${certificate.id}+'/edit'}" th:id="'certificate-'+${certificate.id}">Edit</a>
+				<p th:text="${certificate.title}"></p>
+				<span>..........................................................</span>
+			</div>
+			<div th:id="'certificate_new-' +${certificate.id}"></div>
+			
+			<script>
+				$('#certificate-[[${certificate.id}]]').click(
+					function(event) {
+						event.preventDefault();
+						event.stopPropagation();
+						$.ajax({
+							type : 'GET',
+							url : $(this).attr('href'),
+							success : function(data, textStatus, xhr) {
+								$('#certificate_new-[[${certificate.id}]]').html(data);
+							}
+						})
+					});
+			</script>
+		</li>
+	</th:block>
+</body>

@@ -1,12 +1,8 @@
 package com.aa.awesomecareer.service.impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +15,6 @@ import com.aa.awesomecareer.entity.User;
 import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.repository.UserRepository;
 import com.aa.awesomecareer.service.UserService;
-
 
 @Service
 @Qualifier("userService")
@@ -50,50 +45,32 @@ public class UserServiceImp implements UserService {
 
 	public UserModel findUser(Integer id) {
 		logger.info("Tim kiem user theo id trong co so du lieu");
+		System.out.println("findUser");
 		try {
 			Optional<User> user = userRepository.findById(id);
-			UserModel userModel = new UserModel();
-			BeanUtils.copyProperties(user, userModel);
-			return userModel;
+			if (user.isPresent()) {
+				UserModel userModel = new UserModel();
+				BeanUtils.copyProperties(user.get(), userModel);
+				return userModel;
+			}
+			return null;
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("An error occurred while fetching the user details from the database", e);
 			return null;
 		}
 	}
 
-//	@Transactional
-//	@Override
-//	public UserModel addUser(UserModel userModel) {
-//		if(emailExists(userModel.getEmail())) {
-//			logger.info("There is an account with that email address" +userModel.getEmail());
-//		}
-//		User condition = new User();
-//		condition.setFullName(userModel.getFullName());
-//		condition.setEmail(userModel.getEmail());
-//		condition.setPassword(userModel.getPassword());
-//		condition.setCompany(userModel.getCompany());
-//		condition.setOccupationInterest(userModel.getOccupationInterest());
-//		condition.setCountry(userModel.getCountry());
-//		User user= userRepository.save(condition);
-//		userModel = new UserModel();
-//		BeanUtils.copyProperties(user, userModel);
-//		
-//		return userModel;
-//	}
-	private boolean emailExists(String email) {
-		return userRepository.findByEmail(email) !=null;
-	}
-	
 	public UserModel saveInfo(UserModel userModel) {
 		logger.info("Save basic info in the database");
-		User saveinfo = new User();
-		saveinfo.setId(2);
-		saveinfo.setGender(userModel.getGender());
-		saveinfo.setBirthday(userModel.getBirthday());
-		saveinfo.setRelationshipStatus(userModel.getRelationshipStatus());
-		User user= userRepository.save(saveinfo);
+		Optional<User> saveinfo = userRepository.findById(3);
+		User user = saveinfo.get();
+		user.setGender(userModel.getGender());
+		user.setBirthday(userModel.getBirthday());
+		user.setRelationshipStatus(userModel.getRelationshipStatus());
+		User user1 = userRepository.save(user);
 		userModel = new UserModel();
-		BeanUtils.copyProperties(user, userModel);
+		BeanUtils.copyProperties(user1, userModel);
 		return userModel;
 	}
 

@@ -1,0 +1,43 @@
+.header {
+    display: flex;
+    margin-left: 3%;
+}
+
+.list-noti {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+}
+
+.header-left {
+    display: flex;
+    width: 100%;
+}
+
+.header-left img {
+    width: 70%;
+}
+
+.header-left-1 {
+    text-decoration: none;
+    margin-right: 10%;
+    color: #797979;
+    font-weight: 600;
+    margin-top: 4%;
+    opacity: 0.75;
+}
+
+.header-left-1:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
+.header-right {
+    padding: 10px;
+    margin-left: 50%;
+}
+
+.header-logo {
+    width: 8%;
+    margin-right: 12%;
+}

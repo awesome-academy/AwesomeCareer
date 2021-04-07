@@ -12,6 +12,6 @@ public interface UserService {
 	
 	//UserModel addUser(UserModel userModel);
 	
-	public UserModel saveInfo(UserModel userModel); 
+	public UserModel saveInfo(UserModel userModel);
 
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<form th:method="PUT" th:action="@{'/users/'+${userModel.id}+'/edit'}" th:object="${userModel}" id="basicInfoForm">
+		<input type="hidden" th:name="id" th:value="${userModel.id}" />
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<label class="affix">Gender</label> 
+						<br> 
+						<select	class="btn btn-group" id="gender" th:field="*{gender}">
+							<option th:each="gender : ${genders}" th:value="${gender}" th:text="${gender}"></option>
+						</select> 
+						<br> 
+						<label class="affix">Birthday</label> 
+						<br>
+						<p>
+							<input type="text" class="datepicker" name="birthday" th:field="*{birthday}">
+						</p>
+						<br> 
+						<label class="affix">Relationship status</label> 
+						<br>
+						<select class="btn btn-group" id="relationshipStatus" th:field="*{relationshipStatus}">
+							<option th:each="relationshipStatus : ${relationships}" th:value="${relationshipStatus}" th:text="${relationshipStatus}"></option>
+						</select> 
+						<br> 
+						<input type="checkbox" name="myself" id="myself" value="1">
+						<label for="vehicle"> I am a parent</label> 
+						<br>
+						<button class="btn btn-success" id="_cancel_basic_info" >Cancel</button>
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<script>
+		$('#basicInfoForm').submit(function(event) {
+			alert("bat dau cap nhat thong tin user");
+			event.preventDefault();
+			event.stopPropagation();
+			var selectGender = $("#gender").find(":selected").val();
+			var birthday = $(this).find('input[name="birthday"]').val();
+			var selectRelationship = $("#relationshipStatus").find(":selected").val();
+			$.ajax({
+				type : 'PUT',
+				url : "[[@{'/users/'+${userModel.id}+'/edit'}]]",
+				data : {
+					'gender' : selectGender,
+					'birthday' : birthday,
+					'relationshipStatus' : selectRelationship,
+				},
+				dataType : 'html',
+				success : function(data) {
+					alert('Cap nhat thanh cong');
+					$('#basic_info_show').html(data);
+				}
+			});
+		});
+		
+		$(document).ready(function() {
+			  $('.datepicker').datepicker({
+			  changeYear: true
+			});
+		});
+		
+		$('#_cancel_basic_info').click(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			$('#basicInfoForm').hide();
+		});
+	</script>
+</body>
+</html>

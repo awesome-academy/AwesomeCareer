@@ -1,16 +1,117 @@
 <!DOCTYPE html>
-<html
-	th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}">
 <head>
-<title th:text="#{user.show.title}">User Info</title>
+	<title th:text="#{user.show.title}">User Info</title>
 </head>
 <body>
-	<h1>
-		[[${user.userName}]]
-	</h1>
-	<div th:replace="~{users/_basicInfo :: huy(${certificate})}"></div>
-	
-	
+	<div id="content_body">
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-md-8">
+				<div class="container content_body_container">
+					<h5 style="display: inline-block">Seft introduction</h5>
+					<i class="fas fa-edit content_decor">Edit</i>
+				</div>
+				<div class="container content_header">
+					<h5 style="display: inline-block">Ambition</h5>
+					<i class="fas fa-edit content_decor">Edit</i>
+				</div>
+				<div class="container content_header">
+					<h5 style="display: inline-block">Work Experience</h5>
+					<i class="fas fa-plus-circle content_decor"
+						th:href="@{'/user/'+${user.id}+'/experience/add'}"
+						th:id="'experience-'+${user.id}">Add</i>
+				</div>
+		
+				<div th:id="experience_show"></div>
+				<div th:id="experience_form"></div>
+
+				<div class="container content_header">
+					<h5 style="display: inline-block">Project</h5>
+					<i class="fas fa-edit content_decor">Edit</i>
+				</div>
+				<div class="container content_header">
+					<h5 style="display: inline-block">Portfolio</h5>
+					<i class="fas fa-edit content_decor">Edit</i>
+				</div>
+
+			</div>
+			<div class="col-md-4" id="upload_resume">
+				<div>
+					<h6>Upload resume</h6>
+					<a class="import-resume-btn auxiliary-upload-resume-btn" href="#">
+						<i class="fas fa-file-upload"></i>Upload PDF resume
+					</a>
+				</div>
+			</div>
+			
+			<div class="container content_header">
+				<h5 style="display: inline-block">Certificate</h5>
+				<a class="content_decor" th:href="@{/certificate}" id="certificate">
+					<i class="fas fa-plus-circle"></i>Add
+				</a>
+				<ul id="certificate_show">
+					 <li th:replace="users/certificate/_index :: copy"></li>
+				</ul>
+				<div id="_certificate_form_wrapper"></div>
+			</div>
+						
+			<div class="container content_header">
+				<h5 style="display: inline-block">Basic Info</h5>
+				<a class="content_decor" th:href="@{/basic/edit}" id="basic_info">
+					<i class="fas fa-plus-circle"></i>Add
+				</a>
+				<ul id="basic_info_show">
+					<li th:replace="users/basicinfo/_index :: copy"></li>
+				</ul>
+				<div id="_basic_info_form_wrapper"></div>
+			</div>
+		</div>
+		</div>
+			
+		<script>
+		$('#experience-[[${user.id}]]').click(function(event){
+			event.preventDefault();
+			event.stopPropagation();
+			$.ajax({
+				type : 'GET',
+				url : $(this).attr('href'),
+				success : function(data, textStatus, xhr){
+					$('#experience_form').html(data);
+				}
+				
+			});
+		});
+		</script>
+		
+		<script>
+			$('#basic_info').click(function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$.ajax({
+					type : 'GET',
+					url : $(this).attr('href'),
+					success : function(data, textStatus, xhr) {
+						$('#_basic_info_form_wrapper').html(data);
+					}
+
+				});
+			});
+		</script>
+		
+		<script>
+			$('#certificate').click(function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$.ajax({
+					type : 'GET',
+					url : $(this).attr('href'),
+					success : function(data, textStatus, xhr) {
+						$('#_certificate_form_wrapper').html(data);
+					}
+
+				});
+			});
+		</script>
 </body>
 </html>

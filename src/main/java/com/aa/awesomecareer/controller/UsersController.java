@@ -13,18 +13,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aa.awesomecareer.model.CertificateModel;
 import com.aa.awesomecareer.model.UserModel;
+import com.aa.awesomecareer.service.CertificateService;
 import com.aa.awesomecareer.service.UserService;
 
 @Controller
@@ -38,6 +33,10 @@ public class UsersController {
 	@Autowired
 	@Qualifier("userService")
 	UserService userService;
+	
+	@Autowired
+	@Qualifier("certificateService")
+	CertificateService certificateService;
 
 	@GetMapping(value = "/users")
 	public String index(@RequestParam(name = "page", required = false) Optional<Integer> page, Locale locale,
@@ -51,6 +50,10 @@ public class UsersController {
 	public String show(@PathVariable Integer id, Model model) {
 		UserModel userModel = userService.findUser(id);
 		model.addAttribute("user", userModel);
+				
+		List<CertificateModel> certificateModels = certificateService.findCertificateByUserId(id);
+		model.addAttribute("certificateModels", certificateModels);
+		
 		return "users/show";
 	}
 	
@@ -60,23 +63,5 @@ public class UsersController {
 		return "users/add";
 	}
 	
-	@PutMapping(value = "/users/{id}")
-	public String update(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
-			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
-		UserModel user = userService.saveInfo(userModel);
-		return "users/show";
-	}
 	
-//	@PostMapping(value = "/users")
-//	public String create(@ModelAttribute("user") @Validated UserModel userModel, BindingResult bindingResult,
-//			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
-//		if (bindingResult.hasErrors()) {
-//			logger.info("Returning register.jsp page, validate failed");
-//			return "users/add";
-//		}
-//		userService.addUser(userModel);
-//		// Add message to flash scope
-//		return "redirect: " + request.getContextPath() + "/home";
-//	}
-
 }
