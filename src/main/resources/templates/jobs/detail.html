@@ -19,6 +19,15 @@ data-size="small"><a target="_blank"
 href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" 
 class="fb-xfbml-parse-ignore">Share</a></div><br><br>
 
+<a type="button" class="btn btn-success" id="uploadform" th:href="@{'/uploadform/'+${jobModel.id}}">I'm interested</a><br><br>
+
+<div id="upload_form"></div>
+
+<div id="show_link">
+<th:block th:if="${jobModel.fileurl != ''}">
+<div th:replace="~{jobs/linkdownload}"></div><br><br>
+</th:block>
+</div>
 <h4>Job Type :</h4>
  <ul style="list-style-type:none">
    <th:block th:each="typeModel : ${typeModels}">
@@ -44,6 +53,23 @@ class="fb-xfbml-parse-ignore">Share</a></div><br><br>
 
 <h5>Deadline</h5>
 <p th:text="${jobModel.deadLine}"></p>
+
+<script>
+$('#uploadform').click(function(event){
+	alert("su kien da xay ra chua ");
+	event.preventDefault();
+	event.stopPropagation();
+	$.ajax({
+		
+		type: 'GET',
+		url: $(this).attr('href'),
+		success : function(data, textStatus, xhr){
+			$('#upload_form').html(data);
+		}
+		
+	});	
+});
+</script>
 
 </body>
 </html>

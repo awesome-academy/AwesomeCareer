@@ -47,7 +47,10 @@ public class JobModel extends BaseModel{
 	private String reason;
 	private Date deadLine;
 	private MultipartFile image;
+	private MultipartFile file;
+	private String fileurl;
 	private String url;
+	private String shortDescription;
 	private List<JobType> jobTypes;
 	private Integer fieldId;
     private Set<Type> types = new HashSet<>();
@@ -158,6 +161,15 @@ public class JobModel extends BaseModel{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
 
 	public String getRequirement() {
 		return requirement;
@@ -247,4 +259,20 @@ public class JobModel extends BaseModel{
 		this.url = url;
 	}
 
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getFileurl() {
+		return fileurl;
+	}
+
+	public void setFileurl(String fileurl) {
+		this.fileurl = fileurl;
+	}
+	
 }

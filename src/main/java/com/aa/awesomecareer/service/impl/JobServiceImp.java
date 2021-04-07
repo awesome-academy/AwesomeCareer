@@ -68,6 +68,9 @@ public class JobServiceImp implements JobService {
 	     for(Job job : jobs) {
 	    	 JobModel jobModel = new JobModel();
 	    	 BeanUtils.copyProperties(job,jobModel);
+	    	 jobModel.setUrl(job.getImage());
+	    	 String shortDescription = jobModel.getDescription().substring(0,100);
+	    	 jobModel.setShortDescription(shortDescription);
 	    	 jobModels.add(jobModel);
 	     }
 	     return jobModels;
@@ -94,11 +97,27 @@ public class JobServiceImp implements JobService {
 		}
 		jobModel.setTypeModels(typeModels);
 		jobModel.setUrl(job.get().getImage());
+		jobModel.setFileurl(job.get().getFile());
+		System.out.println("Xem co duong link file chua " +job.get().getFile());
 		return jobModel;
 	}
 	catch(Exception e) {
 		logger.error("An error occurred while fetching the job from database",e);
 		return null;
 	}
+	}
+	
+
+	@Override
+	public JobModel saveCv(Integer jobId,String fileUrl) {
+		
+		Optional<Job> job = jobRepository.findById(jobId);
+		job.get().setFile(fileUrl);
+		Job jobSave = jobRepository.save(job.get());
+		JobModel jobModel = new JobModel();
+		BeanUtils.copyProperties(jobSave, jobModel);
+		jobModel.setFileurl(jobSave.getFile());
+		return jobModel;
+	
 	}
 }
