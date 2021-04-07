@@ -11,4 +11,5 @@ public interface JobService {
 	List<JobModel> findAllJob();
 	void saveJobModel(JobModel jobModel, String url);
 	JobModel saveCv(Integer jobId, String fileurl);
+	List<JobModel> findAllJobSearch(String keyword);
 }
