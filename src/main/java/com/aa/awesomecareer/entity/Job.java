@@ -61,6 +61,9 @@ public class Job extends BaseEntity {
 	@Column(name = "image", length = 256)
 	private String image;
 	
+	@Column(name = "file", length = 500)
+	private String file;
+	
 	@Column(name = "deadLine")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date deadLine;
@@ -245,4 +248,11 @@ public class Job extends BaseEntity {
 		this.image = image;
 	}
 
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
 }

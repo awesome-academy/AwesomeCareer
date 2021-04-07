@@ -13,11 +13,15 @@ xmlns:th="http://www.thymeleaf.org">
      <button><a  th:href="@{/jobs}">Add new Job</a></button>
      <th:block th:each="jobModel : ${jobModels}">
         <li >
+        <img th:src=@{${jobModel.url}} height='200' width='300'/><br>
         <span><a th:utext="${jobModel.position}" th:href="@{'/jobs/'+${jobModel.id}}"></a></span>
         <span>/Company :</span>
         <span><a th:utext="${jobModel.companyName}"></a></span>
         <span>/DeadLine :</span>
-        <span><a th:utext="${jobModel.deadLine}"></a></span>
+        <span><a th:utext="${jobModel.deadLine}"></a></span><br>
+        <span><a th:utext="${jobModel.shortDescription}"></a></span>
+        <p>......................................................................................
+        .........................................................................................</p>
         </li>
       </th:block>
  </ul>
