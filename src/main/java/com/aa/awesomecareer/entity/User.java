@@ -88,6 +88,11 @@ public class User extends BaseEntity{
 //	@Column(name = "image", length = 256)
 //	private String image;
 
+	@OneToMany( mappedBy = "user")
+	private List<Job> jobs;
+	
+	@OneToMany( mappedBy = "user")
+	private List<Application> applications;
 	
 	@OneToMany(mappedBy = "user")
     private List<Experience> experiences;

@@ -9,10 +9,10 @@ import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public class BaseEntity {
-	@Column(name = "updated_at")
+	@Column(name = "updatedAt")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date updatedAt;
-	@Column(name = "created_at")
+	@Column(name = "createdAt")
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date createdAt;
 

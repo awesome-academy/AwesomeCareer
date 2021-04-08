@@ -41,6 +41,7 @@ public class UserModel extends BaseModel {
 	@NotEmpty
 	private String country;
 	
+	private String cvUrl;
 	public String userName;
 	private String seftIntroduction;
 	private String ambition;
@@ -115,6 +116,12 @@ public class UserModel extends BaseModel {
 	}
 	public void setAmbition(String ambition) {
 		this.ambition = ambition;
+	}
+	public String getCvUrl() {
+		return cvUrl;
+	}
+	public void setCvUrl(String cvUrl) {
+		this.cvUrl = cvUrl;
 	}
 
 }

@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "application")
-public class Application {
+public class Application extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -27,19 +27,77 @@ public class Application {
 	@Column(name = "jobId")
 	private Integer jobId;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
+	@Column(name="fileUrl")
+	private String fileUrl;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
+	@ManyToOne
+	@JoinColumn(name = "userId",insertable = false, updatable = false)
+	private User user;
 
-//	@ManyToOne
-//	@JoinColumn(name = "id")
-//	private User user;
-//
-//	@ManyToOne
-//	@JoinColumn(name = "id")
-//	private Job job;
+	@ManyToOne
+	@JoinColumn(name = "jobId",insertable = false, updatable = false)
+	private Job job;
+	
+	public Application() {
+		super();
+	}
+
+	public Application(Integer id, Integer userId, Integer jobId, String fileUrl, User user, Job job) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.jobId = jobId;
+		this.fileUrl = fileUrl;
+		this.user = user;
+		this.job = job;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(Integer jobId) {
+		this.jobId = jobId;
+	}
+
+	public String getFileUrl() {
+		return fileUrl;
+	}
+
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Job getJob() {
+		return job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
+	}
+	
 }

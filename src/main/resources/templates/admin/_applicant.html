@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html 
+ th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+      <ol style="list-style-type :decimal">
+       <th:block th:fragment="copy" th:each="userModel : ${userModels}">
+			<li><a style="font-weight: bold;color:black;" th:text ="${userModel.fullName}" th:href="@{'/user/'+${userModel.id}}"></a></li>
+			<a th:href="@{${userModel.cvUrl}}">CV download</a>
+	  </th:block>
+	</ol>
+</body>
+</html>

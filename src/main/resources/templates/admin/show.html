@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h3>List of Job Post</h3>
+<ol style="list-style-type :decimal ; font-weight: bold;">
+ <li th:replace="admin/posts :: copy"></li>
+</ol>
+</body>
+</html>

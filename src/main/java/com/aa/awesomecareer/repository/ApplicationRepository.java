@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.aa.awesomecareer.entity.Application;
 
 @Repository
-public interface ApplicationRepository extends JpaRepository<Application, Integer> {
+public interface ApplicationRepository extends JpaRepository<Application, Integer>,ApplicationRepositoryCustom {
 
 }

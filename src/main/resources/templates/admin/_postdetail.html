@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<ul>
+	<th:block th:fragment="copy (jobModel)">
+      <li><a th:text ="${jobModel.jobTitle}" th:href="@{'/jobs/'+${jobModel.id}}" style="color:black"></a></li>
+      <a th:href ="@{'/admin/'+${jobModel.id}+'/applicant'}">List applicant</a>
+    </th:block>
+ </ul>
+</body>
+</html>

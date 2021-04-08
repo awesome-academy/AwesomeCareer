@@ -64,7 +64,7 @@ public class JobsController {
 
 		Cloudinary cloudinary = new Cloudinary();
 		String url = cloudinaryService.uploadFile(image);
-		
+		jobModel.setUserId(1);
 		jobService.saveJobModel(jobModel,url);
 		return "redirect:jobs/all";
      }
@@ -88,7 +88,6 @@ public class JobsController {
 	@GetMapping(value="/jobs/{id}")
 	public String showJobDetail(@PathVariable("id") Integer id,Model model) {
 		JobModel jobModel = jobService.showJobDetail(id);
-		System.out.println("xem duogn link cua job :" +jobModel.getFileurl());
 		model.addAttribute("jobModel",jobModel);
 		List<TypeModel> typeModels = jobModel.getTypeModels();
 		model.addAttribute("typeModels",typeModels);
@@ -103,21 +102,4 @@ public class JobsController {
 		return "jobs/cvform";
 	}
 	
-	@PostMapping(value="/jobs/{id}/savecv")
-	public String savecv(@PathVariable("id") Integer id,@ModelAttribute("jobModel") JobModel jobModel,@RequestParam("csv") MultipartFile file,
-			Model model,HttpServletRequest request,RedirectAttributes redirectAttributes) {
-		if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
-        }
-		
-		Cloudinary cloudinary = new Cloudinary();
-		String fileUrl = cloudinaryService.uploadFile(file);
-		System.out.println("Xem co duong dan url chua "+fileUrl );
-		
-		JobModel jobModelSave = jobService.saveCv(id, fileUrl);
-		
-		model.addAttribute("jobModel",jobModelSave);
-		return "jobs/linkdownload";
-	}
 }

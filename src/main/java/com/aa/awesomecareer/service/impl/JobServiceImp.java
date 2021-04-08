@@ -18,11 +18,14 @@ import org.springframework.stereotype.Service;
 import com.aa.awesomecareer.entity.Job;
 import com.aa.awesomecareer.entity.JobType;
 import com.aa.awesomecareer.entity.Type;
+import com.aa.awesomecareer.entity.User;
 import com.aa.awesomecareer.model.JobModel;
 import com.aa.awesomecareer.model.TypeModel;
+import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.repository.JobRepository;
 import com.aa.awesomecareer.repository.JobTypeRepository;
 import com.aa.awesomecareer.repository.TypeRepository;
+import com.aa.awesomecareer.repository.UserRepository;
 import com.aa.awesomecareer.service.JobService;
 
 @Service
@@ -38,13 +41,16 @@ public class JobServiceImp implements JobService {
 	
 	@Autowired
 	TypeRepository typeRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	@Override
-	public void saveJobModel(JobModel jobModel,String url) {
+	public void saveJobModel(JobModel jobModel,String imageUrl) {
 		try {
 		Job job = new Job();
 		BeanUtils.copyProperties(jobModel, job);
-        job.setImage(url);
+        job.setImageUrl(imageUrl);;
 		Job jobSave = jobRepository.save(job);
 		Integer[] typeIds = jobModel.getTypeIds();
 		
@@ -52,7 +58,6 @@ public class JobServiceImp implements JobService {
 			JobType jobType = new JobType();
 			jobType.setJobId(jobSave.getId());
 			jobType.setTypeId(typeId);
-			System.out.println("Xem luu jobtype chua +" + jobType.getJobId() +"+"+jobType.getTypeId());
 			jobTypeRepository.save(jobType);
 		}
 		
@@ -68,7 +73,7 @@ public class JobServiceImp implements JobService {
 	     for(Job job : jobs) {
 	    	 JobModel jobModel = new JobModel();
 	    	 BeanUtils.copyProperties(job,jobModel);
-	    	 jobModel.setUrl(job.getImage());
+	    	 jobModel.setImageUrl(job.getImageUrl());
 	    	 String shortDescription = jobModel.getDescription().substring(0,100);
 	    	 jobModel.setShortDescription(shortDescription);
 	    	 jobModels.add(jobModel);
@@ -85,8 +90,14 @@ public class JobServiceImp implements JobService {
 	public JobModel showJobDetail(Integer id) {
 		try {
 		Optional<Job> job = jobRepository.findById(id);
+		Optional<User> user = userRepository.findById(job.get().getUserId());
+		job.get().setUser(user.get());
+		UserModel userModel = new UserModel();
+		BeanUtils.copyProperties(user.get(), userModel);
 		JobModel jobModel = new JobModel();
 		BeanUtils.copyProperties(job.get(), jobModel);
+		jobModel.setUserModel(userModel);
+
 		List<JobType> jobTypes = jobTypeRepository.findByJobId(id);
 		List<TypeModel> typeModels = new ArrayList<>();
 		for(JobType jobType : jobTypes) {
@@ -96,9 +107,8 @@ public class JobServiceImp implements JobService {
 			typeModels.add(typeModel);
 		}
 		jobModel.setTypeModels(typeModels);
-		jobModel.setUrl(job.get().getImage());
-		jobModel.setFileurl(job.get().getFile());
-		System.out.println("Xem co duong link file chua " +job.get().getFile());
+		System.out.println("Xem kich thuoc jobModel la "+ jobModel.getTypeModels().size());
+		jobModel.setImageUrl(job.get().getImageUrl());
 		return jobModel;
 	}
 	catch(Exception e) {
@@ -106,18 +116,22 @@ public class JobServiceImp implements JobService {
 		return null;
 	}
 	}
-	
-
 	@Override
-	public JobModel saveCv(Integer jobId,String fileUrl) {
-		
-		Optional<Job> job = jobRepository.findById(jobId);
-		job.get().setFile(fileUrl);
-		Job jobSave = jobRepository.save(job.get());
-		JobModel jobModel = new JobModel();
-		BeanUtils.copyProperties(jobSave, jobModel);
-		jobModel.setFileurl(jobSave.getFile());
-		return jobModel;
+	public List<JobModel> findJobByUserId(Integer userId) {
+		logger.info("An error occurred while fetching the job in database");
 	
+		try {
+		List<Job> jobs = jobRepository.findByUserId(userId);
+		List<JobModel> jobModels = new ArrayList<>();
+		for(Job job : jobs) {
+			JobModel jobModel = new JobModel();
+			BeanUtils.copyProperties(job,jobModel);
+			jobModels.add(jobModel);
+		}
+		return jobModels;
+	} catch(Exception e) {
+		logger.error("An error occurred while fetching the job from database",e);
+		return null;
+	}
 	}
 }

@@ -47,10 +47,10 @@ public class JobModel extends BaseModel{
 	private String reason;
 	private Date deadLine;
 	private MultipartFile image;
-	private MultipartFile file;
-	private String fileurl;
-	private String url;
+	private String imageUrl;
 	private String shortDescription;
+	private Integer userId;
+	private UserModel userModel;
 	private List<JobType> jobTypes;
 	private Integer fieldId;
     private Set<Type> types = new HashSet<>();
@@ -59,15 +59,16 @@ public class JobModel extends BaseModel{
 	private Integer[] typeIds ;
 	
 	private List<TypeModel> typeModels = new ArrayList<>();
-
+	
 	public JobModel() {
-		
+		super();
 	}
 
 	public JobModel(Integer id, String jobTitle, String companyWebsite, String companyName, String address,
 			String fieldName, String position, String introduction, String description, String requirement,
-			String reason, Date deadLine, MultipartFile image, List<JobType> jobTypes, Integer fieldId, Set<Type> types,
-			Field field, Integer[] typeIds, List<TypeModel> typeModels) {
+			String reason, Date deadLine, MultipartFile image, String imageUrl, String shortDescription, Integer userId,
+			UserModel userModel, List<JobType> jobTypes, Integer fieldId, Set<Type> types, Field field,
+			Integer[] typeIds, List<TypeModel> typeModels) {
 		super();
 		this.id = id;
 		this.jobTitle = jobTitle;
@@ -82,6 +83,10 @@ public class JobModel extends BaseModel{
 		this.reason = reason;
 		this.deadLine = deadLine;
 		this.image = image;
+		this.imageUrl = imageUrl;
+		this.shortDescription = shortDescription;
+		this.userId = userId;
+		this.userModel = userModel;
 		this.jobTypes = jobTypes;
 		this.fieldId = fieldId;
 		this.types = types;
@@ -161,15 +166,6 @@ public class JobModel extends BaseModel{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
-	}
 
 	public String getRequirement() {
 		return requirement;
@@ -193,6 +189,46 @@ public class JobModel extends BaseModel{
 
 	public void setDeadLine(Date deadLine) {
 		this.deadLine = deadLine;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
 	}
 
 	public List<JobType> getJobTypes() {
@@ -243,36 +279,4 @@ public class JobModel extends BaseModel{
 		this.typeModels = typeModels;
 	}
 
-	public MultipartFile getImage() {
-		return image;
-	}
-
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public MultipartFile getFile() {
-		return file;
-	}
-
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
-
-	public String getFileurl() {
-		return fileurl;
-	}
-
-	public void setFileurl(String fileurl) {
-		this.fileurl = fileurl;
-	}
-	
 }

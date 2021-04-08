@@ -28,14 +28,7 @@ public class Certificate {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date issuedTime;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
-
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
-
+	
 //	@ManyToOne
 //	@JoinColumn(name = "id")
 //	private User user;
