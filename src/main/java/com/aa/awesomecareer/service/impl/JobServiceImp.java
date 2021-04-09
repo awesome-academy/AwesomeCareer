@@ -41,6 +41,7 @@ public class JobServiceImp implements JobService {
 
 	@Override
 	public void saveJobModel(JobModel jobModel,String url) {
+		logger.error("Save job in database");
 		try {
 		Job job = new Job();
 		BeanUtils.copyProperties(jobModel, job);
@@ -62,6 +63,7 @@ public class JobServiceImp implements JobService {
 	}
 	@Override
 	public List<JobModel> findAllJob() {
+		logger.error("Find all job from database");
 		try {
 	     List<Job> jobs = jobRepository.findAll();
 	     List<JobModel> jobModels = new ArrayList<>();
@@ -83,6 +85,7 @@ public class JobServiceImp implements JobService {
 
 	@Override
 	public JobModel showJobDetail(Integer id) {
+		logger.error("Find job from database by id");
 		try {
 		Optional<Job> job = jobRepository.findById(id);
 		JobModel jobModel = new JobModel();
@@ -110,7 +113,8 @@ public class JobServiceImp implements JobService {
 
 	@Override
 	public JobModel saveCv(Integer jobId,String fileUrl) {
-		
+		logger.error("Find job from database by id");
+		try {
 		Optional<Job> job = jobRepository.findById(jobId);
 		job.get().setFile(fileUrl);
 		Job jobSave = jobRepository.save(job.get());
@@ -118,6 +122,28 @@ public class JobServiceImp implements JobService {
 		BeanUtils.copyProperties(jobSave, jobModel);
 		jobModel.setFileurl(jobSave.getFile());
 		return jobModel;
+		}catch(Exception e) {
+	    logger.error("An error occurred while save cv of job from database",e);
+	    return null;
+		}
 	
+	}
+	@Override
+	public List<JobModel> findAllJobSearch(String keyword) {
+		logger.error("Find all job from database by keyword");
+		try {
+		List<Job> jobs = jobRepository.findJobByKeyword(keyword);
+		List<JobModel> jobModels = new ArrayList<>();
+		for(Job job : jobs) {
+			JobModel jobModel = new JobModel();
+			BeanUtils.copyProperties(job,  jobModel);
+			jobModels.add(jobModel);
+		}
+		
+		return jobModels;
+	}catch (Exception e) {
+		 logger.error("An error occurred while find all jobs from database by keyword",e);
+		 return null;
+	}
 	}
 }
