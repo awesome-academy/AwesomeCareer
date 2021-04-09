@@ -299,3 +299,51 @@ span.picture {
 span.picture input {
   border: 0;
 } 
+/* Comment duoc viet tren 1 dong */
+
+#content_body{
+    position:relative;
+    margin-top:4.7%;
+    border-top:solid;
+    border-width: thin
+}
+
+.content_header{
+    padding-bottom:10%;
+}
+.content_decor{
+    float:right;
+    size:3px
+}
+#upload_resume{
+    border-left: solid;
+    border-width: thin;
+    padding-top:10px
+}
+.content_body_container{
+    padding-bottom:10%;
+    padding-top:10px
+}
+
+label{
+    margin-left: 20px;
+    }
+    #datepicker{
+    width:180px; 
+    margin: 0 20px 20px 20px;
+    }
+    #datepicker > span:hover{
+    cursor: pointer;
+    }
+
+.checkboxes label {
+  display: inline-block;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+.checkboxes input {
+  vertical-align: middle;
+}
+.checkboxes label span {
+  vertical-align: middle;
+}

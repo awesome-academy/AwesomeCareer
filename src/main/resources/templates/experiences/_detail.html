@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+	th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+    <ul>
+	<th:block th:fragment="copy (experience)">
+		<li >
+          <div th:id="'experience_old-' +${experience.id}">
+			<a th:href="@{'/experience/'+${experience.id}+'/edit'}"
+				th:id="'experience-'+${experience.id}">Edit</a>
+			<p th:text="${experience.companyName}"></p>
+			<span th:text="${#dates.format(experience.startTime, 'MM/dd/yyyy')}"></span> <span>-</span> <span
+				th:text="${#dates.format(experience.endTime, 'MM/dd/yyyy')}"></span>
+			<p th:text="${experience.jobTitle}"></p>
+			<p th:text="${experience.description}"></p>
+			<span>..........................................................</span>
+		   </div>
+		   <div th:id="'experience_new-' +${experience.id}"></div>
+
+			<script>
+				$('#experience-[[${experience.id}]]').click(
+						function(event) {
+							event.preventDefault();
+							event.stopPropagation();
+							$.ajax({
+								type : 'GET',
+								url : $(this).attr('href'),
+								success : function(data, textStatus, xhr) {
+									//alert(data);
+									//alert($('#experience_old-[[${experience.id}]]').length);
+									$('#experience_new-[[${experience.id}]]')
+											.html(data);
+								}
+
+							})
+						});
+			</script>
+		</li>
+	</th:block>
+	</ul>
+
+</body>
+</html>

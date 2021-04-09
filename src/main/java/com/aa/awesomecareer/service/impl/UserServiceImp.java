@@ -1,7 +1,9 @@
 package com.aa.awesomecareer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -10,9 +12,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.aa.awesomecareer.entity.Skill;
+import com.aa.awesomecareer.entity.SkillUser;
 import com.aa.awesomecareer.entity.User;
+import com.aa.awesomecareer.model.SkillModel;
 import com.aa.awesomecareer.model.UserModel;
+import com.aa.awesomecareer.repository.SkillRepository;
+import com.aa.awesomecareer.repository.SkillUserRepository;
+import com.aa.awesomecareer.repository.SkillUserRepositoryCustom;
 import com.aa.awesomecareer.repository.UserRepository;
 import com.aa.awesomecareer.service.UserService;
 
@@ -24,6 +33,15 @@ public class UserServiceImp implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private SkillRepository skillRepository;
+	
+	@Autowired
+	private SkillUserRepository skillUserRepository;
+	
+	@Autowired
+	private SkillUserRepositoryCustom skillUserRepositoryCustom;
 
 	public UserServiceImp() {
 	}
@@ -72,6 +90,103 @@ public class UserServiceImp implements UserService {
 		userModel = new UserModel();
 		BeanUtils.copyProperties(user1, userModel);
 		return userModel;
+	}
+	
+	@Override
+	@Transactional
+	public void addUser(UserModel userModel) {
+		if (emailExists(userModel.getEmail())) {
+			logger.info("There is an account with that email address" + userModel.getEmail());
+		}
+		try {
+			User condition = new User();
+			condition.setFullName(userModel.getFullName());
+			condition.setEmail(userModel.getEmail());
+			condition.setPassword(userModel.getPassword());
+			condition.setCompany(userModel.getCompany());
+			condition.setOccupationInterest(userModel.getOccupationInterest());
+			condition.setCountry(userModel.getCountry());
+
+			userRepository.save(condition);
+
+		} catch (Exception e) {
+			logger.error("An error occurred while adding user to the database");
+		}
+	}
+
+	@Override
+	@Transactional
+	public void saveSkill(UserModel userModel) {
+		try {
+			System.out.println("kich thuoc" + userModel.getSkillIds().size());
+		    List<Integer> ids = userModel.getSkillIds();
+		    List<SkillUser> skillUsers = skillUserRepositoryCustom.findByUserId(userModel.getId());
+		    for(SkillUser skillUser: skillUsers) {
+		    	skillUserRepository.deleteById(skillUser.getId());
+		    }
+		   
+		   for (Integer id : ids) {
+			   System.out.println("Xem co id khong naof " +id);
+			   SkillUser skillUser = new SkillUser();
+			   skillUser.setSkillId(id);
+			   skillUser.setUserId(userModel.getId());
+			   skillUserRepository.save(skillUser);
+		   }
+		   
+		} catch (Exception e) {
+			logger.error("An error occurred while adding user to the database", e);
+		}
+	}
+
+	private boolean emailExists(String email) {
+		return userRepository.findByEmail(email) != null;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public UserModel findUserById(Integer id) {
+		Optional<User> userOpt = userRepository.findById(id);
+		if (!userOpt.isPresent()) {
+			return null;
+		}
+		User user = userOpt.get();
+		UserModel userModel = new UserModel();
+		BeanUtils.copyProperties(user, userModel);
+		Set<Skill> skills = user.getSkills();
+		List<Integer> skillIds = new ArrayList<Integer>();
+		for (Skill skill : skills) {
+			skillIds.add(skill.getId());
+		}
+		userModel.setSkillIds(skillIds);
+
+		return userModel;
+
+	}
+
+	@Override
+	public UserModel saveIntroduction(UserModel userModel) {
+		User user = new User();
+		BeanUtils.copyProperties(userModel,user);
+		User userNew =userRepository.save(user);
+		UserModel userModelNew = new UserModel();
+		BeanUtils.copyProperties(userNew, userModelNew);
+		return userModelNew;
+	}
+	
+	@Override
+	public UserModel saveAmbition(UserModel userModel) {
+		User user = new User();
+		BeanUtils.copyProperties(userModel, user);
+		User userNew = userRepository.save(user);
+		UserModel userModelNew = new UserModel();
+		BeanUtils.copyProperties(userNew, userModelNew);
+		return userModelNew;
+	}
+
+	@Override
+	public UserModel findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

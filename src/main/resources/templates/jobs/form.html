@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+  <form style="width: 50%" th:action="@{/jobs}" th:object="${jobModel}" th:method ="POST" enctype="multipart/form-data">
+     
+     <label>Photos: </label>
+     <input type="file" th:field="*{image}" accept="image/png, image/jpeg" />
+     
+     <h5>Give your Job Post title</h5><br>
+     <textarea th:field="*{jobTitle}"></textarea>
+ 
+    <h5>Add your company's website</h5>
+    <input type="text" th:field="*{companyWebsite}" ><br>
+  
+    <h5>Add your company's name</h5>
+    <input type="text" th:field="*{companyName}" ><br>
+    
+    <h5>Add your company's address</h5>
+    <input type="text" th:field="*{address}">
+   
+    <h5>Select employment type:</h5><br>
+    <div>
+    <div th:replace="jobs/type :: copy"></div>
+    </div>
+ 
+    <h5>Job Field</h5>
+    <div>
+      <div th:replace="jobs/field :: copy"></div>
+    </div>
+
+    <h5>Position Detail:</h5>
+    <input type="text" th:field="*{position}"><br><br>
+  
+   <h5>Introduce your company</h5>
+   <textarea th:field="*{introduction}"></textarea>
+   
+   <h5>Job Description</h5>
+   <textarea th:field="*{description}"></textarea>
+   
+   <h5>Job Requirement</h5>
+   <textarea th:field="*{requirement}"></textarea>
+   
+   <h5>Why You'll Love Working Here</h5>
+   <textarea th:field="*{reason}"></textarea>
+   
+   <h5>Deadline</h5>
+	<input type="text" id="datepicker1" th:field="*{deadLine}">
+   
+ <input type="submit" class="btn btn-success" value="Submit">
+ </form>
+ 
+ <script>
+		$(function() {
+			$("#datepicker1").datepicker();
+		});
+ </script>
+	
+</body>
+</html>

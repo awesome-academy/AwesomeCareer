@@ -10,22 +10,35 @@
 			<div class="col-md-8">
 				<div class="container content_body_container">
 					<h5 style="display: inline-block">Seft introduction</h5>
+					<a  th:href="@{/introduction}" id="introduction">
 					<i class="fas fa-edit content_decor">Edit</i>
+					</a>
+					<div id="_introduction_show" th:text="${userModel.seftIntroduction}"></div>
+					<div id="_introduction_form_wrapper"></div>
 				</div>
 				<div class="container content_header">
 					<h5 style="display: inline-block">Ambition</h5>
+					<a th:href="@{/ambition}" id="ambition"> 
 					<i class="fas fa-edit content_decor">Edit</i>
+					</a>
+					<div id="_ambition_show" th:text="${userModel.ambition}"></div>
+					<div id="_ambition_form_wrapper"></div>
 				</div>
+				
 				<div class="container content_header">
 					<h5 style="display: inline-block">Work Experience</h5>
-					<i class="fas fa-plus-circle content_decor"
-						th:href="@{'/user/'+${user.id}+'/experience/add'}"
-						th:id="'experience-'+${user.id}">Add</i>
+					<a class="content_decor" th:href="@{/experience}" id="experience">
+						<i class="fas fa-plus-circle"></i>Add
+					</a>
+					<ul id="experience_show">
+					    <li th:replace="experiences/index :: copy"></li>
+						<!-- <th:block th:each="experience : ${experienceModels}">
+							<li th:replace="~{experiences/_detail :: copy(${experience})}"></li>
+						</th:block> -->
+					</ul>
+					<div id="_experience_form_wrapper"></div>
 				</div>
-		
-				<div th:id="experience_show"></div>
-				<div th:id="experience_form"></div>
-
+				
 				<div class="container content_header">
 					<h5 style="display: inline-block">Project</h5>
 					<i class="fas fa-edit content_decor">Edit</i>
@@ -34,6 +47,21 @@
 					<h5 style="display: inline-block">Portfolio</h5>
 					<i class="fas fa-edit content_decor">Edit</i>
 				</div>
+				<div class="container content_header">
+					<h5 style="display: inline-block">Education</h5>
+					<a th:href="@{/education}" id="education">
+					<i class="fas fa-edit content_decor">Add</i>
+					</a>
+					<ul id="education_show">
+					    <li th:replace="educations/index :: copy"></li>
+					</ul>
+					<div id="_education_form_wrapper"></div>
+				</div>
+				<div class="container content_header">
+					<h5 style="display: inline-block">Skills</h5>
+				</div>
+				
+				<div th:id="'skill-'+${userModel.id}" th:replace="~{skills/form :: copy}"></div>
 
 			</div>
 			<div class="col-md-4" id="upload_resume">
@@ -68,20 +96,19 @@
 			</div>
 		</div>
 		</div>
-			
+
 		<script>
-		$('#experience-[[${user.id}]]').click(function(event){
-			event.preventDefault();
-			event.stopPropagation();
-			$.ajax({
-				type : 'GET',
-				url : $(this).attr('href'),
-				success : function(data, textStatus, xhr){
-					$('#experience_form').html(data);
-				}
-				
+			$('#experience').click(function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$.ajax({
+					type : 'GET',
+					url : $(this).attr('href'),
+					success : function(data, textStatus, xhr) {
+						$('#_experience_form_wrapper').html(data);
+					}
+				});
 			});
-		});
 		</script>
 		
 		<script>
@@ -112,6 +139,43 @@
 
 				});
 			});
-		</script>
+
+		   $('#education').click(function(event){
+			   event.preventDefault();
+			   event.stopPropagation();
+			   $.ajax({
+				   type:'GET',
+				   url: $(this).attr('href'),
+			       success : function(data, textStatus, xhr){
+			    	   $('#_education_form_wrapper').html(data);
+			       }
+			   });
+		   });
+		   
+		   $('#introduction').click(function(event){
+			   event.preventDefault();
+			   event.stopPropagation();
+			   $.ajax({
+				   type : 'GET',
+				   url: $(this).attr('href'),
+				   success : function(data, textStatus, xhr){
+					   $('#_introduction_form_wrapper').html(data);
+				   }
+			   });
+		   });
+		   
+		   $('#ambition').click(function(event){
+			   event.preventDefault();
+			   event.stopPropagation();
+			   $.ajax({
+				   type :'GET',
+				   url : $(this).attr('href'),
+				   success : function(data, textStatus, xhr){
+					   $('#_ambition_form_wrapper').html(data);
+				   }
+				   
+			   });
+		   });
+	</script>
 </body>
 </html>

@@ -1,12 +1,22 @@
 package com.aa.awesomecareer.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,7 +30,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "user")
 
-public class User {
+public class User extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -43,7 +53,6 @@ public class User {
 	@Column(name = "country",length = 256)
 	private String country;
 
-	
 	@Column(name = "userName",length = 256)
 	private String userName;
 	
@@ -80,14 +89,31 @@ public class User {
 	
 //	@Column(name = "image", length = 256)
 //	private String image;
+
 	
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
+	@OneToMany(mappedBy = "user")
+    private List<Experience> experiences;
 	
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
+	@OneToMany(mappedBy = "user")
+    private List<SkillUser> skillUsers;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(
+			name="skilluser",
+			joinColumns = @JoinColumn(name="userId"),
+			inverseJoinColumns = @JoinColumn(name="skillId")
+			)
+    private Set<Skill> skills = new HashSet<>();
+	
+	
+	
+//	@Temporal(value = TemporalType.TIMESTAMP)
+//	@Column(name = "createdAt")
+//	private Date createdAt;
+	
+//	@Temporal(value = TemporalType.TIMESTAMP)
+//	@Column(name = "updatedBy")
+//	private Date updatedBy;
 	
 	public String getFullName() {
 		return fullName;
@@ -179,8 +205,46 @@ public class User {
 	
 	
 
+	public List<Experience> getExperiences() {
+		return experiences;
+	}
 
-//
+	public void setExperiences(List<Experience> experiences) {
+		this.experiences = experiences;
+	}
+
+	public Set<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Set<Skill> skills) {
+		this.skills = skills;
+	}
+
+	public List<SkillUser> getSkillUsers() {
+		return skillUsers;
+	}
+
+	public void setSkillUsers(List<SkillUser> skillUsers) {
+		this.skillUsers = skillUsers;
+	}
+
+	public String getSeftIntroduction() {
+		return seftIntroduction;
+	}
+
+	public void setSeftIntroduction(String seftIntroduction) {
+		this.seftIntroduction = seftIntroduction;
+	}
+
+	public String getAmbition() {
+		return ambition;
+	}
+
+	public void setAmbition(String ambition) {
+		this.ambition = ambition;
+	}
+	
 //	@OneToMany(mappedBy = "application")
 //	private List<Application> applications;
 //	

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/skill}" th:method="POST" id="_skill">
+		<h3>Select your favorite sports:</h3>
+		<ol>
+			<th:block th:each="skillModel : ${skillModels}">
+				<li style="list-style-type: none;" class="checkboxes">
+				<label>
+				<input type="checkbox" th:value="${skillModel.id}" name="skill" />
+				<span th:text="${skillModel.name}" ></span>
+				</label>
+				</li>
+		    <th:block>
+		</ol>
+		<hr>
+		<input type="submit" class="btn btn-success" value="Update">
+	</form>
+
+	<script>
+		$('#_skill').submit(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			var form = $(this);
+			var skills = [];
+			$('input[name=skill]:checked').map(function() {
+				skills.push($(this).val());
+			});
+
+			$.ajax({
+				type : 'POST',
+				url : $(this).attr('action'),
+				traditional : true,
+				data : {
+					'skills' : skills
+				},
+				success : function(data, textStatus, xhr) {
+					alert(data);
+					$('#skill_show').html(data);
+				}
+			})
+		});
+	</script>
+
+</body>
+</html>

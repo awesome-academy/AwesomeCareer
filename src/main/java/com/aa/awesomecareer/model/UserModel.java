@@ -1,5 +1,6 @@
 package com.aa.awesomecareer.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,8 @@ public class UserModel extends BaseModel {
 	private String relationshipStatus;
 	private boolean imAParent;
 //	private String image;
+	
+	private List<Integer> skillIds = new ArrayList<Integer>();
 	
 	public String getFullName() {
 		return fullName;
@@ -137,6 +140,25 @@ public class UserModel extends BaseModel {
 	private List<EducationModel> educationModels;
 	private List<ProjectModel> projectModels;
 	private List<ProfileModel> profileModels;
+	public List<Integer> getSkillIds() {
+		return skillIds;
+	}
+	public void setSkillIds(List<Integer> skillIds) {
+		this.skillIds = skillIds;
+	}
+	public String getSeftIntroduction() {
+		return seftIntroduction;
+	}
+	public void setSeftIntroduction(String seftIntroduction) {
+		this.seftIntroduction = seftIntroduction;
+	}
+	public String getAmbition() {
+		return ambition;
+	}
+	public void setAmbition(String ambition) {
+		this.ambition = ambition;
+	}
+
 }
 
 

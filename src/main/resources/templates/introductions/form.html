@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/introduction}" th:method="POST" th:object="${userModel}" id="_introduction">
+
+<textarea rows="4" cols="50" th:field="*{seftIntroduction}">
+Enter text here...
+</textarea>
+
+<a class="btn btn-success" id="cancel_introduction">Cancel</a>
+<button class="btn btn-success">Submit</button>
+
+</form>
+
+<script>
+$('#_introduction').submit(function(event){
+	event.preventDefault();
+	event.stopPropagation();
+	var seftIntroduction = $(this).find('textarea[name="seftIntroduction"]').val();
+	$.ajax({
+		type: 'POST',
+		url : $(this).attr('action'),
+		data: {'seftIntroduction':seftIntroduction},
+		success : function(data, textStatus, xhr){
+			$('#_introduction_show').html(data);
+		}
+		
+	});
+});
+
+$('#cancel_introduction').click(function(event){
+	event.preventDefault();
+	event.stopPropagation();
+	$('#_introduction').hide();
+	
+});
+</script>
+
+</body>
+</html>

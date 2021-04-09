@@ -4,12 +4,12 @@
 <body>
 	<th:block th:fragment="copy (basicinfo)">
 		<li>
-			<div th:id="'basicinfo_old' +${user.id}">
-				<p th:text="${user.gender}"></p>
-				<p th:text="${user.relationshipStatus}"></p>
-				<p th:text="${user.birthday}"></p>
+			<div th:id="'basicinfo_old' +${userModel.id}">
+				<p th:text="${userModel.gender}"></p>
+				<p th:text="${userModel.relationshipStatus}"></p>
+				<p th:text="${userModel.birthday}"></p>
 			</div>
-			<div th:id="'basicinfo_new-' +${user.id}"></div>
+			<div th:id="'basicinfo_new-' +${userModel.id}"></div>
 		
 		</li>
 	</th:block>

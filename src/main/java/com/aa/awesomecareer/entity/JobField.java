@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "jobfield")
-public class JobField {
+public class JobField extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -26,13 +26,7 @@ public class JobField {
 	@Column(name = "fieldId")
 	private Integer fieldId;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
-
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
+	
 
 //	@ManyToOne
 //	@JoinColumn(name = "id")

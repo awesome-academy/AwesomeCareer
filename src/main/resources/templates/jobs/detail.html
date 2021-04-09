@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html 
+th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<img th:src=@{${jobModel.url}} height='200' width='300'/>
+<h1 th:text="${jobModel.jobTitle}" style="text-align: left">Job Title</h1>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" 
+src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=162735362079130&autoLogAppEvents=1" 
+nonce="F2HXguOE"></script>
+<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" 
+data-size="small"><a target="_blank" 
+href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" 
+class="fb-xfbml-parse-ignore">Share</a></div><br><br>
+
+<a type="button" class="btn btn-success" id="uploadform" th:href="@{'/uploadform/'+${jobModel.id}}">I'm interested</a><br><br>
+
+<div id="upload_form"></div>
+
+<div id="show_link">
+<th:block th:if="${jobModel.fileurl != ''}">
+<div th:replace="~{jobs/linkdownload}"></div><br><br>
+</th:block>
+</div>
+<h4>Job Type :</h4>
+ <ul style="list-style-type:none">
+   <th:block th:each="typeModel : ${typeModels}">
+      <li th:utext="${typeModel.name}" style="padding-left: 0px">Job Type</li>
+    </th:block>
+ </ul>
+ <h4>Job Field:</h4>
+<p th:utext="${jobModel.fieldName}"></p>
+ <h4>Position:</h4>
+<p th:utext="${jobModel.position}"></p>
+<h4>Company Introduction</h4>
+   Company Website : <a th:utext="${jobModel.companyWebsite}"></a><br>
+   Company Name :<span th:utext="${jobModel.companyName}"></span><br>
+   Company Address :<span th:utext="${jobModel.address}"></span>
+<p th:text="${jobModel.introduction}"></p>
+<h4>Job Description</h4>
+<p th:text="${jobModel.description}"></p>
+<h4>Job Requirements</h4>
+<p th:text="${jobModel.requirement}"></p>
+
+<h4>Why You'll Love Working Here</h4>
+<p th:text="${jobModel.reason}"></p>
+
+<h5>Deadline</h5>
+<p th:text="${jobModel.deadLine}"></p>
+
+<script>
+$('#uploadform').click(function(event){
+	alert("su kien da xay ra chua ");
+	event.preventDefault();
+	event.stopPropagation();
+	$.ajax({
+		
+		type: 'GET',
+		url: $(this).attr('href'),
+		success : function(data, textStatus, xhr){
+			$('#upload_form').html(data);
+		}
+		
+	});	
+});
+</script>
+
+</body>
+</html>

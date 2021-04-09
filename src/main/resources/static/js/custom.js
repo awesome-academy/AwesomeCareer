@@ -13,14 +13,17 @@ $(document).ready(function() {
 	      //  Cookies.get('XSRF-TOKEN'));
 	    }
 	  }
-	}
+	},
+	xhrFields: {
+      withCredentials: true
+   }
   });	
 	
   var _csrf_token = $("meta[name='_csrf']").attr("content");
   var _csrf_parameter = $("meta[name='_csrf_parameter']").attr("content");
   var _csrf_header = $("meta[name='_csrf_header']").attr("content");
   $(document).ajaxSend(function(e, xhr, options) {
-    if(_csrf_header && _csrf_token) {
+    if (_csrf_header && _csrf_token) {
       xhr.setRequestHeader(_csrf_header, _csrf_token);
     }
   });

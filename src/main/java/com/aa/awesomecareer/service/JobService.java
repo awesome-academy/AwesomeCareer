@@ -1,5 +1,14 @@
 package com.aa.awesomecareer.service;
 
-public interface JobService {
+import java.util.List;
 
+import com.aa.awesomecareer.model.JobModel;
+
+
+public interface JobService {
+      
+	JobModel showJobDetail(Integer id);
+	List<JobModel> findAllJob();
+	void saveJobModel(JobModel jobModel, String url);
+	JobModel saveCv(Integer jobId, String fileurl);
 }
