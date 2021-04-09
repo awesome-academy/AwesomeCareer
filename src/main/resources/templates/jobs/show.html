@@ -11,6 +11,7 @@ xmlns:th="http://www.thymeleaf.org">
  <ul>
      <h1>List Of Job</h1>
      <button><a  th:href="@{/jobs}">Add new Job</a></button>
+     <div th:replace="~{jobs/searchjobs :: copy(${job})}" id="_search"></div>
      <th:block th:each="jobModel : ${jobModels}">
         <li >
         <img th:src=@{${jobModel.url}} height='200' width='300'/><br>
@@ -20,8 +21,7 @@ xmlns:th="http://www.thymeleaf.org">
         <span>/DeadLine :</span>
         <span><a th:utext="${jobModel.deadLine}"></a></span><br>
         <span><a th:utext="${jobModel.shortDescription}"></a></span>
-        <p>......................................................................................
-        .........................................................................................</p>
+        <hr>
         </li>
       </th:block>
  </ul>

@@ -6,34 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aa.awesomecareer.entity.Field;
-import com.aa.awesomecareer.entity.JobType;
-import com.aa.awesomecareer.entity.Type;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+@SuppressWarnings("serial")
+public class JobModel extends BaseModel {
 
-
-public class JobModel extends BaseModel{
-	
 	private Integer id;
 	private String jobTitle;
 	private String companyWebsite;
@@ -46,28 +25,28 @@ public class JobModel extends BaseModel{
 	private String requirement;
 	private String reason;
 	private Date deadLine;
+	@JsonIgnore
 	private MultipartFile image;
+	@JsonIgnore
 	private MultipartFile file;
 	private String fileurl;
 	private String url;
 	private String shortDescription;
-	private List<JobType> jobTypes;
+	private List<JobTypeModel> jobTypes;
 	private Integer fieldId;
-    private Set<Type> types = new HashSet<>();
-	private Field field;
-	
-	private Integer[] typeIds ;
-	
+	private Set<TypeModel> types = new HashSet<TypeModel>();
+	private FieldModel field;
+	private Integer[] typeIds;
 	private List<TypeModel> typeModels = new ArrayList<>();
 
 	public JobModel() {
-		
+
 	}
 
 	public JobModel(Integer id, String jobTitle, String companyWebsite, String companyName, String address,
 			String fieldName, String position, String introduction, String description, String requirement,
-			String reason, Date deadLine, MultipartFile image, List<JobType> jobTypes, Integer fieldId, Set<Type> types,
-			Field field, Integer[] typeIds, List<TypeModel> typeModels) {
+			String reason, Date deadLine, MultipartFile image, List<JobTypeModel> jobTypes, Integer fieldId,
+			Set<TypeModel> types, FieldModel field, Integer[] typeIds, List<TypeModel> typeModels) {
 		super();
 		this.id = id;
 		this.jobTitle = jobTitle;
@@ -161,7 +140,6 @@ public class JobModel extends BaseModel{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 
 	public String getShortDescription() {
 		return shortDescription;
@@ -195,11 +173,11 @@ public class JobModel extends BaseModel{
 		this.deadLine = deadLine;
 	}
 
-	public List<JobType> getJobTypes() {
+	public List<JobTypeModel> getJobTypes() {
 		return jobTypes;
 	}
 
-	public void setJobTypes(List<JobType> jobTypes) {
+	public void setJobTypes(List<JobTypeModel> jobTypes) {
 		this.jobTypes = jobTypes;
 	}
 
@@ -211,19 +189,20 @@ public class JobModel extends BaseModel{
 		this.fieldId = fieldId;
 	}
 
-	public Set<Type> getTypes() {
+	public Set<TypeModel> getTypes() {
 		return types;
 	}
 
-	public void setTypes(Set<Type> types) {
+	public void setTypes(Set<TypeModel> types) {
 		this.types = types;
 	}
 
-	public Field getField() {
+	@JsonIgnore
+	public FieldModel getField() {
 		return field;
 	}
 
-	public void setField(Field field) {
+	public void setField(FieldModel field) {
 		this.field = field;
 	}
 
@@ -243,6 +222,7 @@ public class JobModel extends BaseModel{
 		this.typeModels = typeModels;
 	}
 
+	@JsonIgnore
 	public MultipartFile getImage() {
 		return image;
 	}
@@ -259,6 +239,7 @@ public class JobModel extends BaseModel{
 		this.url = url;
 	}
 
+	@JsonIgnore
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -274,5 +255,5 @@ public class JobModel extends BaseModel{
 	public void setFileurl(String fileurl) {
 		this.fileurl = fileurl;
 	}
-	
+
 }
