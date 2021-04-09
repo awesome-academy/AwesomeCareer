@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "certificate")
-public class Certificate {
+public class Certificate extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -28,13 +28,41 @@ public class Certificate {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date issuedTime;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
+	public Integer getId() {
+		return id;
+	}
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getIssuedTime() {
+		return issuedTime;
+	}
+
+	public void setIssuedTime(Date issuedTime) {
+		this.issuedTime = issuedTime;
+	}
+
+	
+	
+	
 
 //	@ManyToOne
 //	@JoinColumn(name = "id")

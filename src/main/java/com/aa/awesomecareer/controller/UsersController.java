@@ -1,6 +1,5 @@
 package com.aa.awesomecareer.controller;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -21,12 +20,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.aa.awesomecareer.model.CertificateModel;
+import com.aa.awesomecareer.model.UserModel;
+import com.aa.awesomecareer.service.CertificateService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aa.awesomecareer.model.EducationModel;
 import com.aa.awesomecareer.model.ExperienceModel;
 import com.aa.awesomecareer.model.SkillModel;
-import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.service.EducationService;
 import com.aa.awesomecareer.service.ExperienceService;
 import com.aa.awesomecareer.service.SkillService;
@@ -53,6 +55,10 @@ public class UsersController {
 	@Autowired
 	@Qualifier("userService")
 	UserService userService;
+	
+	@Autowired
+	@Qualifier("certificateService")
+	CertificateService certificateService;
 
 	@GetMapping(value = "/users")
 	public String index(@RequestParam(name = "page", required = false) Optional<Integer> page, Locale locale,
@@ -71,7 +77,7 @@ public class UsersController {
 		model.addAttribute("user", new UserModel());
 		return "users/_add";
 	}
-
+	
 	@PostMapping(value = "/users")
 	public String create(@ModelAttribute("userModel") @Validated UserModel userModel, BindingResult bindingResult,
 			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
@@ -88,6 +94,9 @@ public class UsersController {
 	public String show(@PathVariable Integer id, Model model) {
 		UserModel userModel = userService.findUserById(id);
 		model.addAttribute("userModel", userModel);
+		
+		List<CertificateModel> certificateModels = certificateService.findCertificateByUserId(id);
+		model.addAttribute("certificateModels", certificateModels);
 
 		List<ExperienceModel> experienceModels = experienceService.findAllById(1);
 		model.addAttribute("experienceModels", experienceModels);

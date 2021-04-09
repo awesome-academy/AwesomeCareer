@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  $('.datepicker').datepicker({
+  changeYear: true
+});
   $.ajaxSetup({
 	beforeSend : function(xhr, settings) {
 	  if (settings.type == 'POST' || settings.type == 'PUT'

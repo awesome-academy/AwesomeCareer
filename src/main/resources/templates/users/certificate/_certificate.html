@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<form th:method="POST" th:action="@{/certificate}" th:object="${certificateModel}" id="certificateForm">
+		<input type="hidden" th:name="id" th:value="${certificateModel.id}" />
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+							<label class="affix">Title</label> 
+							<br>
+							<input type="text" class="form-control" th:placeholder="Title" name="title" th:field="*{title}">
+						</div>
+						<br> <label class="affix">Issued in</label> <br>
+						<p>
+							<input type="text" class="datepicker" name="issuedTime" th:field="*{issuedTime}">
+						</p>
+						<br> <br> 
+						<a class="btn btn-success" th:href="@{'/certificate/'+${certificateModel.id}+'/delete'}" id="deleteCertificate">
+							Delete
+					    </a>
+						<button class="btn btn-success" id="_cancel_certificate" >Cancel</button>
+						<button type="submit" class="btn btn-primary" >Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+
+	<script>
+		$('#certificateForm').submit(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			var title = $(this).find('input[name="title"]').val();
+			var issuedTime = $(this).find('input[name="issuedTime"]').val();
+			$.ajax({
+				type : 'POST',
+				url : '[[@{/certificate}]]',
+				data : {
+					'title' : title,
+					'issuedTime' : issuedTime,
+				},
+				dataType : 'html',
+				success : function(data, textStatus, xhr) {
+					alert('Them moi thanh cong');
+					$('#certificate_show').html(data);
+				}
+			});
+		});
+
+		$('#deleteCertificate').click(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			$.ajax({
+				type : 'DELETE',
+				url : $(this).attr('href'),
+				dataType : 'html',
+				success : function(data, textStatus, xhr) {
+					alert('Xoa thanh cong');
+					$('#certificate_show').html(data);
+				}
+			});
+		});
+		
+		$(document).ready(function() {
+			  $('.datepicker').datepicker({
+			  changeYear: true
+			});
+		});
+		
+		$('#_cancel_certificate').click(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			$('#certificateForm').hide();
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<th:block th:fragment="copy (basicinfo)">
+		<li>
+			<div th:id="'basicinfo_old' +${userModel.id}">
+				<p th:text="${userModel.gender}"></p>
+				<p th:text="${userModel.relationshipStatus}"></p>
+				<p th:text="${userModel.birthday}"></p>
+			</div>
+			<div th:id="'basicinfo_new-' +${userModel.id}"></div>
+		
+		</li>
+	</th:block>
+</body>
