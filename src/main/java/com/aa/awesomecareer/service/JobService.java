@@ -9,7 +9,8 @@ public interface JobService {
       
 	JobModel showJobDetail(Integer id);
 	List<JobModel> findAllJob();
-	void saveJobModel(JobModel jobModel, String url);
-	JobModel saveCv(Integer jobId, String fileurl);
+	void saveJobModel(JobModel jobModel, String ImageUrl);
+	List<JobModel> findJobByUserId(Integer userId);
+	Long findJobPostByUserId(Integer userId);
 	List<JobModel> findAllJobSearch(String keyword);
 }

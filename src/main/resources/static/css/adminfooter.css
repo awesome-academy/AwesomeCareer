@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+footer {
+	padding: 4%;
+	background-color: #F0F8FF;
+	list-style-type:none;
+	line-height: 40px;
+}
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

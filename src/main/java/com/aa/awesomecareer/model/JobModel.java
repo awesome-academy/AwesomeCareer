@@ -27,26 +27,31 @@ public class JobModel extends BaseModel {
 	private Date deadLine;
 	@JsonIgnore
 	private MultipartFile image;
-	@JsonIgnore
-	private MultipartFile file;
-	private String fileurl;
-	private String url;
+	private String imageUrl;
 	private String shortDescription;
-	private List<JobTypeModel> jobTypes;
+	private Integer userId;
+	private UserModel userModel;
+	private List<JobType> jobTypes;
 	private Integer fieldId;
-	private Set<TypeModel> types = new HashSet<TypeModel>();
-	private FieldModel field;
-	private Integer[] typeIds;
+	private Long qtyJobByUserId;
+	private Long qtyApplycantByJobId;
+	private boolean existApplication;
+	private String companyEmail;
+    private Set<Type> types = new HashSet<>();
+	private Field field;
+	
+	private Integer[] typeIds ;
 	private List<TypeModel> typeModels = new ArrayList<>();
-
+	
 	public JobModel() {
-
+		super();
 	}
 
 	public JobModel(Integer id, String jobTitle, String companyWebsite, String companyName, String address,
 			String fieldName, String position, String introduction, String description, String requirement,
-			String reason, Date deadLine, MultipartFile image, List<JobTypeModel> jobTypes, Integer fieldId,
-			Set<TypeModel> types, FieldModel field, Integer[] typeIds, List<TypeModel> typeModels) {
+			String reason, Date deadLine, MultipartFile image, String imageUrl, String shortDescription, Integer userId,
+			UserModel userModel, List<JobType> jobTypes, Integer fieldId, Set<Type> types, Field field,
+			Integer[] typeIds, List<TypeModel> typeModels) {
 		super();
 		this.id = id;
 		this.jobTitle = jobTitle;
@@ -61,6 +66,10 @@ public class JobModel extends BaseModel {
 		this.reason = reason;
 		this.deadLine = deadLine;
 		this.image = image;
+		this.imageUrl = imageUrl;
+		this.shortDescription = shortDescription;
+		this.userId = userId;
+		this.userModel = userModel;
 		this.jobTypes = jobTypes;
 		this.fieldId = fieldId;
 		this.types = types;
@@ -173,6 +182,42 @@ public class JobModel extends BaseModel {
 		this.deadLine = deadLine;
 	}
 
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
+	}
+
 	public List<JobTypeModel> getJobTypes() {
 		return jobTypes;
 	}
@@ -222,38 +267,43 @@ public class JobModel extends BaseModel {
 		this.typeModels = typeModels;
 	}
 
+
+	public Long getQtyJobByUserId() {
+		return qtyJobByUserId;
+
 	@JsonIgnore
 	public MultipartFile getImage() {
 		return image;
+
 	}
 
-	public void setImage(MultipartFile image) {
-		this.image = image;
+	public void setQtyJobByUserId(Long qtyJobByUserId) {
+		this.qtyJobByUserId = qtyJobByUserId;
 	}
 
-	public String getUrl() {
-		return url;
+	public Long getQtyApplycantByJobId() {
+		return qtyApplycantByJobId;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setQtyApplycantByJobId(Long qtyApplycantByJobId) {
+		this.qtyApplycantByJobId = qtyApplycantByJobId;
 	}
 
-	@JsonIgnore
-	public MultipartFile getFile() {
-		return file;
+
+	public boolean isExistApplication() {
+		return existApplication;
+
+
+	public void setExistApplication(boolean existApplication) {
+		this.existApplication = existApplication;
 	}
 
-	public void setFile(MultipartFile file) {
-		this.file = file;
+	public String getCompanyEmail() {
+		return companyEmail;
 	}
 
-	public String getFileurl() {
-		return fileurl;
-	}
-
-	public void setFileurl(String fileurl) {
-		this.fileurl = fileurl;
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 
 }

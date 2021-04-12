@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{adminlayout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+  <div class="row">
+    <div class="col-sm-2 col-lg-2">
+        <div class="nav flex-column nav-pills">
+          <h5><a class="nav-link" th:href="@{/admin/1}">Home</a></h5>
+          <h5><a class="nav-link" th:href="@{/jobpost/1}" id="job_post">Job Posts <span th:text="${jobModel.qtyJobByUserId}"></span></a>
+          </h5>
+          <h5><a class="nav-link" th:href="@{/jobs/applicant}" id="job_applicant">Applicants</a></h5>
+          <h5><a class="nav-link" >Settings</a></h5>
+       </div>
+    </div>
+    <div class="col-sm-8 col-lg-8" id="bodyshow">
+      <h1>Overview</h1>
+ 
+      <h6><a th:href="@{/jobs}" id="createjob">Create a Job Post</a></h6>
+    </div>
+    <div class="col-sm-2 col-lg-2" id="body_left">
+      <h3>What's new</h3>
+    </div>
+  </div>
+</div>
+ <script>
+   $('#job_post').click (function(event){
+	 event.preventDefault();
+	 event.stopPropagation();
+	 
+	 $.ajax({
+		 type: 'GET',
+		 url : $(this).attr('href'),
+		 success : function(data, textStatus, xhr){
+			 $('#bodyshow').html(data)
+		 }
+		 
+	 }); 
+   });
+ </script>
+ <script>
+ $('#job_applicant').click(function(event){
+	 event.preventDefault();
+	 event.stopPropagation();
+	 
+	 $.ajax({
+		 type :'GET',
+		 url: $(this).attr('href'),
+		 success : function(data, textStatus, xhr){
+			 $('#bodyshow').html(data);
+		 }
+		 
+		 
+		 
+	 });
+ });
+ </script>
+      <script>
+    $('#applicant-[[${jobModel.id}]]').click(function(event){
+    	alert("vao su kien applicant chua");
+    	 event.preventDefault();
+    	 event.stopPropagation();
+    	 $.ajax({
+    		 type:'GET',
+    		 url : $(this).attr('href'),
+    		 success : function(data, textStatus, xhr){
+    			 $('#exampleModal').html(data)
+    		 }
+    	 });
+    });  
+    </script>  
+</body>
+</html>

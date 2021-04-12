@@ -1,0 +1,17 @@
+
+<table class="table">
+    <thead>
+        <tr>
+           <th>Applicant</th>
+           <th>Job</th> 
+           <th>Status</th>
+        </tr>
+     </thead>
+     <tbody>  
+        <tr th:each="applicationModel : ${applicationModels}">
+          <td><a th:utext="${applicationModel.applicantName}" th:href="@{'/user/'+${applicationModel.userId}}">Applicant</a></td>
+          <td ><a th:utext="${applicationModel.jobName}" th:href="@{'/jobs/'+${applicationModel.jobId}}">Job</a></td>
+          <td th:utext="${applicationModel.status}">Status</td>
+        </tr>
+      </tbody>      
+    </table>

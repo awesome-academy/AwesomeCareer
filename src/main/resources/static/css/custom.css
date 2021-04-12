@@ -347,3 +347,15 @@ label{
 .checkboxes label span {
   vertical-align: middle;
 }
+
+#jobhead{
+	background-color: #F0F8FF;
+	text-align: center;
+	color : rgba(0, 0, 0, 0.56);
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.listjob{
+	background-color: #F8F8FF;
+}

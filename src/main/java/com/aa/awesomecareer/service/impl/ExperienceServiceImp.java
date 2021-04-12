@@ -39,12 +39,16 @@ public class ExperienceServiceImp implements ExperienceService {
 	@Override
 	public ExperienceModel findById(Integer id) {
 		logger.info("Finding experience from database by id of experience");
+		try {
 		Optional<Experience> experience = experienceRepo.findById(id);
 		ExperienceModel experienceModel = new ExperienceModel();
 		BeanUtils.copyProperties(experience.get(), experienceModel);
 		return experienceModel;
+	}catch(Exception e) {
+		logger.error("There is no experience in database find by id", e);
+		return null;
 	}
-
+	}
 	@Override
 	public void delete(Integer id) {
 		logger.info("delete experience from database by id of experience");

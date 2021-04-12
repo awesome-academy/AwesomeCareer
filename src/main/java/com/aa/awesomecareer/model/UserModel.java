@@ -28,9 +28,8 @@ public class UserModel extends BaseModel {
 	private String company;
 	private String occupationInterest;
 	private String country;
-	
+	private String cvUrl;
 	private Date birthday;
-	
 	public String userName;
 	private String seftIntroduction;
 	private String ambition;
@@ -82,9 +81,7 @@ public class UserModel extends BaseModel {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	
-	
+
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -109,16 +106,12 @@ public class UserModel extends BaseModel {
 	public void setImAParent(boolean imAParent) {
 		this.imAParent = imAParent;
 	}
-
-
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-
 
 	public String getUserName() {
 		return userName;
@@ -126,9 +119,6 @@ public class UserModel extends BaseModel {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-
-
 	private List<ApplicationModel> applicationModels;
 	private List<BookmarkModel> bookmarkModels;
 	private List<FavoriteModel> favoriteModels;
@@ -157,6 +147,12 @@ public class UserModel extends BaseModel {
 	}
 	public void setAmbition(String ambition) {
 		this.ambition = ambition;
+	}
+	public String getCvUrl() {
+		return cvUrl;
+	}
+	public void setCvUrl(String cvUrl) {
+		this.cvUrl = cvUrl;
 	}
 
 }

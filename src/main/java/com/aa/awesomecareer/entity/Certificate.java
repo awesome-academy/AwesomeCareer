@@ -60,10 +60,6 @@ public class Certificate extends BaseEntity {
 		this.issuedTime = issuedTime;
 	}
 
-	
-	
-	
-
 //	@ManyToOne
 //	@JoinColumn(name = "id")
 //	private User user;

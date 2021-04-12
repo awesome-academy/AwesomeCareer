@@ -7,24 +7,21 @@ xmlns:th="http://www.thymeleaf.org">
 <title>Insert title here</title>
 </head>
 <body>
-
- <ul>
-     <h1>List Of Job</h1>
-     <button><a  th:href="@{/jobs}">Add new Job</a></button>
-     <div th:replace="~{jobs/searchjobs :: copy(${job})}" id="_search"></div>
+     <h4 id="jobhead">Summary Of Jobs Post</h4>
+     <br>
+    <ul >
      <th:block th:each="jobModel : ${jobModels}">
-        <li >
-        <img th:src=@{${jobModel.url}} height='200' width='300'/><br>
-        <span><a th:utext="${jobModel.position}" th:href="@{'/jobs/'+${jobModel.id}}"></a></span>
-        <span>/Company :</span>
-        <span><a th:utext="${jobModel.companyName}"></a></span>
-        <span>/DeadLine :</span>
-        <span><a th:utext="${jobModel.deadLine}"></a></span><br>
-        <span><a th:utext="${jobModel.shortDescription}"></a></span>
-        <hr>
+        <li class="listjob" >
+        <img th:src=@{${jobModel.imageUrl}} height='200' width='300'/><br><br>
+        <h6><a th:utext="${jobModel.position}" th:href="@{'/jobs/'+${jobModel.id}}"></a></h6></span>
+        <h6>Company : <span th:utext="${jobModel.companyName}"></span></h6>
+        
+        <h6>DeadLine : <span th:utext="${jobModel.deadLine}"></span></h6>
+        <span><a th:utext="${jobModel.shortDescription}"></a></span><br>
         </li>
+        <br>
       </th:block>
- </ul>
+    </ul>
 
 </body>
 </html>

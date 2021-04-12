@@ -1,0 +1,11 @@
+
+header {
+	height: 10%;
+	padding : 2%;
+
+}
+
+#textheader {
+	color: rgba(0, 0, 0, 0.56);
+	font-size: 18px;
+}

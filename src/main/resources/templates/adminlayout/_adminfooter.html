@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
+  <head>
+  </head>
+  <body>
+    <footer th:fragment="copy" class="footer">
+
+              <div class="container">
+                 <div class="row">
+                    <div class="col-sm-3">
+                    
+                      <div>
+                        <h6>For employers</h6>
+                        <li>Wantly Admin for employers</li>
+                        <li>Pricing</li>
+                        <li>Post a job</li>
+                        <li>Enterpise Terms of Use</li>
+                      </div>
+                     
+                      <div>
+                        <h6>Mobile apps</h6>
+                        <li>Wantedly Visit (iPhone/iPad)</li>
+                        <li>Wantedly Visit (Android) </li>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                      <div>
+                        <h6>About Wantedly</h6>
+                        <li>How to use</li>
+                        <li>Help</li>
+                        <li>Company</li>
+                        <li>Terms of Use</li>
+                        <li>Privacy</li>
+                        <li>For Medical</li>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                       <h6>Countries</h6>
+                       <select id="cars">
+                         <option value="volvo">Japanese</option>
+                         <option value="saab">Singapore</option>
+                         <option value="vw">Hong Kong</option>
+                       </select>
+                    </div>
+                    <div class="col-sm-5">
+                      <form>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <button type="submit" style="width:100%">Submit</button>
+                      </form>
+                    </div>
+                 </div>
+             </div>
+    </footer>
+  </body>
+</html>
