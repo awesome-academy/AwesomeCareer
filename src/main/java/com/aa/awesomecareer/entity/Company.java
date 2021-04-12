@@ -37,12 +37,5 @@ public class Company {
 	@Column(name = "image", length = 256)
 	private String image;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
-
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
 
 }

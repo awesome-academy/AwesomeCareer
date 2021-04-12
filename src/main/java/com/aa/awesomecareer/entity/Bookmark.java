@@ -26,13 +26,7 @@ public class Bookmark {
 	@Column(name = "jobId")
 	private Integer jobId;
 
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "createdAt")
-	private Date createdAt;
-
-	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "updatedBy")
-	private Date updatedBy;
+	
 
 //	@ManyToOne
 //	@JoinColumn(name = "id")

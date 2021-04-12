@@ -21,16 +21,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Getter;
-//import lombok.NoArgsConstructor;
-//import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
 
-public class User extends BaseEntity {
+public class User extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -90,6 +88,11 @@ public class User extends BaseEntity {
 //	@Column(name = "image", length = 256)
 //	private String image;
 
+	@OneToMany( mappedBy = "user")
+	private List<Job> jobs;
+	
+	@OneToMany( mappedBy = "user")
+	private List<Application> applications;
 	
 	@OneToMany(mappedBy = "user")
     private List<Experience> experiences;
@@ -106,14 +109,6 @@ public class User extends BaseEntity {
     private Set<Skill> skills = new HashSet<>();
 	
 	
-	
-//	@Temporal(value = TemporalType.TIMESTAMP)
-//	@Column(name = "createdAt")
-//	private Date createdAt;
-	
-//	@Temporal(value = TemporalType.TIMESTAMP)
-//	@Column(name = "updatedBy")
-//	private Date updatedBy;
 	
 	public String getFullName() {
 		return fullName;
@@ -163,48 +158,6 @@ public class User extends BaseEntity {
 		this.country = country;
 	}
 
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getRelationshipStatus() {
-		return relationshipStatus;
-	}
-
-	public void setRelationshipStatus(String relationshipStatus) {
-		this.relationshipStatus = relationshipStatus;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
-	
-
 	public List<Experience> getExperiences() {
 		return experiences;
 	}
@@ -219,6 +172,14 @@ public class User extends BaseEntity {
 
 	public void setSkills(Set<Skill> skills) {
 		this.skills = skills;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public List<SkillUser> getSkillUsers() {
@@ -243,6 +204,30 @@ public class User extends BaseEntity {
 
 	public void setAmbition(String ambition) {
 		this.ambition = ambition;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getRelationshipStatus() {
+		return relationshipStatus;
+	}
+
+	public void setRelationshipStatus(String relationshipStatus) {
+		this.relationshipStatus = relationshipStatus;
 	}
 	
 //	@OneToMany(mappedBy = "application")

@@ -7,7 +7,7 @@
 <title th:text="#{user.show.title}">User Info</title>
 </head>
 <body>
-	<form th:action="@{/users}" th:object="${user}" th:method="POST">
+	<form th:action="@{/users}" th:object="${userModel}" th:method="POST">
 		<div class="container">
 			<div class="form-group col-md-4">
 				<input type="fullname" class="form-control" id="inputFullname"

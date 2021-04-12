@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @SuppressWarnings("serial")
 public abstract class BaseModel implements Serializable {
-	@JsonIgnore
 	private Sort sort;
 	private Integer page = 1;
 	private Integer perPage = 3;

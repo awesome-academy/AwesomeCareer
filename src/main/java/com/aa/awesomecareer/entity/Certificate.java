@@ -61,11 +61,4 @@ public class Certificate extends BaseEntity {
 	}
 
 	
-	
-	
-
-//	@ManyToOne
-//	@JoinColumn(name = "id")
-//	private User user;
-
 }

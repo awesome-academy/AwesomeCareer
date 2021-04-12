@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+	</head>
+	
+	<body>
+	<header th:fragment="copy">
+   <div class="header">
+     <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+           <a id="logo" th:href="@{/}"><img src="img/logo.png"></a>
+           </div>
+           <div class="col-sm-4">
+           <h5><a th:href="@{/jobs/all}" id="textheader">User View</a></h5>
+           </div>
+          
+         </div>
+      </div>
+      	</div>
+		</header>
+	</body>
+</html>

@@ -1,10 +1,10 @@
 package com.aa.awesomecareer.service.impl;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.aa.awesomecareer.entity.Certificate;
 import com.aa.awesomecareer.model.CertificateModel;
@@ -20,11 +19,10 @@ import com.aa.awesomecareer.repository.CertificateRepository;
 import com.aa.awesomecareer.repository.CertificateRepositoryCustom;
 import com.aa.awesomecareer.service.CertificateService;
 
-
 @Service
 @Qualifier("certificateService")
 public class CertificateServiceImp implements CertificateService {
-	private static final Logger logger = LoggerFactory.getLogger(CertificateServiceImp.class);
+private static final Logger logger = LoggerFactory.getLogger(CertificateServiceImp.class);
 	
 	@Autowired
 	private CertificateRepository certificateRepository;
@@ -101,5 +99,4 @@ public class CertificateServiceImp implements CertificateService {
 		BeanUtils.copyProperties(certificate1, certificateModel);
 		return certificateModel;
 	}
-	
 }

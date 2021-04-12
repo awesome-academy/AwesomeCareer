@@ -61,37 +61,19 @@ public class UserServiceImp implements UserService {
 		return null;
 	}
 
-	public UserModel findUser(Integer id) {
-		logger.info("Tim kiem user theo id trong co so du lieu");
-		System.out.println("findUser");
+	public UserModel findByEmail(String email) {
+		logger.info("Fetching user by email in the database");
 		try {
-			Optional<User> user = userRepository.findById(id);
-			if (user.isPresent()) {
-				UserModel userModel = new UserModel();
-				BeanUtils.copyProperties(user.get(), userModel);
-				return userModel;
-			}
-			return null;
+			User user = userRepository.findByEmail(email);
+			UserModel userModel = new UserModel();
+			BeanUtils.copyProperties(user, userModel);
+			return userModel;
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("An error occurred while fetching the user details from the database", e);
-			return null;
+			logger.error("An error occurred while fetching user by email from the database", e);
 		}
+		return null;
 	}
 
-	public UserModel saveInfo(UserModel userModel) {
-		logger.info("Save basic info in the database");
-		Optional<User> saveinfo = userRepository.findById(3);
-		User user = saveinfo.get();
-		user.setGender(userModel.getGender());
-		user.setBirthday(userModel.getBirthday());
-		user.setRelationshipStatus(userModel.getRelationshipStatus());
-		User user1 = userRepository.save(user);
-		userModel = new UserModel();
-		BeanUtils.copyProperties(user1, userModel);
-		return userModel;
-	}
-	
 	@Override
 	@Transactional
 	public void addUser(UserModel userModel) {
@@ -182,11 +164,38 @@ public class UserServiceImp implements UserService {
 		BeanUtils.copyProperties(userNew, userModelNew);
 		return userModelNew;
 	}
-
+	
 	@Override
-	public UserModel findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserModel findUser(Integer id) {
+		logger.info("Tim kiem user theo id trong co so du lieu");
+		System.out.println("findUser");
+		try {
+			Optional<User> user = userRepository.findById(id);
+			if (user.isPresent()) {
+				UserModel userModel = new UserModel();
+				BeanUtils.copyProperties(user.get(), userModel);
+				return userModel;
+			}
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("An error occurred while fetching the user details from the database", e);
+			return null;
+		}
+	}
+	
+	@Override
+	public UserModel saveInfo(UserModel userModel) {
+		logger.info("Save basic info in the database");
+		Optional<User> saveinfo = userRepository.findById(3);
+		User user = saveinfo.get();
+		user.setGender(userModel.getGender());
+		user.setBirthday(userModel.getBirthday());
+		user.setRelationshipStatus(userModel.getRelationshipStatus());
+		User user1 = userRepository.save(user);
+		userModel = new UserModel();
+		BeanUtils.copyProperties(user1, userModel);
+		return userModel;
 	}
 
 }
