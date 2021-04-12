@@ -35,6 +35,18 @@ public class CommonUtil {
 		List<String> occupations = Arrays.asList(arr);
 		return occupations;
 	}
+	
+	public static List<String> genderList(){
+		String[] arr = { " ", "Female", "Male", "Other" };
+		List<String> genders = Arrays.asList(arr);
+		return genders;
+	}
+	
+	public static List<String> relationshipList(){
+		String[] arr = { " ", "Married", "Single", "Other" };
+		List<String> ralationship = Arrays.asList(arr);
+		return ralationship;
+	}
 
 
 }

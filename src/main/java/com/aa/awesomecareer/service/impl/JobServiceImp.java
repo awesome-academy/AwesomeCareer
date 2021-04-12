@@ -50,6 +50,7 @@ public class JobServiceImp implements JobService {
 	ApplicationRepository applicationRepository;
 
 	@Override
+
 	public void saveJobModel(JobModel jobModel,String imageUrl) {
 		try {
 		Job job = new Job();
@@ -71,6 +72,7 @@ public class JobServiceImp implements JobService {
 	}
 	@Override
 	public List<JobModel> findAllJob() {
+		logger.error("Find all job from database");
 		try {
 	     List<Job> jobs = jobRepository.findAll();
 	     List<JobModel> jobModels = new ArrayList<>();
@@ -92,6 +94,7 @@ public class JobServiceImp implements JobService {
 
 	@Override
 	public JobModel showJobDetail(Integer id) {
+		logger.error("Find job from database by id");
 		try {
 		Optional<Job> job = jobRepository.findById(id);
 		Optional<User> user = userRepository.findById(job.get().getUserId());
@@ -147,6 +150,23 @@ public class JobServiceImp implements JobService {
 	public Long findJobPostByUserId(Integer userId) {
 		Long quantityJob = jobRepository.findJobPostByUserId(userId);
 		return quantityJob;
+	}
+	@Override
+	public List<JobModel> findAllJobSearch(String keyword) {
+		logger.error("Find all job from database by keyword");
+		try {
+		List<Job> jobs = jobRepository.findJobByKeyword(keyword);
+		List<JobModel> jobModels = new ArrayList<>();
+		for(Job job : jobs) {
+			JobModel jobModel = new JobModel();
+			BeanUtils.copyProperties(job,  jobModel);
+			jobModels.add(jobModel);
+		}
 		
+		return jobModels;
+	}catch (Exception e) {
+		 logger.error("An error occurred while find all jobs from database by keyword",e);
+		 return null;
+	}
 	}
 }

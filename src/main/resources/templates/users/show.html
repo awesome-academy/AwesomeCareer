@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html
-	th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}">
 <head>
-<title th:text="#{user.show.title}">User Info</title>
+	<title th:text="#{user.show.title}">User Info</title>
 </head>
 <body>
-	<div class="container" id="content_body">
+	<div id="content_body">
 		<!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-8">
@@ -74,8 +72,31 @@
 					</a>
 				</div>
 			</div>
+			
+			<div class="container content_header">
+				<h5 style="display: inline-block">Certificate</h5>
+				<a class="content_decor" th:href="@{/certificate}" id="certificate">
+					<i class="fas fa-plus-circle"></i>Add
+				</a>
+				<ul id="certificate_show">
+					 <li th:replace="users/certificate/_index :: copy"></li>
+				</ul>
+				<div id="_certificate_form_wrapper"></div>
+			</div>
+						
+			<div class="container content_header">
+				<h5 style="display: inline-block">Basic Info</h5>
+				<a class="content_decor" th:href="@{/basic/edit}" id="basic_info">
+					<i class="fas fa-plus-circle"></i>Add
+				</a>
+				<ul id="basic_info_show">
+					<li th:replace="users/basicinfo/_index :: copy"></li>
+				</ul>
+				<div id="_basic_info_form_wrapper"></div>
+			</div>
 		</div>
-</div>
+		</div>
+
 		<script>
 			$('#experience').click(function(event) {
 				event.preventDefault();
@@ -86,10 +107,38 @@
 					success : function(data, textStatus, xhr) {
 						$('#_experience_form_wrapper').html(data);
 					}
+				});
+			});
+		</script>
+		
+		<script>
+			$('#basic_info').click(function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$.ajax({
+					type : 'GET',
+					url : $(this).attr('href'),
+					success : function(data, textStatus, xhr) {
+						$('#_basic_info_form_wrapper').html(data);
+					}
 
 				});
 			});
+		</script>
+		
+		<script>
+			$('#certificate').click(function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$.ajax({
+					type : 'GET',
+					url : $(this).attr('href'),
+					success : function(data, textStatus, xhr) {
+						$('#_certificate_form_wrapper').html(data);
+					}
 
+				});
+			});
 
 		   $('#education').click(function(event){
 			   event.preventDefault();
@@ -127,7 +176,6 @@
 				   
 			   });
 		   });
-		   
-		</script>
+	</script>
 </body>
 </html>

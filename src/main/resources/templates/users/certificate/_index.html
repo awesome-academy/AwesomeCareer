@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+	<th:block th:fragment="copy" th:each="certificate : ${certificateModels}">
+		<li th:replace="~{users/certificate/_detail :: copy(${certificate})}"></li>
+	</th:block>
+</body>

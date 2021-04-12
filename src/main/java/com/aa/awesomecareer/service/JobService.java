@@ -12,4 +12,5 @@ public interface JobService {
 	void saveJobModel(JobModel jobModel, String ImageUrl);
 	List<JobModel> findJobByUserId(Integer userId);
 	Long findJobPostByUserId(Integer userId);
+	List<JobModel> findAllJobSearch(String keyword);
 }

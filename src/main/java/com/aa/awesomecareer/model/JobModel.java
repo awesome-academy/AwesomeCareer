@@ -6,34 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aa.awesomecareer.entity.Field;
-import com.aa.awesomecareer.entity.JobType;
-import com.aa.awesomecareer.entity.Type;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+@SuppressWarnings("serial")
+public class JobModel extends BaseModel {
 
-
-public class JobModel extends BaseModel{
-	
 	private Integer id;
 	private String jobTitle;
 	private String companyWebsite;
@@ -46,6 +25,7 @@ public class JobModel extends BaseModel{
 	private String requirement;
 	private String reason;
 	private Date deadLine;
+	@JsonIgnore
 	private MultipartFile image;
 	private String imageUrl;
 	private String shortDescription;
@@ -61,7 +41,6 @@ public class JobModel extends BaseModel{
 	private Field field;
 	
 	private Integer[] typeIds ;
-	
 	private List<TypeModel> typeModels = new ArrayList<>();
 	
 	public JobModel() {
@@ -171,6 +150,14 @@ public class JobModel extends BaseModel{
 		this.description = description;
 	}
 
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
 	public String getRequirement() {
 		return requirement;
 	}
@@ -193,10 +180,6 @@ public class JobModel extends BaseModel{
 
 	public void setDeadLine(Date deadLine) {
 		this.deadLine = deadLine;
-	}
-
-	public MultipartFile getImage() {
-		return image;
 	}
 
 	public void setImage(MultipartFile image) {
@@ -235,11 +218,11 @@ public class JobModel extends BaseModel{
 		this.userModel = userModel;
 	}
 
-	public List<JobType> getJobTypes() {
+	public List<JobTypeModel> getJobTypes() {
 		return jobTypes;
 	}
 
-	public void setJobTypes(List<JobType> jobTypes) {
+	public void setJobTypes(List<JobTypeModel> jobTypes) {
 		this.jobTypes = jobTypes;
 	}
 
@@ -251,19 +234,20 @@ public class JobModel extends BaseModel{
 		this.fieldId = fieldId;
 	}
 
-	public Set<Type> getTypes() {
+	public Set<TypeModel> getTypes() {
 		return types;
 	}
 
-	public void setTypes(Set<Type> types) {
+	public void setTypes(Set<TypeModel> types) {
 		this.types = types;
 	}
 
-	public Field getField() {
+	@JsonIgnore
+	public FieldModel getField() {
 		return field;
 	}
 
-	public void setField(Field field) {
+	public void setField(FieldModel field) {
 		this.field = field;
 	}
 
@@ -283,8 +267,14 @@ public class JobModel extends BaseModel{
 		this.typeModels = typeModels;
 	}
 
+
 	public Long getQtyJobByUserId() {
 		return qtyJobByUserId;
+
+	@JsonIgnore
+	public MultipartFile getImage() {
+		return image;
+
 	}
 
 	public void setQtyJobByUserId(Long qtyJobByUserId) {
@@ -299,9 +289,10 @@ public class JobModel extends BaseModel{
 		this.qtyApplycantByJobId = qtyApplycantByJobId;
 	}
 
+
 	public boolean isExistApplication() {
 		return existApplication;
-	}
+
 
 	public void setExistApplication(boolean existApplication) {
 		this.existApplication = existApplication;
