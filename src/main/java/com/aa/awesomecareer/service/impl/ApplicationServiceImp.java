@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aa.awesomecareer.entity.Application;
+import com.aa.awesomecareer.entity.Job;
 import com.aa.awesomecareer.entity.User;
 import com.aa.awesomecareer.model.ApplicationModel;
 import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.repository.ApplicationRepository;
+import com.aa.awesomecareer.repository.JobRepository;
 import com.aa.awesomecareer.repository.UserRepository;
 import com.aa.awesomecareer.service.ApplicationService;
+import com.aa.awesomecareer.util.Constants.Status;
 
 @Service
 public class ApplicationServiceImp implements ApplicationService {
@@ -26,6 +29,9 @@ public class ApplicationServiceImp implements ApplicationService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	JobRepository jobRepository;
 
 	@Override
 	public ApplicationModel saveApplicationModel(ApplicationModel applicationModel) {
@@ -68,4 +74,34 @@ public class ApplicationServiceImp implements ApplicationService {
 			return false;
 		}
 	}
+	@Override
+	public List<ApplicationModel> findAllApplicant() {
+		try {
+		List<Application> applications = applicationRepository.findAll();
+	    List<ApplicationModel> applicationModels = new ArrayList<>();
+		for (Application application : applications) {
+			ApplicationModel applicationModel = new ApplicationModel();
+			System.out.println("xem chi so application" +application.getId());
+			BeanUtils.copyProperties(application, applicationModel);
+			Optional<User> user = userRepository.findById(application.getUserId());
+			applicationModel.setApplicantName(user.get().getFullName());
+			Optional<Job> job = jobRepository.findById(application.getJobId());
+			applicationModel.setJobName(job.get().getJobTitle());
+			applicationModel.setStatus(Status.getStatusByValue(application.getStatus()));
+		    applicationModels.add(applicationModel);
+		}
+		return applicationModels;
+	}catch(Exception e) {
+		logger.error("There is no applicant in database", e);
+		return null;
+	}
+	}
+	
+	@Override
+	public Long findApplicantByJobId(Integer jobId) {
+		Long qtyApplicantByJob = applicationRepository.findApplicantByJobId(jobId);
+		return qtyApplicantByJob;
+	}
+	
+	
 }

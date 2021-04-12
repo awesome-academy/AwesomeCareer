@@ -29,6 +29,10 @@ public class Application extends BaseEntity {
 
 	@Column(name="fileUrl")
 	private String fileUrl;
+	
+	@Column(name="status")
+	private Integer status;
+
 
 	@ManyToOne
 	@JoinColumn(name = "userId",insertable = false, updatable = false)
@@ -99,5 +103,12 @@ public class Application extends BaseEntity {
 	public void setJob(Job job) {
 		this.job = job;
 	}
-	
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

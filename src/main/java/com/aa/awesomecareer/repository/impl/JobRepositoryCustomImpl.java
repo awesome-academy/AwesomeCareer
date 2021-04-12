@@ -21,5 +21,14 @@ public class JobRepositoryCustomImpl implements JobRepositoryCustom {
 		query.setParameter("userId", userId);
 		return query.getResultList();
 	}
+	
+	@Override
+	public Long findJobPostByUserId( Integer userId) {
+		
+		TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(*) FROM Job job WHERE job.userId = :userId", Long.class);
+		query.setParameter("userId", userId);
+		return query.getSingleResult();
+		
+	}
 
 }

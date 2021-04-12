@@ -16,6 +16,13 @@ public class ApplicationModel {
 	private MultipartFile file;
 	private String fileUrl;
 	
+	private String jobName;
+	private String applicantName;
+	private Long qtyApplicant;
+	
+	private String status;
+	
+	
 	public ApplicationModel() {
 		super();
 	}
@@ -57,5 +64,29 @@ public class ApplicationModel {
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
 	}
-
+	public String getJobName() {
+		return jobName;
+	}
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+	public String getApplicantName() {
+		return applicantName;
+	}
+	public void setApplicantName(String applicantName) {
+		this.applicantName = applicantName;
+	}
+	public Long getQtyApplicant() {
+		return qtyApplicant;
+	}
+	public void setQtyApplicant(Long qtyApplicant) {
+		this.qtyApplicant = qtyApplicant;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 }

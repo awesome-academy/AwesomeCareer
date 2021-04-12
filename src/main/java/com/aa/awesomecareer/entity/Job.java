@@ -61,6 +61,9 @@ public class Job extends BaseEntity {
 	
 	@Column(name = "imageUrl", length = 256)
 	private String imageUrl;
+	
+	@Column(name = "companyEmail", length = 256)
+	private String companyEmail;
 
 	@Column(name = "userId",insertable = false, updatable = false)
 	private Integer userId;
@@ -283,6 +286,14 @@ public class Job extends BaseEntity {
 
 	public void setField(Field field) {
 		this.field = field;
+	}
+
+	public String getCompanyEmail() {
+		return companyEmail;
+	}
+
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 	
 }

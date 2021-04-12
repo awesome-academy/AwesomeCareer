@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aa.awesomecareer.model.JobModel;
 import com.aa.awesomecareer.model.TypeModel;
+import com.aa.awesomecareer.service.ApplicationService;
 import com.aa.awesomecareer.service.FieldService;
 import com.aa.awesomecareer.service.JobService;
 import com.aa.awesomecareer.service.TypeService;
@@ -40,6 +41,9 @@ public class JobsController {
 	
 	@Autowired
 	JobService jobService;
+	
+	@Autowired
+	ApplicationService applicationService;
 	
 	@Autowired
     private CloundinaryService cloudinaryService;
@@ -91,15 +95,12 @@ public class JobsController {
 		model.addAttribute("jobModel",jobModel);
 		List<TypeModel> typeModels = jobModel.getTypeModels();
 		model.addAttribute("typeModels",typeModels);
+		if(applicationService.existApplication(2,jobModel.getId() )) {
+			jobModel.setExistApplication(true);
+		}else {
+			jobModel.setExistApplication(false);
+		}
 		return "jobs/detail";	
-	}
-	
-	@GetMapping(value="/uploadform/{id}")
-	public String showCvForm(@PathVariable("id") Integer id,Model model) {
-		JobModel jobModel = new JobModel();
-		jobModel.setId(id);
-		model.addAttribute("jobModel", jobModel);
-		return "jobs/cvform";
 	}
 	
 }

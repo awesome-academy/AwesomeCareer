@@ -26,20 +26,33 @@ public class AdminController {
 	@Autowired
 	ApplicationService applicationService;
 	
-	@GetMapping( value="/admin/{id}")
+	@GetMapping( value="/jobpost/{id}")
 	public String showAdmin(@PathVariable("id") Integer id,Model model) {
-		List<JobModel> jobModels = jobService.findJobByUserId(id);
+		System.out.println("Vao controller chua");
+		List<JobModel> jobModels = jobService.findJobByUserId(1);
 		model.addAttribute("jobModels", jobModels);
 		return "admin/show";
 	}
 	
-	@GetMapping(value="/admin/{id}/applicant")
+	@GetMapping (value="/admin/1")
+	public String showpage(Model model) {
+		Long qty = jobService.findJobPostByUserId(1);
+		System.out.println(qty);
+		JobModel jobModel = new JobModel();
+		jobModel.setQtyJobByUserId(qty);
+		model.addAttribute("jobModel", jobModel);
+		return "admin/test";
+	}
+	
+	@GetMapping(value="/jobs/{id}/applicant")
 	public String showApplicantOfJob(@PathVariable("id") Integer jobId, Model model) {
-		
+		JobModel jobModel = new JobModel();
+		jobModel.setId(jobId);
+		model.addAttribute("jobModel", jobModel);
 		List<UserModel> userModels = applicationService.findByJobId(jobId);
 		model.addAttribute("userModels", userModels);
 		
-		return "admin/_applicant";
+		return "admin/_applicantmodal";
 	}
 
 }

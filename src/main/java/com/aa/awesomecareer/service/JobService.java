@@ -11,4 +11,5 @@ public interface JobService {
 	List<JobModel> findAllJob();
 	void saveJobModel(JobModel jobModel, String ImageUrl);
 	List<JobModel> findJobByUserId(Integer userId);
+	Long findJobPostByUserId(Integer userId);
 }

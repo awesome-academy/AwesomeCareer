@@ -1,0 +1,44 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+#body_left{
+	
+	margin-bottom : 10px;
+	background-color: #F5F5F5;
+}
+
+.nav {
+	height: 500px;
+}
+
+.nav a{
+	color: rgba(0, 0, 0, 0.56);
+	font-size :18px;
+}
+
+html body {
+	background-color: #F8F8FF;
+}
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#createjob{
+	background-color:#6495ED;
+	color : white;
+	border-radius: 5px;
+	padding: 8px;
+}
+
+a{
+	color: black;
+}

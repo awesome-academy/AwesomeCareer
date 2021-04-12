@@ -1,5 +1,7 @@
 package com.aa.awesomecareer.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aa.awesomecareer.model.ApplicationModel;
 import com.aa.awesomecareer.model.JobModel;
+import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.service.ApplicationService;
 import com.aa.awesomecareer.service.impl.CloundinaryService;
 import com.cloudinary.Cloudinary;
@@ -27,18 +30,11 @@ public class ApplicationController {
 	@Autowired
 	CloundinaryService cloundinaryService;
 	
-	@GetMapping(value="/jobs/{id}/apply")
-	public String showCvForm(@PathVariable("id") Integer id,Model model) {
-		JobModel jobModel = new JobModel();
-		jobModel.setId(id);
-		model.addAttribute("jobModel", jobModel);
-		return "jobs/cvform";
-	}
-	
 	@PostMapping(value="/jobs/{id}/savecv")
 	public String saveCv (@PathVariable ("id") Integer jobId,@RequestParam("csv") MultipartFile file,Model model,
 			HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		if(!applicationService.existApplication(3, jobId)) {
+		System.out.println("Xem da vao controller chua");
+		if(!applicationService.existApplication(2, jobId)) {
 		   if(file.isEmpty()) {
 			   redirectAttributes.addFlashAttribute("message", "Please select a file to upload");  
 			   return "redirect:uploadStatus";		   
@@ -47,14 +43,22 @@ public class ApplicationController {
 		   ApplicationModel applicationModel = new ApplicationModel();
 		  Cloudinary cloundinary = new Cloudinary();
 		  String fileUrl = cloundinaryService.uploadFile(file);
-		  applicationModel.setUserId(4);
+		  applicationModel.setUserId(2);
 		  applicationModel.setFileUrl(fileUrl);
 		  applicationModel.setJobId(jobId);
 		  ApplicationModel applicationModelSave = applicationService.saveApplicationModel(applicationModel);
 		  model.addAttribute("applicationModel",applicationModelSave);
 		 
-		  return "jobs/linkdownload";
+		  return "jobs/success";
 	}
 		return null;
+	}
+	
+	@GetMapping (value="/jobs/applicant")
+	public String listApplicant (Model model){
+		List<ApplicationModel> applicationModels = applicationService.findAllApplicant();
+	    model.addAttribute("applicationModels", applicationModels);
+	
+		return "admin/_applicant";
 	}
 }

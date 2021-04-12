@@ -8,4 +8,6 @@ public interface ApplicationRepositoryCustom {
       List<Application> findApplicationByJobId (Integer id);
 
 	boolean findApplication(Integer userId, Integer jobId);
+
+	Long findApplicantByJobId(Integer jobId);
 }

@@ -35,4 +35,13 @@ public class ApplicationRepositoryCustomImpl implements ApplicationRepositoryCus
 		return query.getSingleResult()>0;
 	}
 	
+	@Override
+	public Long findApplicantByJobId(Integer jobId) {
+		TypedQuery<Long> query = entityManager
+				.createQuery("SELECT COUNT(*) FROM Application application WHERE application.jobId = :jobId" , Long.class);
+		query.setParameter("jobId", jobId);
+		return query.getSingleResult();
+
+	}
+	
 }

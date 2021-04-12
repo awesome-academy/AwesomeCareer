@@ -53,6 +53,10 @@ public class JobModel extends BaseModel{
 	private UserModel userModel;
 	private List<JobType> jobTypes;
 	private Integer fieldId;
+	private Long qtyJobByUserId;
+	private Long qtyApplycantByJobId;
+	private boolean existApplication;
+	private String companyEmail;
     private Set<Type> types = new HashSet<>();
 	private Field field;
 	
@@ -277,6 +281,38 @@ public class JobModel extends BaseModel{
 
 	public void setTypeModels(List<TypeModel> typeModels) {
 		this.typeModels = typeModels;
+	}
+
+	public Long getQtyJobByUserId() {
+		return qtyJobByUserId;
+	}
+
+	public void setQtyJobByUserId(Long qtyJobByUserId) {
+		this.qtyJobByUserId = qtyJobByUserId;
+	}
+
+	public Long getQtyApplycantByJobId() {
+		return qtyApplycantByJobId;
+	}
+
+	public void setQtyApplycantByJobId(Long qtyApplycantByJobId) {
+		this.qtyApplycantByJobId = qtyApplycantByJobId;
+	}
+
+	public boolean isExistApplication() {
+		return existApplication;
+	}
+
+	public void setExistApplication(boolean existApplication) {
+		this.existApplication = existApplication;
+	}
+
+	public String getCompanyEmail() {
+		return companyEmail;
+	}
+
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 
 }

@@ -22,6 +22,7 @@ import com.aa.awesomecareer.entity.User;
 import com.aa.awesomecareer.model.JobModel;
 import com.aa.awesomecareer.model.TypeModel;
 import com.aa.awesomecareer.model.UserModel;
+import com.aa.awesomecareer.repository.ApplicationRepository;
 import com.aa.awesomecareer.repository.JobRepository;
 import com.aa.awesomecareer.repository.JobTypeRepository;
 import com.aa.awesomecareer.repository.TypeRepository;
@@ -44,6 +45,9 @@ public class JobServiceImp implements JobService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	ApplicationRepository applicationRepository;
 
 	@Override
 	public void saveJobModel(JobModel jobModel,String imageUrl) {
@@ -118,7 +122,7 @@ public class JobServiceImp implements JobService {
 	}
 	@Override
 	public List<JobModel> findJobByUserId(Integer userId) {
-		logger.info("An error occurred while fetching the job in database");
+		logger.info("Find all job from database by UserId");
 	
 		try {
 		List<Job> jobs = jobRepository.findByUserId(userId);
@@ -126,6 +130,10 @@ public class JobServiceImp implements JobService {
 		for(Job job : jobs) {
 			JobModel jobModel = new JobModel();
 			BeanUtils.copyProperties(job,jobModel);
+			System.out.println("ten job" + jobModel.getJobTitle());
+			Long qtyApplycantByJobId = applicationRepository.findApplicantByJobId(job.getId());
+	    	 System.out.println("xem ket qua qty cua applycant nao" +qtyApplycantByJobId);
+	    	 jobModel.setQtyApplycantByJobId(qtyApplycantByJobId);
 			jobModels.add(jobModel);
 		}
 		return jobModels;
@@ -133,5 +141,12 @@ public class JobServiceImp implements JobService {
 		logger.error("An error occurred while fetching the job from database",e);
 		return null;
 	}
+	}
+	
+	@Override
+	public Long findJobPostByUserId(Integer userId) {
+		Long quantityJob = jobRepository.findJobPostByUserId(userId);
+		return quantityJob;
+		
 	}
 }
