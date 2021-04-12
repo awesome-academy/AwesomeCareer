@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html 
+  xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+  <!-- <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}"> -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}">
+  <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/fontawesome.min.css}"></link>
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+  <link th:href="@{/css/admincustom.css}" rel="stylesheet" type="text/css" media="all" />
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/adminfooter.css}">
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/adminheader.css}">
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+</head>
+<body>
+
+<h3 style="text-align:center">List of Job Post</h3>
+ <table class="table">
+        <thead>
+        <tr>
+          <th>Job Post</th>
+          <th>Deadline</th>
+          <th>Application</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="jobModel : ${jobModels}">
+          <td><a th:utext="${jobModel.jobTitle}" th:href="@{'/jobs/'+${jobModel.id}}">Job Post</a></td>
+          <td th:utext="${jobModel.deadLine}">Deadline</td>
+          <td >
+          <div th:replace ="~{admin/_applicantjob}"></div>    
+          </td>
+        </tr>
+        </tbody> 
+   
+    </table>
+   </body>
+
+</html>
+ 

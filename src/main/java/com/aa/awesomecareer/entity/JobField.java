@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "jobfield")
-public class JobField extends BaseEntity {
+public class JobField {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -25,7 +25,24 @@ public class JobField extends BaseEntity {
 	private Integer jobId;
 	@Column(name = "fieldId")
 	private Integer fieldId;
-
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getJobId() {
+		return jobId;
+	}
+	public void setJobId(Integer jobId) {
+		this.jobId = jobId;
+	}
+	public Integer getFieldId() {
+		return fieldId;
+	}
+	public void setFieldId(Integer fieldId) {
+		this.fieldId = fieldId;
+	}
 	
 
 //	@ManyToOne

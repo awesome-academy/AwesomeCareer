@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css} " />
+<!-- <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}"> -->
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}">
+<link rel="stylesheet"
+	th:href="@{/webjars/font-awesome/css/fontawesome.min.css}"></link>
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<link th:href="@{/css/admincustom.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/adminfooter.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/adminheader.css}">
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+</head>
+<body>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<ul style="list-style-type:none">
+						<th:block th:each="userModel : ${userModels}">
+							<li><a th:utext="${userModel.fullName}" th:href="@{'/user/'+${userModel.id}}"></a></li>
+						</th:block>
+					</ul>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	
+</body>
+</html>

@@ -6,13 +6,34 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.aa.awesomecareer.entity.Field;
+import com.aa.awesomecareer.entity.JobType;
+import com.aa.awesomecareer.entity.Type;
 
-@SuppressWarnings("serial")
-public class JobModel extends BaseModel {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+public class JobModel extends BaseModel{
+	
 	private Integer id;
 	private String jobTitle;
 	private String companyWebsite;
@@ -25,28 +46,33 @@ public class JobModel extends BaseModel {
 	private String requirement;
 	private String reason;
 	private Date deadLine;
-	@JsonIgnore
 	private MultipartFile image;
-	@JsonIgnore
-	private MultipartFile file;
-	private String fileurl;
-	private String url;
+	private String imageUrl;
 	private String shortDescription;
-	private List<JobTypeModel> jobTypes;
+	private Integer userId;
+	private UserModel userModel;
+	private List<JobType> jobTypes;
 	private Integer fieldId;
-	private Set<TypeModel> types = new HashSet<TypeModel>();
-	private FieldModel field;
-	private Integer[] typeIds;
+	private Long qtyJobByUserId;
+	private Long qtyApplycantByJobId;
+	private boolean existApplication;
+	private String companyEmail;
+    private Set<Type> types = new HashSet<>();
+	private Field field;
+	
+	private Integer[] typeIds ;
+	
 	private List<TypeModel> typeModels = new ArrayList<>();
-
+	
 	public JobModel() {
-
+		super();
 	}
 
 	public JobModel(Integer id, String jobTitle, String companyWebsite, String companyName, String address,
 			String fieldName, String position, String introduction, String description, String requirement,
-			String reason, Date deadLine, MultipartFile image, List<JobTypeModel> jobTypes, Integer fieldId,
-			Set<TypeModel> types, FieldModel field, Integer[] typeIds, List<TypeModel> typeModels) {
+			String reason, Date deadLine, MultipartFile image, String imageUrl, String shortDescription, Integer userId,
+			UserModel userModel, List<JobType> jobTypes, Integer fieldId, Set<Type> types, Field field,
+			Integer[] typeIds, List<TypeModel> typeModels) {
 		super();
 		this.id = id;
 		this.jobTitle = jobTitle;
@@ -61,6 +87,10 @@ public class JobModel extends BaseModel {
 		this.reason = reason;
 		this.deadLine = deadLine;
 		this.image = image;
+		this.imageUrl = imageUrl;
+		this.shortDescription = shortDescription;
+		this.userId = userId;
+		this.userModel = userModel;
 		this.jobTypes = jobTypes;
 		this.fieldId = fieldId;
 		this.types = types;
@@ -141,14 +171,6 @@ public class JobModel extends BaseModel {
 		this.description = description;
 	}
 
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
-	}
-
 	public String getRequirement() {
 		return requirement;
 	}
@@ -173,11 +195,51 @@ public class JobModel extends BaseModel {
 		this.deadLine = deadLine;
 	}
 
-	public List<JobTypeModel> getJobTypes() {
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
+	}
+
+	public List<JobType> getJobTypes() {
 		return jobTypes;
 	}
 
-	public void setJobTypes(List<JobTypeModel> jobTypes) {
+	public void setJobTypes(List<JobType> jobTypes) {
 		this.jobTypes = jobTypes;
 	}
 
@@ -189,20 +251,19 @@ public class JobModel extends BaseModel {
 		this.fieldId = fieldId;
 	}
 
-	public Set<TypeModel> getTypes() {
+	public Set<Type> getTypes() {
 		return types;
 	}
 
-	public void setTypes(Set<TypeModel> types) {
+	public void setTypes(Set<Type> types) {
 		this.types = types;
 	}
 
-	@JsonIgnore
-	public FieldModel getField() {
+	public Field getField() {
 		return field;
 	}
 
-	public void setField(FieldModel field) {
+	public void setField(Field field) {
 		this.field = field;
 	}
 
@@ -222,38 +283,36 @@ public class JobModel extends BaseModel {
 		this.typeModels = typeModels;
 	}
 
-	@JsonIgnore
-	public MultipartFile getImage() {
-		return image;
+	public Long getQtyJobByUserId() {
+		return qtyJobByUserId;
 	}
 
-	public void setImage(MultipartFile image) {
-		this.image = image;
+	public void setQtyJobByUserId(Long qtyJobByUserId) {
+		this.qtyJobByUserId = qtyJobByUserId;
 	}
 
-	public String getUrl() {
-		return url;
+	public Long getQtyApplycantByJobId() {
+		return qtyApplycantByJobId;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setQtyApplycantByJobId(Long qtyApplycantByJobId) {
+		this.qtyApplycantByJobId = qtyApplycantByJobId;
 	}
 
-	@JsonIgnore
-	public MultipartFile getFile() {
-		return file;
+	public boolean isExistApplication() {
+		return existApplication;
 	}
 
-	public void setFile(MultipartFile file) {
-		this.file = file;
+	public void setExistApplication(boolean existApplication) {
+		this.existApplication = existApplication;
 	}
 
-	public String getFileurl() {
-		return fileurl;
+	public String getCompanyEmail() {
+		return companyEmail;
 	}
 
-	public void setFileurl(String fileurl) {
-		this.fileurl = fileurl;
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
 
 }

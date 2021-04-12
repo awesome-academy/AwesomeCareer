@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -58,11 +59,18 @@ public class Job extends BaseEntity {
 	@Column(name = "reason", length = 3000)
 	private String reason;
 	
-	@Column(name = "image", length = 256)
-	private String image;
+	@Column(name = "imageUrl", length = 256)
+	private String imageUrl;
 	
-	@Column(name = "file", length = 500)
-	private String file;
+	@Column(name = "companyEmail", length = 256)
+	private String companyEmail;
+
+	@Column(name = "userId",insertable = false, updatable = false)
+	private Integer userId;
+	
+	@ManyToOne
+	@JoinColumn(name = "userId",insertable = false, updatable = false)
+	private User user;
 	
 	@Column(name = "deadLine")
 	@Temporal(value = TemporalType.TIMESTAMP)
@@ -73,6 +81,9 @@ public class Job extends BaseEntity {
 	
 	@Column(name = "fieldId")
 	private Integer fieldId;
+	
+	@OneToMany( mappedBy = "job")
+	private List<Application> applications;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -85,14 +96,15 @@ public class Job extends BaseEntity {
 	@OneToOne
     @JoinColumn(name = "fieldId",insertable = false, updatable = false)
 	private Field field;
-
-	public Job() {
 	
+	public Job() {
+		
 	}
-
+	
 	public Job(Integer id, String jobTitle, String companyWebsite, String companyName, String address, String fieldName,
-			String position, String introduction, String description, String requirement, String reason, Date deadLine,
-			List<JobType> jobTypes, Integer fieldId, Set<Type> types, Field field) {
+			String position, String introduction, String description, String requirement, String reason,
+			String imageUrl, Integer userId, User user, Date deadLine, List<JobType> jobTypes, Integer fieldId,
+			List<Application> applications, Set<Type> types, Field field) {
 		super();
 		this.id = id;
 		this.jobTitle = jobTitle;
@@ -105,9 +117,13 @@ public class Job extends BaseEntity {
 		this.description = description;
 		this.requirement = requirement;
 		this.reason = reason;
+		this.imageUrl = imageUrl;
+		this.userId = userId;
+		this.user = user;
 		this.deadLine = deadLine;
 		this.jobTypes = jobTypes;
 		this.fieldId = fieldId;
+		this.applications = applications;
 		this.types = types;
 		this.field = field;
 	}
@@ -200,6 +216,30 @@ public class Job extends BaseEntity {
 		this.reason = reason;
 	}
 
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Date getDeadLine() {
 		return deadLine;
 	}
@@ -224,6 +264,14 @@ public class Job extends BaseEntity {
 		this.fieldId = fieldId;
 	}
 
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
+	}
+
 	public Set<Type> getTypes() {
 		return types;
 	}
@@ -240,19 +288,12 @@ public class Job extends BaseEntity {
 		this.field = field;
 	}
 
-	public String getImage() {
-		return image;
+	public String getCompanyEmail() {
+		return companyEmail;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setCompanyEmail(String companyEmail) {
+		this.companyEmail = companyEmail;
 	}
-
-	public String getFile() {
-		return file;
-	}
-
-	public void setFile(String file) {
-		this.file = file;
-	}
+	
 }

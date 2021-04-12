@@ -6,12 +6,14 @@
 		<header th:fragment="copy">
 			<div class="header">
 				<div class="header-left">
-					<a id="logo" th:href="@{/}"><img src="img/logo.png"></a>
+					<div id="adminlogo" ><a th:href="@{/}"><img src="img/logo.png"></a></div>
 					<a th:href="@{/jobs/all}" class="header-left-1">Jobs</a>
 					<a th:href="@{/}" class="header-left-1">Stores</a>
+					<a  class="header-left-1" th:href="@{/admin/1}">Admin</a>
 				</div>
-
+               
 				<div class="header-right">
+				   
 					<a th:href="@{/}"><img class="header-logo" src="img/search.png"/></a>
 					<a th:href="@{/}"><img class="header-logo" src="img/people.png"/></a>
 					<a th:href="@{/}"><img class="header-logo" src="img/message.png"/></a>
