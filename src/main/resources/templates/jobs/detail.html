@@ -51,6 +51,7 @@ class="fb-xfbml-parse-ignore">Share</a></div><br><br>
   Applicant
 </button>
 </div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -80,12 +81,15 @@ class="fb-xfbml-parse-ignore">Share</a></div><br><br>
     </div>
   </div>
 </div>
+
  <div id="show_message"></div>
  <div th:if="${jobModel.existApplication}">
  <div>CV upload successfull</div>
  </div>
+ 
  <div id="cv_form"></div>
-
+<button ><a th:href="@{'/sendEmail/'+${jobModel.id}}" id="sendEmail">Send Email</a></button>
+ <div id="emailsuccess"></div>
 <script>
 $('#uploadform').click(function(event){
 	alert("su kien da xay ra chua ");
@@ -138,6 +142,22 @@ $.ajax({
    });
    return false;
  });
+</script>
+<script>
+$('#sendEmail').click(function(event){
+	 alert("xem su kien vao chua")
+	   event.preventDefault();
+	   event.stopPropagation();
+	   $.ajax({
+			type: 'POST',
+			url: $(this).attr('href'),
+			success : function(data, textStatus, xhr){
+				$('#emailsuccess').html(data);
+			}
+			
+		});
+		});
+
 </script>
 
 </body>

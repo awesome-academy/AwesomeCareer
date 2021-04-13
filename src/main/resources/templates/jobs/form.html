@@ -38,17 +38,17 @@
     <input type="text" th:field="*{position}"><br><br>
   
    <h5>Introduce your company</h5>
-   <textarea th:field="*{introduction}"></textarea>
+   <textarea th:field="*{introduction}" id="textareaContent1"></textarea>
    
    <h5>Job Description</h5>
-   <textarea th:field="*{description}"></textarea>
+   <textarea th:field="*{description}" id="textareaContent2"></textarea>
    
    <h5>Job Requirement</h5>
-   <textarea th:field="*{requirement}"></textarea>
+   <textarea th:field="*{requirement}" id="textareaContent3"></textarea>
    
    <h5>Why You'll Love Working Here</h5>
    <textarea th:field="*{reason}"></textarea>
-   
+
    <h5>Deadline</h5>
 	<input type="text" id="datepicker1" th:field="*{deadLine}">
    
@@ -59,6 +59,21 @@
 		$(function() {
 			$("#datepicker1").datepicker();
 		});
+ </script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+	 CKEDITOR.replace('textareaContent1');
+ });
+ </script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+	 CKEDITOR.replace('textareaContent2');
+ });
+ </script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+	 CKEDITOR.replace('textareaContent3');
+ });
  </script>
 	
 </body>
