@@ -11,7 +11,28 @@
         <tr th:each="applicationModel : ${applicationModels}">
           <td><a th:utext="${applicationModel.applicantName}" th:href="@{'/user/'+${applicationModel.userId}}">Applicant</a></td>
           <td ><a th:utext="${applicationModel.jobName}" th:href="@{'/jobs/'+${applicationModel.jobId}}">Job</a></td>
-          <td th:utext="${applicationModel.status}">Status</td>
+          <td>
+          <span><a th:if="${applicationModel.status == 'APPROVE'}" th:utext="${applicationModel.status}" 
+          th:href="@{'/sendEmail/'+${applicationModel.jobId}}" id="sendEmail">Female</a></span>
+          <span id="emailsuccess"></span>
+          <span th:unless="${applicationModel.status == 'APPROVE'}" th:utext="${applicationModel.status}">Male</span>
+          </td>
         </tr>
       </tbody>      
     </table>
+    <script>
+$('#sendEmail').click(function(event){
+	 alert("xem su kien vao chua")
+	   event.preventDefault();
+	   event.stopPropagation();
+	   $.ajax({
+			type: 'POST',
+			url: $(this).attr('href'),
+			success : function(data, textStatus, xhr){
+				alert("send email success");
+			}
+			
+		});
+		});
+
+</script>

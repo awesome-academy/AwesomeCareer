@@ -3,7 +3,7 @@ package com.aa.awesomecareer.util;
 public class Constants {
 	
 	public enum Status {
-		PENDING(1),ACTIVE(2),CLOSE(0);
+		PENDING(1),ACTIVE(2),APPROVE(0);
 
 		private int value;
 
