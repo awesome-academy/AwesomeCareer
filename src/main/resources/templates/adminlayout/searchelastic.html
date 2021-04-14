@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <th:block th:fragment="copy">
+   <input type="text" id="searchElastic" placeholder="Search" class="textbox" name="key-search" style="width:50%">
+   <p id="search-description"></p>
+   
+   <script>
+   $("#searchElastic").autocomplete({
+    
+	   source : function(request, response){   
+		   $.ajax({
+			   
+			   url : '[[@{/search/text}]]',
+			   dataType: "json",
+			   data : {
+				   term : request.term
+			   },
+			   success: function(data){
+				   response(data)
+			   }
+		   });
+	   },
+	   minLength:2 ,
+   })
+   .autocomplete("instance")._renderItem = function(ul, item){
+	   return $("<li>")
+	   .append("<div>" + "<a href='[[@{/jobs/}]]"+ item.id+"'>"+ item.jobTitle + "</a>" + "</div>")
+	   .append("<div>" + "<a href='[[@{/users/}]]"+ item.userElasticModel.id+"'>"+ item.userElasticModel.id.fullName + "</a>" + "</div>")
+	   .appendTo(ul);
+   };
+   
+   </script>
+   </th:block>
+</body>
+</html>
