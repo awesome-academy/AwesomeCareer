@@ -72,7 +72,7 @@ public class User extends BaseEntity{
 	@Column(name = "interest",length = 256)
 	private String interest;
 	
-	@Column(name = "gender",length = 3)
+	@Column(name = "gender",length = 10)
 	private String gender;
 	
 	@Column(name = "birthday")
@@ -82,11 +82,12 @@ public class User extends BaseEntity{
 	@Column(name = "relationshipStatus",length = 256)
 	private String relationshipStatus;
 	
+	@Column(name = "imageUrl", length = 256)
+	private String imageUrl;
+	
 //	@Column(name = "imAParent")
 //	private boolean imAParent;
 	
-//	@Column(name = "image", length = 256)
-//	private String image;
 
 	@OneToMany( mappedBy = "user")
 	private List<Job> jobs;
@@ -158,6 +159,54 @@ public class User extends BaseEntity{
 		this.country = country;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getRelationshipStatus() {
+		return relationshipStatus;
+	}
+
+	public void setRelationshipStatus(String relationshipStatus) {
+		this.relationshipStatus = relationshipStatus;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	public List<Experience> getExperiences() {
 		return experiences;
 	}
@@ -174,13 +223,6 @@ public class User extends BaseEntity{
 		this.skills = skills;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public List<SkillUser> getSkillUsers() {
 		return skillUsers;
@@ -206,29 +248,7 @@ public class User extends BaseEntity{
 		this.ambition = ambition;
 	}
 
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getRelationshipStatus() {
-		return relationshipStatus;
-	}
-
-	public void setRelationshipStatus(String relationshipStatus) {
-		this.relationshipStatus = relationshipStatus;
-	}
+	
 	
 //	@OneToMany(mappedBy = "application")
 //	private List<Application> applications;

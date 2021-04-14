@@ -10,10 +10,18 @@
 		<!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-8">
+				<div class="container content_header">
+					<a class="content_decor" th:href="@{/imageuser/update}" id="imageUser">
+						<img th:src=@{${userModel.imageUrl}} height='150' width='150'/>
+					</a>
+					<div th:replace="~{users/form :: copy(${updateAvatar})}"></div>
+				</div>
+				
+				
 				<div class="container content_body_container">
 					<h5 style="display: inline-block">Seft introduction</h5>
 					<a  th:href="@{/introduction}" id="introduction">
-					<i class="fas fa-edit content_decor">Edit</i>
+						<i class="fas fa-edit content_decor">Edit</i>
 					</a>
 					<div id="_introduction_show" th:text="${userModel.seftIntroduction}"></div>
 					<div id="_introduction_form_wrapper"></div>
@@ -76,7 +84,30 @@
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
+			
+			<div class="container content_header">
+				<h5 style="display: inline-block">Certificate</h5>
+				<a class="content_decor" th:href="@{/certificate}" id="certificate">
+					<i class="fas fa-plus-circle"></i>Add
+				</a>
+				<ul id="certificate_show">
+					 <li th:replace="users/certificate/_index :: copy"></li>
+				</ul>
+				<div id="_certificate_form_wrapper"></div>
+			</div>
+						
+			<div class="container content_header">
+				<h5 style="display: inline-block">Basic Info</h5>
+				<a class="content_decor" th:href="@{/basic/edit}" id="basic_info">
+					<i class="fas fa-plus-circle"></i>Add
+				</a>
+				<ul id="basic_info_show">
+					<li th:replace="users/basicinfo/_index :: copy"></li>
+				</ul>
+				<div id="_basic_info_form_wrapper"></div>
+			</div>
+
 		<script>
 			$('#experience').click(function(event) {
 				event.preventDefault();

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}">
+<head>
+	<title th:text="#{user.update.avatar}">Update avatar</title>
+</head>
+<body>
+	<th:block th:fragment="copy (updateAvatar)">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageUserModal">
+			Update image
+		</button>
+		
+		<div class="modal fade" id="imageUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+    				<div class="modal-header">
+    					<h5 class="modal-title" id="exampleModalLabel">Profile image</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				       		<span aria-hidden="true">&times;</span>
+				        </button>
+					</div>
+					<div class="modal-body">
+						<form   th:action="@{/imageuser}" th:object="${userModel}" th:method ="POST" enctype="multipart/form-data" id="updateAvatar">
+							<input type="hidden" th:name="id" th:value="${userModel.id}" />
+							<br>
+						    <input type="file" th:field="*{image}" accept="image/png, image/jpeg" name="image"/>
+						    <br> <br>
+							<button type="submit" class="btn btn-primary">Update</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	
+	<div id="success_message"></div>
+ 	<div>Profile updated</div>
+	
+	<script type="text/javascript">
+		$("#updateAvatar").submit(function(event){	 
+		   alert("bat dau cap nhat anh dai dien cua nguoi dung")
+		   event.preventDefault();
+		   event.stopPropagation();
+	       var formData = new FormData($(this)[0]);
+		   $.ajax({
+			   url : $(this).attr('action'),
+		       type: 'POST',
+		       data: formData,
+		       async: false,
+		       cache: false,
+		       contentType: false,
+		       enctype: 'multipart/form-data',
+		       processData: false,
+		       success: function (data, textStatus, xhr) {
+		    	   $('#success_message').html(data);
+		    	   $('#imageUserModal').modal('hide');
+		       }
+		   });
+		   return false;
+		 });
+	</script>
+	
+	<!-- <script type="text/javascript">
+		$('#imageUserForm').submit(function(event) {
+			alert("bat dau cap nhat anh cua user");
+			event.preventDefault();
+			event.stopPropagation();
+			var imageUrl = $(this).find('input[name="image"]').val();
+			$.ajax({
+				type : 'POST',
+				url : '[[@{/imageuser}]]',
+				data : {
+					'imageUrl' : imageUrl,
+				},
+				dataType : 'html',
+				success : function(data, textStatus, xhr) {
+					alert('Them moi thanh cong');
+				}
+			});
+		});
+	
+		$('#_cancel_image_user').click(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			$('#imageUserForm').hide();
+		});
+	</script>  -->
+</body>
