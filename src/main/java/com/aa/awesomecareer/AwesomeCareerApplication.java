@@ -8,13 +8,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.aa.awesomecareer.repository.impl.BaseRepositoryImpl;
 import com.cloudinary.Cloudinary;
 
 @SpringBootApplication
 @EnableJpaRepositories (repositoryBaseClass = BaseRepositoryImpl.class)
-public class AwesomeCareerApplication {
+public class AwesomeCareerApplication implements WebMvcConfigurer {
 	
 	@Value("${cloudinary.cloud_name}")
 	private String cloudName;
@@ -28,6 +30,11 @@ public class AwesomeCareerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AwesomeCareerApplication.class, args);
 	}
+	
+	@Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/highchart").setViewName("/admin/landing-page");
+    }
 	
 	@Bean
 	public Cloudinary cloudinaryConfig() {

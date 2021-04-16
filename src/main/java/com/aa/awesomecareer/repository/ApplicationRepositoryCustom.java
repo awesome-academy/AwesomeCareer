@@ -10,4 +10,6 @@ public interface ApplicationRepositoryCustom {
 	boolean findApplication(Integer userId, Integer jobId);
 
 	Long findApplicantByJobId(Integer jobId);
+	
+	Long countApplicantByTime(Integer monthapply, Integer yearapply);
 }

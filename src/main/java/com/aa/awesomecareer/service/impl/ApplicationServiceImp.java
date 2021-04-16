@@ -103,5 +103,11 @@ public class ApplicationServiceImp implements ApplicationService {
 		return qtyApplicantByJob;
 	}
 	
+	@Override
+	public Long countApplicantByTime (Integer monthapply, Integer yearapply) {
+		Long countApplicantByTime = applicationRepository.countApplicantByTime(monthapply, yearapply);
+		return countApplicantByTime;
+		
+	}
 	
 }

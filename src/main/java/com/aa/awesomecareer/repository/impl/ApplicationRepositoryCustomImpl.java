@@ -43,5 +43,16 @@ public class ApplicationRepositoryCustomImpl implements ApplicationRepositoryCus
 		return query.getSingleResult();
 
 	}
+
+	@Override
+	public Long countApplicantByTime(Integer monthapply,Integer yearapply) {
+		TypedQuery<Long> query = entityManager
+				.createQuery("SELECT COUNT(*) FROM Application application WHERE MONTH(application.createdAt) = :monthapply "
+						+ "AND YEAR(application.createdAt) = :yearapply", Long.class);
+		query.setParameter("monthapply", monthapply);
+		query.setParameter("yearapply", yearapply);
+		return query.getSingleResult();
+
+	}
 	
 }
