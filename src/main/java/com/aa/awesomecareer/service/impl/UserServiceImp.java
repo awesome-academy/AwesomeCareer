@@ -197,5 +197,20 @@ public class UserServiceImp implements UserService {
 		BeanUtils.copyProperties(user1, userModel);
 		return userModel;
 	}
+	
+	public void updateImage(UserModel userModel, String url) {
+		try {
+			System.out.println("cap nhat anh dai dien cua user");
+			Optional<User> updateImage = userRepository.findById(3);
+			User user = updateImage.get();
+			user.setImageUrl(url);
+			User saveImageUser = userRepository.save(user);
+			userModel = new UserModel();
+			BeanUtils.copyProperties(saveImageUser, userModel);
+		}
+		catch (Exception e) {
+			System.out.println("loi khi chay den cap nhat anh dai dien cua user");
+		}
+	}
 
 }

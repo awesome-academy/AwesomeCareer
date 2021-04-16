@@ -15,11 +15,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aa.awesomecareer.model.JobModel;
 import com.aa.awesomecareer.model.UserModel;
 import com.aa.awesomecareer.service.UserService;
+import com.aa.awesomecareer.service.impl.CloundinaryService;
 import com.aa.awesomecareer.util.CommonUtil;
+import com.cloudinary.Cloudinary;
 
 @Controller
 public class BasicInfoController {
@@ -31,6 +38,9 @@ public class BasicInfoController {
 	@Autowired
 	@Qualifier("userService")
 	UserService userService;
+	
+	@Autowired
+    private CloundinaryService cloudinaryService;
 		
 	@GetMapping(value = "/basic/edit")
 	public String showBasicInfo(Model model) {
@@ -53,5 +63,33 @@ public class BasicInfoController {
 		System.out.println("sua thong tin user co id = " + id);
 		return "users/basicinfo/_index::copy";
 	}
+	
+	@GetMapping(value="/imageuser/update")
+	public String showUpdateImage(Model model) {
+		System.out.println("cap nhat anh cua user");
+		UserModel userModel = userService.findUser(3);
+		model.addAttribute("userModel", userModel);
+		return "users/form";
+	}
+	
+	@GetMapping("/uploadImage")
+    public String uploadImage() {
+        return "uploadImage";
+    }
 
+	@PostMapping(value="/imageuser")
+	public String saveJobForm(@ModelAttribute("userModel") UserModel userModel, @RequestParam("image") MultipartFile image,
+			Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		if (image.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            return "redirect:uploadImage";
+        }
+
+		Cloudinary cloudinary = new Cloudinary();
+		String url = cloudinaryService.uploadFile(image);
+		System.out.println("cap nhat anh da toi day");
+				
+		userService.updateImage(userModel, url);
+		return "redirect:user/3";
+     }
 }

@@ -7,8 +7,11 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.aa.awesomecareer.util.validator.FieldMatch;
 import com.aa.awesomecareer.util.validator.UniqueEmail;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,7 +56,11 @@ public class UserModel extends BaseModel {
 	private Date birthday;
 	private String relationshipStatus;
 	private boolean imAParent;
-//	private String image;
+	
+	private MultipartFile image;
+	
+	private String imageUrl;
+
 	
 	private List<Integer> skillIds = new ArrayList<Integer>();
 	
@@ -99,6 +106,44 @@ public class UserModel extends BaseModel {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+
+
+
+
+
+
+	private List<ApplicationModel> applicationModels;
+	private List<BookmarkModel> bookmarkModels;
+	private List<FavoriteModel> favoriteModels;
+	private List<VotingModel> votingModels;
+	private List<FollowModel> followModels;
+	private List<InterestModel> interestModels;
+	private List<LanguageModel> languageModels;
+	private List<CertificateModel> certificateModels;
+	private List<EducationModel> educationModels;
+	private List<ProjectModel> projectModels;
+	private List<ProfileModel> profileModels;
 	public List<Integer> getSkillIds() {
 		return skillIds;
 	}

@@ -22,4 +22,7 @@ public interface UserService {
 	public UserModel findUser(Integer id);
 
 	UserModel saveInfo(UserModel userModel);
+
+	public void updateImage(UserModel userModel, String url);
+
 }
