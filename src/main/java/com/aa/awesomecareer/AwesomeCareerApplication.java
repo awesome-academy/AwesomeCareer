@@ -16,7 +16,7 @@ import com.cloudinary.Cloudinary;
 
 @SpringBootApplication
 @EnableJpaRepositories (repositoryBaseClass = BaseRepositoryImpl.class)
-public class AwesomeCareerApplication implements WebMvcConfigurer {
+public class AwesomeCareerApplication {
 	
 	@Value("${cloudinary.cloud_name}")
 	private String cloudName;
@@ -31,10 +31,6 @@ public class AwesomeCareerApplication implements WebMvcConfigurer {
 		SpringApplication.run(AwesomeCareerApplication.class, args);
 	}
 	
-	@Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/highchart").setViewName("/admin/landing-page");
-    }
 	
 	@Bean
 	public Cloudinary cloudinaryConfig() {
