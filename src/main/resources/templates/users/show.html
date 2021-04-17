@@ -40,12 +40,12 @@
 					<a class="content_decor" th:href="@{/experience}" id="experience">
 						<i class="fas fa-plus-circle"></i>Add
 					</a>
-					<ul id="experience_show">
-					    <li th:replace="experiences/index :: copy"></li>
+					<div id="experience_show">
+					    <div th:replace="experiences/index :: copy"></div>
 						<!-- <th:block th:each="experience : ${experienceModels}">
 							<li th:replace="~{experiences/_detail :: copy(${experience})}"></li>
 						</th:block> -->
-					</ul>
+					</div>
 					<div id="_experience_form_wrapper"></div>
 				</div>
 				

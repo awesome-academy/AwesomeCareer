@@ -82,9 +82,6 @@ public class User extends BaseEntity{
 	@Column(name = "relationshipStatus",length = 256)
 	private String relationshipStatus;
 	
-	@Column(name = "imageUrl", length = 256)
-	private String imageUrl;
-	
 //	@Column(name = "imAParent")
 //	private boolean imAParent;
 	
@@ -197,14 +194,6 @@ public class User extends BaseEntity{
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
 	}
 
 	public List<Experience> getExperiences() {

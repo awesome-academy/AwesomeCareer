@@ -6,8 +6,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<th:block th:fragment="copy" th:each="experience : ${experienceModels}">
-			<li th:replace="~{experiences/_detail :: copy(${experience})}"></li>
+<div th:fragment="copy">
+  <ul>
+	<th:block  th:each="experience : ${experienceModels}">
+	  <li th:replace="~{experiences/_detail :: copy(${experience})}"></li>
 	</th:block>
+  </ul>
+  <script>
+	$('#experience_show a[id^="experience-edit-"]').click(function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		var id = $(this).data('experience_id');
+		$.ajax({
+			type : 'GET',
+			url : $(this).attr('href'),
+			success : function(data, textStatus, xhr) {
+				$('#experience_new-'+id).html(data);
+			}
+
+		})
+	});
+  </script>
+</div>
 </body>
 </html>

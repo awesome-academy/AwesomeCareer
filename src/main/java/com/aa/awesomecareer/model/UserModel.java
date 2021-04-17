@@ -63,6 +63,17 @@ public class UserModel extends BaseModel {
 
 	
 	private List<Integer> skillIds = new ArrayList<Integer>();
+	private List<ApplicationModel> applicationModels;
+	private List<BookmarkModel> bookmarkModels;
+	private List<FavoriteModel> favoriteModels;
+	private List<VotingModel> votingModels;
+	private List<FollowModel> followModels;
+	private List<InterestModel> interestModels;
+	private List<LanguageModel> languageModels;
+	private List<CertificateModel> certificateModels;
+	private List<EducationModel> educationModels;
+	private List<ProjectModel> projectModels;
+	private List<ProfileModel> profileModels;
 	
 	public String getFullName() {
 		return fullName;
@@ -126,24 +137,7 @@ public class UserModel extends BaseModel {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-
-
-
-
-
-
-
-	private List<ApplicationModel> applicationModels;
-	private List<BookmarkModel> bookmarkModels;
-	private List<FavoriteModel> favoriteModels;
-	private List<VotingModel> votingModels;
-	private List<FollowModel> followModels;
-	private List<InterestModel> interestModels;
-	private List<LanguageModel> languageModels;
-	private List<CertificateModel> certificateModels;
-	private List<EducationModel> educationModels;
-	private List<ProjectModel> projectModels;
-	private List<ProfileModel> profileModels;
+	
 	public List<Integer> getSkillIds() {
 		return skillIds;
 	}
