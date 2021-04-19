@@ -1,26 +1,35 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-	</head>
-	<body>
+
 		<header th:fragment="copy">
 			<div class="header">
-				<div class="header-left">
+				<div class="header-left" >
 					<div id="adminlogo" ><a th:href="@{/}"><img src="img/logo.png"></a></div>
 					<a th:href="@{/jobs/all}" class="header-left-1">Jobs</a>
-					<a th:href="@{/}" class="header-left-1">Stores</a>
-					<a  class="header-left-1" th:href="@{/admin/1}">Admin</a>
+					<a  class="header-left-1" th:href="@{/admin/1}">Admin</a> 
 				</div>
                
 				<div class="header-right">
+				    <div sec:authorize="!isAuthenticated()" >
+				      <a id="login" th:href="@{/login}" class="header-left-1">Login</a>
+				      <a th:href="@{/signup}" class="header-left-1">Sign up</a>
+				    </div>
 				   
-					<a th:href="@{/}"><img class="header-logo" src="img/search.png"/></a>
-					<a th:href="@{/}"><img class="header-logo" src="img/people.png"/></a>
-					<a th:href="@{/}"><img class="header-logo" src="img/message.png"/></a>
-					<a th:href="@{/}"><img class="header-logo" src="img/notification.png"/></a>
-				</div>
+					<div class="dropdown">
+					<div sec:authorize="isAuthenticated()" th:with="user=${#request.userPrincipal.principal.user}">
+					    <b><span sec:authentication="name" class="header-left-1">Username</span></b>
+					  <ul class="dropdown-menu">
+					    <li>
+					    <form th:action="@{'/user/'+${user.id}}">
+					     <input type="submit" value="Profile" />
+					    </form>
+					    </li>
+					    <li>
+					      <form th:action="@{/logout}" method="post">
+					        <input type="submit" value="Logout" />
+					      </form>
+					    </li>
+                      </ul>
+				    </div>
 
-			</div>
-		</header>
-	</body>
-</html>
+			     </div>
+		
+        </header>

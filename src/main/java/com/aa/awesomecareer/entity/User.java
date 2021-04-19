@@ -82,6 +82,9 @@ public class User extends BaseEntity{
 	@Column(name = "relationshipStatus",length = 256)
 	private String relationshipStatus;
 	
+	@Column(name = "token_reset_password",length = 25)
+	private String token;
+	
 //	@Column(name = "imAParent")
 //	private boolean imAParent;
 	
@@ -237,8 +240,15 @@ public class User extends BaseEntity{
 		this.ambition = ambition;
 	}
 
-	
-	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+
 //	@OneToMany(mappedBy = "application")
 //	private List<Application> applications;
 //	

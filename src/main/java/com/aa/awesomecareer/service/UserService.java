@@ -2,6 +2,8 @@ package com.aa.awesomecareer.service;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.aa.awesomecareer.model.UserModel;
 
 public interface UserService {
@@ -24,5 +26,11 @@ public interface UserService {
 	UserModel saveInfo(UserModel userModel);
 
 	public void updateImage(UserModel userModel, String url);
+
+	void updateResetPasswordToken(String token, String email) throws EntityNotFoundException;
+
+	UserModel findUserByPasswordForgotToken(String token);
+
+	void updateNewPassword(String token, String newPassword);
 
 }
