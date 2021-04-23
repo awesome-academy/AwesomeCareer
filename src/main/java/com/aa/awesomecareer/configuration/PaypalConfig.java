@@ -13,7 +13,7 @@ import com.paypal.base.rest.PayPalRESTException;
 
 @Configuration
 public class PaypalConfig {
-
+//check
 	@Value("${paypal.client.app}")
     private String clientId;
 	@Value("${paypal.client.secret}")
