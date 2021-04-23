@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,7 +38,7 @@ import com.aa.awesomecareer.util.CommonUtil;
 //@EnableWebMvc
 public class UsersController {
 	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
-
+    
 	@Autowired
 	MessageSource messageSource;
 
@@ -62,26 +63,34 @@ public class UsersController {
 		return "users/index";
 	}
 
-	@GetMapping(value = { "/signup" })
-	public String add(Locale locale, Model model) {
+	@GetMapping(value ="/signup")
+	public String showRegisterForm(Locale locale, Model model) {
+		System.out.println("vao controller signup chua");
 		List<String> occupations = CommonUtil.occupationList();
 		model.addAttribute("occupations", occupations);
 		List<String> countries = CommonUtil.countryList();
 		model.addAttribute("countries", countries);
-		model.addAttribute("user", new UserModel());
-		return "users/_add";
+		model.addAttribute("userModel", new UserModel());
+		return "users/_register";
+	}
+	
+	
+	@GetMapping(value="/login")
+	public String loginForm(Model model) {
+		return "users/_login";
 	}
 
-	@PostMapping(value = "/users")
+	@PostMapping(value = "/signup")
 	public String create(@ModelAttribute("userModel") @Validated UserModel userModel, BindingResult bindingResult,
 			Model model, final RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
 		if (bindingResult.hasErrors()) {
 			logger.info("Returning register.jsp page, validate failed");
 			return "users/_add";
 		}
+		System.out.println("Xem da vao controller add user chua");
 		userService.addUser(userModel);
 		// Add message to flash scope
-		return "redirect: " + request.getContextPath() + "/user/" + userModel.getId();
+		return "users/_login";
 	}
 
 	@GetMapping(value = "/user/{id}")

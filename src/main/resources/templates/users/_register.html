@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html 
+  th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+  xmlns:th="http://www.thymeleaf.org" 
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body style="text-align: center;">
+
+                    <div class="text-center" >
+                        <form style="display: inline-block;width: 40%;" th:action="@{/signup}" method="POST" th:object="${userModel}">
+                            <div class="form-group">
+                                <input type="text" class="form-control" th:field="*{fullName}" placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" th:field="*{email}" placeholder="Email address">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" th:field="*{password}" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" th:field="*{company}" placeholder="Company">
+                            </div>
+                            <div class="form-group">
+                            <select class="form-control" th:field="*{occupationInterest}">
+                              <option value="">Occupation</option>
+                              <option th:each="occupation: ${occupations}"
+						      th:value="${occupation}" th:utext="${occupation}">...</option>
+                             </select>
+                             </div>
+                             <div class="form-group">
+                             <select class="form-control" th:field="*{country}">
+                              <option value="">Country</option>
+                              <option th:each="country: ${countries}" th:value="${country}"
+						      th:utext="${country}">...</option>
+                             </select>
+                             </div>
+                            <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
+                        </form>
+                    </div>
+ 
+</body>
+</html>

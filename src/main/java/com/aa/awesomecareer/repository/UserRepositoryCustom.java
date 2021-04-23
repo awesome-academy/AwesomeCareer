@@ -7,4 +7,6 @@ public interface UserRepositoryCustom {
 	User findByUserId(Integer userId);
 	void deleteByUserId(Integer id);
 	void saveSkillUser(User user);
+	boolean findUserByEmail(String email);
+	User findByResetPasswordToken (String token);
 }

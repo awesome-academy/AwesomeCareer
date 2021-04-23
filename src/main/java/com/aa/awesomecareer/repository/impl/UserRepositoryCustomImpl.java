@@ -17,10 +17,20 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
 	@Override
 	public User findByEmail(String email) {
-		TypedQuery<User> query = entityManager.createQuery("FROM User user WHERE user.email = :email", User.class);
+		TypedQuery<User> query = entityManager
+				.createQuery("FROM User user WHERE user.email = :email", User.class);
 		query.setParameter("email", email);
 		return query.getSingleResult();
 	}
+	
+	@Override
+	public boolean findUserByEmail(String email) {
+		TypedQuery<Long> query = entityManager
+				.createQuery("SELECT COUNT(*) FROM User user WHERE user.email = :email", Long.class);
+		query.setParameter("email", email);
+		return query.getSingleResult()>0;
+	}
+	
 
 	@Override
 	public User findByUserId(Integer id) {
@@ -39,6 +49,13 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 	public void saveSkillUser(User user) {
 		
 		
+	}
+
+	@Override
+	public User findByResetPasswordToken(String token) {
+			TypedQuery<User> query = entityManager.createQuery("FROM User user WHERE user.token = :token", User.class);
+			query.setParameter("token", token);
+			return query.getSingleResult();
 	}
 
 }

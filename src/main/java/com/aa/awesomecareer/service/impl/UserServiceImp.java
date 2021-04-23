@@ -6,11 +6,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +33,9 @@ import com.aa.awesomecareer.service.UserService;
 public class UserServiceImp implements UserService {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImp.class);
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -77,21 +83,22 @@ public class UserServiceImp implements UserService {
 	@Override
 	@Transactional
 	public void addUser(UserModel userModel) {
-		if (emailExists(userModel.getEmail())) {
-			logger.info("There is an account with that email address" + userModel.getEmail());
-		}
 		try {
+		if (userRepository.findUserByEmail(userModel.getEmail())) {
+			logger.info("There is an account with that email address" + userModel.getEmail());
+		}else {
+		
 			User condition = new User();
 			condition.setFullName(userModel.getFullName());
 			condition.setEmail(userModel.getEmail());
-			condition.setPassword(userModel.getPassword());
+			condition.setPassword(passwordEncoder.encode(userModel.getPassword()));
 			condition.setCompany(userModel.getCompany());
 			condition.setOccupationInterest(userModel.getOccupationInterest());
 			condition.setCountry(userModel.getCountry());
 
 			userRepository.save(condition);
 
-		} catch (Exception e) {
+		}} catch (Exception e) {
 			logger.error("An error occurred while adding user to the database");
 		}
 	}
@@ -118,10 +125,6 @@ public class UserServiceImp implements UserService {
 		} catch (Exception e) {
 			logger.error("An error occurred while adding user to the database", e);
 		}
-	}
-
-	private boolean emailExists(String email) {
-		return userRepository.findByEmail(email) != null;
 	}
 
 	@Override
@@ -203,7 +206,7 @@ public class UserServiceImp implements UserService {
 			System.out.println("cap nhat anh dai dien cua user");
 			Optional<User> updateImage = userRepository.findById(3);
 			User user = updateImage.get();
-			user.setImageUrl(url);
+			//user.setImageUrl(url);
 			User saveImageUser = userRepository.save(user);
 			userModel = new UserModel();
 			BeanUtils.copyProperties(saveImageUser, userModel);
@@ -212,5 +215,35 @@ public class UserServiceImp implements UserService {
 			System.out.println("loi khi chay den cap nhat anh dai dien cua user");
 		}
 	}
+
+	@Override
+	public void updateResetPasswordToken(String token, String email) throws EntityNotFoundException {
+		User user = userRepository.findByEmail(email);
+		if(user != null) {
+			user.setToken(token);
+			userRepository.save(user);
+		}else {
+			throw new EntityNotFoundException("Could not find any user with email" +email);
+		}
+		
+	}
+	
+	@Override
+	public UserModel findUserByPasswordForgotToken(String token) {
+		User user = userRepository.findByResetPasswordToken(token);
+        UserModel userModel = new UserModel();
+        BeanUtils.copyProperties(user, userModel);
+        return userModel;
+	}
+	
+	@Override
+	public void updateNewPassword (String token, String newPassword) {
+		
+		User user = userRepository.findByResetPasswordToken(token);
+		user.setPassword(passwordEncoder.encode(newPassword));
+		userRepository.save(user);
+		
+	}
+	
 
 }
