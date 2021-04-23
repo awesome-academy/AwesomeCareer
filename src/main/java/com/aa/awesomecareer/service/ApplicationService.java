@@ -12,5 +12,6 @@ public interface ApplicationService {
 	public boolean existApplication(Integer userId, Integer jobId);
 	List<ApplicationModel> findAllApplicant();
 	Long findApplicantByJobId(Integer jobId);
+	Long countApplicantByTime(Integer monthapply, Integer yearapply);
 	
 }

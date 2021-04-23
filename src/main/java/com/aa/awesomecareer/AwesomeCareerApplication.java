@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.aa.awesomecareer.repository.impl.BaseRepositoryImpl;
 import com.cloudinary.Cloudinary;
@@ -28,6 +30,7 @@ public class AwesomeCareerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AwesomeCareerApplication.class, args);
 	}
+	
 	
 	@Bean
 	public Cloudinary cloudinaryConfig() {
