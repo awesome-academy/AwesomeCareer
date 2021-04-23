@@ -203,7 +203,7 @@ public class UserServiceImp implements UserService {
 			System.out.println("cap nhat anh dai dien cua user");
 			Optional<User> updateImage = userRepository.findById(3);
 			User user = updateImage.get();
-			user.setImageUrl(url);
+			//user.setImageUrl(url);
 			User saveImageUser = userRepository.save(user);
 			userModel = new UserModel();
 			BeanUtils.copyProperties(saveImageUser, userModel);
