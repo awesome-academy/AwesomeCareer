@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Create Company</title>
+</head>
+<body>
+	<form style="width: 50%" th:action="@{/company}" th:object="${companyModel}" th:method ="POST">
+		
+		<h5>Company Name</h5>
+    	<input type="text" th:field="*{name}"><br>
+    	
+    	<h5>Address</h5>
+    	<input type="text" th:field="*{address}"><br>
+    	
+    	<h5>Website</h5>
+    	<input type="text" th:field="*{website}"><br>
+    	
+    	<input type="submit" class="btn btn-success" value="Submit">
+	</form>
+</body>

@@ -53,7 +53,7 @@ public class CertificateController {
 	public String showFormUpdate(@PathVariable("id") Integer id, Model model) {
 		CertificateModel certificateModel = certificateService.finCertificateById(id);
 		model.addAttribute("certificateModel", certificateModel);
-		System.out.println("id cua certificate la " + certificateModel.getId());
+		//System.out.println("id cua certificate la " + certificateModel.getId());
 		return "users/certificate/_edit::edit";
 	}
 	

@@ -22,7 +22,7 @@ import com.aa.awesomecareer.service.CertificateService;
 @Service
 @Qualifier("certificateService")
 public class CertificateServiceImp implements CertificateService {
-private static final Logger logger = LoggerFactory.getLogger(CertificateServiceImp.class);
+	private static final Logger logger = LoggerFactory.getLogger(CertificateServiceImp.class);
 	
 	@Autowired
 	private CertificateRepository certificateRepository;

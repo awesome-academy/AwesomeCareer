@@ -6,7 +6,7 @@ import com.aa.awesomecareer.model.CertificateModel;
 
 public interface CertificateService {
 	
-public CertificateModel saveCertificate(CertificateModel certificateModel) throws Exception;
+	public CertificateModel saveCertificate(CertificateModel certificateModel) throws Exception;
 	
 	public void deleteCertificate(Integer id) throws Exception;
 	

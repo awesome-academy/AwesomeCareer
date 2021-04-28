@@ -49,7 +49,7 @@ public class Experience extends BaseModel {
 	private boolean internship;
 	
 	@ManyToOne
-	@JoinColumn(name = "userId",insertable = false, updatable = false)
+	@JoinColumn(name = "userId", insertable = false, updatable = false)
 	private User user;
 	
 	public Experience() {
