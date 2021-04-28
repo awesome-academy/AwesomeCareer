@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{layout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Dashboard</title>
+</head>
+<body>
+	<h1 class="display-3">Overview</h1>
+	<div class="display-4">
+		<span th:text="${companyModel.name}">Name</span>
+	</div>
+	<br>
+	<a class="btn btn-success" th:href="@{'/company/'+${companyModel.id}+'/edit'}">Company Info</a>
+</body>
