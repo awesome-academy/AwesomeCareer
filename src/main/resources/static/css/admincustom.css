@@ -42,3 +42,11 @@ html body {
 a{
 	color : black;
 }
+
+#formpaypal{
+	padding : 10%;
+	text-align:center;
+}
+#formpaypal input {
+	width: 43%;
+}

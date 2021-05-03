@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html
+	th:replace="~{adminlayout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Paypal Payment with Spring Boot - ShareEverythings.com</title>
+</head>
+<body>
+	<div class="container" id="formpaypal">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+				<b><p style="color: rgba(0, 0, 0, 0.56);">Please input your money here (USD)</p></b>
+				<form method="post" th:action="@{/pay}">
+					<input type="text" value="5" name="price" /><br>
+					<button type="submit" class="btn btn-primary">Payment with Paypal</button>
+				</form>
+			</div>
+		</div>
+		<div class="col-sm-3"></div>
+	</div>
+</body>
+</html>

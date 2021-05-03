@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html
+    th:replace="~{adminlayout/application :: layout(~{::title}, ~{::body}, ~{})}"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Paypal Payment with Spring Boot - ShareEverythings.com</title>
+</head>
+<body>
+     <div class="container" id="formpaypal">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			  <div class="col-sm-6">
+	             <h1>Payment Success !</h1>
+	             <a th:href="@{/admin/1}">Go Home</a>
+	          </div>
+	        </div>
+	     </div>
+	 </div>
+</body>
+</html>
